@@ -643,7 +643,7 @@
            ========================= */
 
         function rowOutlet(o, i) {
-            const whatsapp = o.wa || DEFAULT_WHATSAPP;
+            const whatsapp = DEFAULT_WHATSAPP;
 
             return `
         <tr>
@@ -672,7 +672,7 @@
 
             <a
               class="wa-link"
-              href="https://wa.me/${cleanPhone(whatsapp)}"
+              href="https://wa.me/${DEFAULT_WHATSAPP}"
               target="_blank"
               rel="noopener"
             >
@@ -802,7 +802,7 @@
             // menggunakan nomor utama Juragan Chicken.
             outlets = outlets.map((outlet) => ({
                 ...outlet,
-                wa: outlet.wa || DEFAULT_WHATSAPP
+                wa: DEFAULT_WHATSAPP
             }));
         }
 

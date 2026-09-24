@@ -3,129 +3,100 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Juragan Chicken | Fried Chicken & Coffee Subang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Franchise Juragan Chicken | Kemitraan</title>
   <meta name="description"
-    content="Juragan Chicken — fried chicken crispy, coffee, paket hemat, outlet dan informasi franchise. Pesan online melalui WhatsApp.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://DOMAIN-ANDA.vercel.app/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Juragan Chicken | Fried Chicken & Coffee">
-  <meta property="og:description"
-    content="Fried chicken crispy, coffee, paket hemat dan peluang franchise Juragan Chicken.">
-  <!-- Share Preview / Open Graph -->
-  <meta property="og:image" content="https://webjuragan.vercel.app/logo.jpg.png">
-  <meta property="og:image:alt" content="Logo Juragan Chicken">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:url" content="https://webjuragan.vercel.app/">
+    content="Informasi franchise dan kemitraan Juragan Chicken. Pelajari konsep outlet, dukungan, proses pengajuan dan isi form minat.">
+  <link rel="icon" href="logo.jpg.png" type="image/png">
 
-  <!-- WhatsApp / Facebook / LinkedIn share preview -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Juragan Chicken | Fried Chicken & Coffee">
-  <meta name="twitter:description"
-    content="Fried chicken crispy, coffee, paket hemat dan peluang franchise Juragan Chicken.">
-  <meta name="twitter:image" content="https://webjuragan.vercel.app/logo.jpg.png">
-  <meta name="twitter:image:alt" content="Logo Juragan Chicken">
-
-  <link rel="icon" href="assets/-juragan-chicken.svglogo" type="image/svg+xml">
   <style>
     :root {
-      --red: #b91c1c;
-      --darkred: #761313;
-      --orange: #f97316;
-      --yellow: #fbbf24;
-      --cream: #fff8ef;
+      --r: #b91c1c;
+      --o: #f97316;
+      --c: #fff8ef;
       --ink: #241916;
-      --muted: #74655e;
+      --mut: #71625b;
       --line: #eaded5;
       --white: #fff;
-      --green: #16834b;
-      --shadow: 0 18px 55px #4d211414
+      --shadow: 0 18px 55px rgba(77, 33, 20, .08);
+      --wa: #25d366;
     }
 
     * {
-      box-sizing: border-box
+      box-sizing: border-box;
     }
 
     html {
-      scroll-behavior: smooth
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--c);
       color: var(--ink);
-      background: var(--cream);
-      line-height: 1.6
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
     img {
       display: block;
-      max-width: 100%
+      max-width: 100%;
     }
 
     a {
       text-decoration: none;
-      color: inherit
+      color: inherit;
     }
 
     button,
     input,
     select,
     textarea {
-      font: inherit
+      font: inherit;
     }
 
     .container {
-      width: min(1180px, 92%);
-      margin: auto
+      width: min(1120px, 92%);
+      margin: auto;
     }
 
-    .top {
-      background: #211714;
-      color: #ffe9d8;
-      font-size: 12px
-    }
-
-    .top .container {
+    /* HEADER */
+    .nav {
+      min-height: 76px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
       display: flex;
-      justify-content: space-between;
-      padding: 8px 0
-    }
-
-    header {
+      align-items: center;
       position: sticky;
       top: 0;
       z-index: 50;
-      background: #fffdf9eb;
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line)
     }
 
-    .nav {
-      height: 90px;
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px
+      gap: 14px;
+      width: 100%;
     }
 
-    .logo img {
-      width: 110px
+    .logo {
+      width: 150px;
     }
 
-    .links {
+    .nav-links {
       display: flex;
-      gap: 21px;
-      font-size: 14px;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
       font-weight: 850;
-      color: #533c34
+      color: #533c34;
     }
 
-    .links a:hover {
-      color: var(--red)
+    .nav-links a:hover {
+      color: var(--r);
     }
 
     .btn {
@@ -133,1781 +104,597 @@
       border-radius: 999px;
       padding: 12px 18px;
       font-weight: 900;
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      justify-content: center
+      justify-content: center;
+      cursor: pointer;
     }
 
     .red {
-      background: linear-gradient(135deg, var(--red), #e13a20);
+      background: linear-gradient(135deg, var(--r), #e13a20);
       color: #fff;
-      box-shadow: 0 9px 22px #b91c1c2b
+      box-shadow: 0 9px 22px rgba(185, 28, 28, .16);
     }
 
     .light {
       background: #fff;
       border: 1px solid var(--line);
-      color: #633d30
+      color: #633d30;
     }
 
     .menu-btn {
       display: none;
+      width: 40px;
+      height: 40px;
       border: 1px solid var(--line);
-      background: #fff;
       border-radius: 11px;
-      padding: 9px
+      background: #fff;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
     }
 
+    .menu-btn span {
+      width: 18px;
+      height: 2px;
+      border-radius: 99px;
+      background: #533c34;
+    }
+
+    /* HERO */
     .hero {
-      background: radial-gradient(circle at 88% 8%, #fbbf2460, transparent 23%), linear-gradient(135deg, #fff0dc, #ffd7a2 58%, #ffae54)
+      padding: 68px 0;
+      background: linear-gradient(135deg, #fff0d8, #ffd18d 55%, #ff9d3d);
     }
 
-    .hero-grid {
+    .hero-grid,
+    .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 50px;
+      gap: 40px;
       align-items: center;
-      padding: 72px 0
     }
 
     .eyebrow,
     .kicker {
-      display: inline-block;
-      color: #9b2a1d;
+      color: #99291c;
       font-size: 11px;
       font-weight: 950;
       letter-spacing: .13em;
-      text-transform: uppercase
+      text-transform: uppercase;
     }
 
     .hero h1 {
-      font: 900 clamp(46px, 6vw, 76px)/.98 Georgia, serif;
-      color: #551d17;
-      margin: 15px 0
-    }
-
-    .hero h1 span {
-      color: var(--red)
+      font: 900 clamp(43px, 6vw, 67px)/1 Georgia, serif;
+      color: #571e17;
+      margin: 10px 0 15px;
     }
 
     .hero p {
-      font-size: 18px;
-      color: #674a3d;
-      max-width: 610px
+      font-size: 17px;
+      color: #694b3e;
+      max-width: 650px;
     }
 
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 25px
-    }
-
-    .checks {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      font-size: 12px;
-      font-weight: 850;
-      color: #60473b
-    }
-
-    .hero-photo {
-      position: relative;
-      padding: 13px;
-      background: #ffffffbb;
-      border-radius: 30px;
+    .hero-img {
+      border-radius: 27px;
+      overflow: hidden;
       box-shadow: var(--shadow);
-      transform: rotate(1deg)
     }
 
-    .hero-photo img {
-      height: 455px;
+    .hero-img img {
+      height: 390px;
       width: 100%;
       object-fit: cover;
-      border-radius: 21px
-    }
-
-    .badge {
-      position: absolute;
-      right: -8px;
-      top: 25px;
-      width: 112px;
-      height: 112px;
-      border-radius: 50%;
-      background: var(--red);
-      color: #fff;
-      border: 8px solid #fff0dc;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 950;
-      line-height: 1.1
-    }
-
-    .note {
-      position: absolute;
-      left: -20px;
-      bottom: 22px;
-      background: #fff;
-      padding: 11px 14px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      font-size: 12px;
-      font-weight: 900;
-      color: var(--green)
-    }
-
-    .trust {
-      background: #fff;
-      border-bottom: 1px solid var(--line)
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      padding: 20px 0
-    }
-
-    .trust-item {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      padding: 7px 17px;
-      border-right: 1px solid var(--line)
-    }
-
-    .trust-item:last-child {
-      border: 0
-    }
-
-    .icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #fff0df;
-      display: grid;
-      place-items: center
-    }
-
-    .trust-item b {
-      display: block;
-      font-size: 13px
-    }
-
-    .trust-item span {
-      font-size: 11px;
-      color: var(--muted)
     }
 
     section {
-      padding: 78px 0
+      padding: 72px 0;
     }
 
-    .white {
-      background: #fff
+    .head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 30px;
     }
 
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 28px
+    .head h2 {
+      font: 900 42px/1.08 Georgia, serif;
+      color: #571e17;
+      margin: 7px 0;
     }
 
-    .section-head h2 {
-      font: 900 clamp(34px, 4vw, 50px)/1.05 Georgia, serif;
-      color: #572019;
-      margin: 7px 0
+    .head p {
+      color: var(--mut);
     }
 
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 670px
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      overflow: auto;
-      margin-bottom: 20px
-    }
-
-    .tab {
-      border: 1px solid var(--line);
-      background: #fffaf4;
-      border-radius: 999px;
-      padding: 9px 14px;
-      white-space: nowrap;
-      font-weight: 850;
-      cursor: pointer;
-      color: #67483a
-    }
-
-    .tab.active,
-    .tab:hover {
-      background: var(--red);
-      border-color: var(--red);
-      color: #fff
-    }
-
-    .grid {
+    .cards,
+    .steps {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 17px
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
 
     .card {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 21px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px #4421160e;
-      transition: .2s
+      border-radius: 20px;
+      padding: 21px;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow)
+    .card h3 {
+      margin: 8px 0;
     }
 
-    .pic {
-      height: 210px;
-      position: relative;
-      overflow: hidden
-    }
-
-    .pic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: .3s
-    }
-
-    .card:hover .pic img {
-      transform: scale(1.04)
-    }
-
-    .tag {
-      position: absolute;
-      top: 11px;
-      left: 11px;
-      background: #fff;
-      border-radius: 999px;
-      padding: 5px 9px;
-      font-size: 10px;
-      color: var(--red);
-      font-weight: 950
-    }
-
-    .body {
-      padding: 15px
-    }
-
-    .body h3 {
-      margin: 0 0 5px;
-      font-size: 17px
-    }
-
-    .body p {
-      font-size: 12px;
-      color: var(--muted);
-      min-height: 40px;
-      margin: 0 0 12px
-    }
-
-    .card-foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px
-    }
-
-    .price {
-      color: var(--red);
-      font-weight: 950
-    }
-
-    .small-btn {
-      border: 0;
-      background: #fff0df;
-      color: #a13b22;
-      border-radius: 11px;
-      padding: 8px 10px;
-      font-size: 11px;
-      font-weight: 900;
-      cursor: pointer
-    }
-
-    .about-grid,
-    .contact-grid,
-    .fr-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 45px;
-      align-items: center
-    }
-
-    .about-img {
-      border-radius: 27px;
-      overflow: hidden;
-      box-shadow: var(--shadow)
-    }
-
-    .about-img img {
-      width: 100%;
-      height: 430px;
-      object-fit: cover
-    }
-
-    .about h2 {
-      font: 900 clamp(35px, 4vw, 52px)/1.05 Georgia, serif;
-      color: #572019;
-      margin: 8px 0 15px
-    }
-
-    .muted {
-      color: var(--muted)
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 22px 0
-    }
-
-    .feature {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      padding: 12px;
-      font-weight: 850
-    }
-
-    .feature small {
-      display: block;
-      color: var(--muted);
-      font-weight: 500
+    .card p {
+      font-size: 13px;
+      color: var(--mut);
     }
 
     .dark {
       background: #241916;
-      color: #fff
+      color: #fff;
     }
 
-    .dark .section-head h2 {
-      color: #fff
+    .dark .head h2 {
+      color: #fff;
     }
 
-    .dark .section-head p {
-      color: #d7c4b9
+    .dark .head p {
+      color: #d8c4b8;
     }
 
     .steps {
-      display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px
     }
 
     .step {
-      border: 1px solid #fff2;
-      background: #ffffff08;
-      border-radius: 18px;
-      padding: 20px
+      border: 1px solid rgba(255, 255, 255, .13);
+      background: rgba(255, 255, 255, .03);
+      border-radius: 17px;
+      padding: 19px;
     }
 
     .num {
-      width: 38px;
-      height: 38px;
-      background: var(--orange);
+      width: 37px;
+      height: 37px;
       border-radius: 11px;
+      background: var(--o);
       display: grid;
       place-items: center;
       font-weight: 950;
-      margin-bottom: 14px
+      margin-bottom: 12px;
     }
 
     .step p {
       font-size: 12px;
-      color: #d7c4b9
+      color: #d8c4b8;
     }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1.25fr .75fr .75fr;
-      grid-template-rows: 210px 210px;
-      gap: 12px
-    }
-
-    .gallery-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 17px
-    }
-
-    .gallery-grid img:first-child {
-      grid-row: span 2
-    }
-
-    .franchise {
-      background: linear-gradient(135deg, #fff0d8, #ffd08b 55%, #ff9d3d)
-    }
-
-    .fr-card {
-      background: #fff;
-      border-radius: 25px;
-      padding: 26px;
-      box-shadow: var(--shadow)
-    }
-
-    .fr-card h3 {
-      font: 900 29px Georgia, serif;
-      color: #572019;
-      margin: 0
-    }
-
-    .fr-list {
-      display: grid;
-      gap: 9px;
-      margin: 20px 0
-    }
-
-    .fr-list div {
-      background: #ffffffa8;
-      padding: 11px 13px;
-      border-radius: 13px;
-      font-weight: 850
-    }
-
-    .faq-grid {
+    .requirements {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px
+      gap: 35px;
+      align-items: center;
     }
 
-    .faq {
-      background: #fffaf4
-    }
-
-    .faq-item {
+    .check {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px
+      padding: 12px;
+      border-radius: 13px;
+      margin: 8px 0;
+      font-weight: 850;
     }
 
-    .faq-item summary {
-      font-weight: 900;
-      cursor: pointer
-    }
-
-    .faq-item p {
-      font-size: 12px;
-      color: var(--muted)
-    }
-
-    .locations {
-      background: #fff
-    }
-
-    .outlets {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px
-    }
-
-    .outlet {
-      border: 1px solid var(--line);
-      border-radius: 19px;
-      padding: 19px;
-      background: #fffaf4
-    }
-
-    .outlet h3 {
-      margin: 0 0 4px
-    }
-
-    .outlet p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px
-    }
-
-    .outlet a {
-      display: inline-block;
-      margin-top: 12px;
-      color: var(--red);
-      font-size: 12px;
-      font-weight: 900
-    }
-
-    .order {
-      background: linear-gradient(135deg, var(--darkred), var(--red));
-      color: #fff
-    }
-
-    .order-grid {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 40px
-    }
-
-    .order h2 {
-      font: 900 47px/1.05 Georgia, serif;
-      margin: 8px 0 14px
-    }
-
-    .order p {
-      color: #ffddd1
+    .note {
+      background: #fff0d8;
+      border: 1px solid #efcf9c;
+      border-radius: 21px;
+      padding: 23px;
+      color: #654638;
     }
 
     .form {
       background: #fff;
-      color: var(--ink);
-      border-radius: 24px;
+      border: 1px solid var(--line);
+      border-radius: 23px;
       padding: 24px;
-      box-shadow: var(--shadow)
+      box-shadow: var(--shadow);
     }
 
     .field {
       display: grid;
       gap: 5px;
-      margin-bottom: 11px
+      margin-bottom: 11px;
     }
 
     .field label {
       font-size: 11px;
-      font-weight: 900
+      font-weight: 900;
     }
 
     .field input,
     .field select,
     .field textarea {
+      width: 100%;
       border: 1px solid var(--line);
       border-radius: 11px;
-      padding: 10px 11px;
-      outline: none
+      padding: 10px;
+      outline: none;
     }
 
     .field textarea {
-      min-height: 80px
+      min-height: 85px;
+      resize: vertical;
     }
 
     .form .btn {
-      width: 100%
+      width: 100%;
     }
 
-    .contact-card {
-      background: #fff8ed;
-      border: 1px solid #f0dcc8;
-      border-radius: 22px;
-      padding: 24px
-    }
-
-    .contact-card h3 {
-      font: 900 27px Georgia, serif;
-      color: #572019;
-      margin-top: 0
-    }
-
-    .contact-items {
-      display: grid;
-      gap: 9px
-    }
-
-    .contact-item {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      padding: 11px 13px
-    }
-
-    .contact-item b {
-      display: block
-    }
-
-    .contact-item small {
-      color: var(--muted)
+    .wa-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #e9f9ef;
+      color: #137a43;
+      font-weight: 900;
+      font-size: 13px;
     }
 
     footer {
       background: #1d1411;
-      color: #d7c4b9;
-      padding: 45px 0 20px
+      color: #d8c4b8;
+      padding: 27px 0;
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr .7fr .7fr .8fr;
-      gap: 25px
-    }
-
-    .footer-logo img {
-      width: 175px;
-      filter: brightness(0) invert(1)
-    }
-
-    footer h4 {
-      color: #fff;
-      margin-top: 0
-    }
-
-    footer a {
-      display: block;
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
       font-size: 12px;
-      margin: 7px 0
-    }
-
-    .copy {
-      border-top: 1px solid #fff2;
-      margin-top: 28px;
-      padding-top: 15px;
-      font-size: 10px
     }
 
     .float-wa {
       position: fixed;
-      right: 17px;
-      bottom: 17px;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: #25d366;
+      right: 20px;
+      bottom: 20px;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: var(--wa);
       color: #fff;
-      display: grid;
-      place-items: center;
-      font-size: 23px;
       z-index: 70;
-      box-shadow: 0 15px 30px #0003
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .18);
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #180b08aa;
-      z-index: 100;
-      place-items: center;
-      padding: 16px
+    .float-wa svg {
+      width: 30px;
+      height: 30px;
+      fill: currentColor;
     }
 
-    .modal.open {
-      display: grid
-    }
-
-    .modal-card {
-      width: min(760px, 100%);
-      background: #fff;
-      border-radius: 24px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative
-    }
-
-    .modal-card img {
-      width: 100%;
-      height: 100%;
-      min-height: 350px;
-      object-fit: cover
-    }
-
-    .modal-copy {
-      padding: 26px
-    }
-
-    .modal-copy h2 {
-      font: 900 34px Georgia, serif;
-      color: #572019
-    }
-
-    .close {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      border: 0;
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      background: #fff;
-      font-size: 20px;
-      cursor: pointer
-    }
-
-    @media(max-width:980px) {
-      .links {
-        display: none
-      }
-
-      .links.open {
-        display: flex;
+    @media(max-width:900px) {
+      .nav-links {
+        display: none;
         position: absolute;
         top: 76px;
         left: 0;
         right: 0;
         background: #fff;
-        padding: 14px 4%;
+        padding: 10px 4% 14px;
         flex-direction: column;
-        border-bottom: 1px solid var(--line)
+        align-items: stretch;
+        gap: 4px;
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 15px 30px rgba(50, 25, 18, .10);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 10px 12px;
+        border-radius: 10px;
       }
 
       .menu-btn {
-        display: block
-      }
-
-      .nav>.red {
-        display: none
+        display: flex;
       }
 
       .hero-grid,
-      .about-grid,
-      .contact-grid,
-      .fr-grid,
-      .order-grid {
-        grid-template-columns: 1fr
+      .form-grid,
+      .requirements {
+        grid-template-columns: 1fr;
       }
 
-      .grid {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .trust-grid {
-        grid-template-columns: repeat(2, 1fr)
+      .cards {
+        grid-template-columns: 1fr 1fr;
       }
 
       .steps {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .outlets {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
       }
     }
 
     @media(max-width:600px) {
-      .top span:last-child {
-        display: none
-      }
-
       .nav {
-        height: 68px
-      }
-
-      .links.open {
-        top: 68px
-      }
-
-      .logo img {
-        width: 145px
-      }
-
-      .hero-grid {
-        padding: 45px 0
-      }
-
-      .hero p {
-        font-size: 16px
-      }
-
-      .hero-photo img {
-        height: 315px
-      }
-
-      .badge {
-        width: 88px;
-        height: 88px;
-        font-size: 9px
-      }
-
-      .note {
-        left: 4px;
-        font-size: 10px
-      }
-
-      .trust-item {
-        padding: 7px 3px
-      }
-
-      .trust-item b {
-        font-size: 11px
-      }
-
-      .trust-item span {
-        font-size: 9px
-      }
-
-      .section-head {
-        display: block
-      }
-
-      .section-head .btn {
-        margin-top: 12px
-      }
-
-      .grid {
-        gap: 10px
-      }
-
-      .pic {
-        height: 145px
-      }
-
-      .body {
-        padding: 11px
-      }
-
-      .body h3 {
-        font-size: 14px
-      }
-
-      .body p {
-        font-size: 10px;
-        min-height: 57px
-      }
-
-      .price {
-        font-size: 12px
-      }
-
-      .small-btn {
-        font-size: 10px;
-        padding: 7px
-      }
-
-      .feature-grid,
-      .faq-grid,
-      .outlets {
-        grid-template-columns: 1fr
-      }
-
-      .steps {
-        grid-template-columns: 1fr
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 150px 150px
-      }
-
-      .gallery-grid img:first-child {
-        grid-column: span 2;
-        grid-row: auto
-      }
-
-      .order h2 {
-        font-size: 38px
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr
-      }
-
-      .modal-card {
-        grid-template-columns: 1fr
-      }
-
-      .modal-card img {
-        height: 210px;
-        min-height: 0
-      }
-
-      /* =========================================================
-       HEADER + HERO REFINEMENT
-       Hanya memperbaiki tampilan header dan hero
-       ========================================================= */
-
-      header {
-        background: rgba(255, 253, 249, .97);
-        border-bottom: 0;
-        box-shadow: 0 2px 12px rgba(76, 32, 20, .035);
-      }
-
-      .nav {
-        height: 76px;
-        display: flex;
-        align-items: center;
-        gap: 28px;
+        min-height: 66px;
       }
 
       .logo {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        height: 100%;
+        width: 110px;
       }
 
-      .logo img {
-        width: 116px;
-        height: auto;
-        max-height: 68px;
-        object-fit: contain;
+      .nav-links {
+        top: 66px;
       }
 
-      .links {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        gap: 23px;
-        font-size: 13px;
-        font-weight: 850;
-        color: #533c34;
-      }
-
-      .links a {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        height: 40px;
-        white-space: nowrap;
-      }
-
-      .links a::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 2px;
-        width: 0;
-        height: 2px;
-        border-radius: 99px;
-        background: var(--red);
-        transform: translateX(-50%);
-        transition: width .2s ease;
-      }
-
-      .links a:hover {
-        color: var(--red);
-      }
-
-      .links a:hover::after {
-        width: 18px;
-      }
-
-      .nav>.red {
-        flex-shrink: 0;
-        min-width: 76px;
-        height: 42px;
-        padding: 0 18px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        font-weight: 900;
-        border-radius: 999px;
-        box-shadow: 0 8px 20px rgba(185, 28, 28, .15);
-      }
-
-      /* Hero menyatu langsung dengan area navbar */
       .hero {
-        margin-top: 0;
-        border-top: 0;
-        background:
-          linear-gradient(180deg,
-            #fffdf9 0%,
-            #fff5e8 8%,
-            #ffe6c2 38%,
-            #ffd39a 68%,
-            #ffb45c 100%);
-      }
-
-      .hero-grid {
-        padding-top: 58px;
-        padding-bottom: 68px;
-      }
-
-      .hero-photo {
-        margin-top: 0;
-      }
-
-      @media (max-width: 980px) {
-        .nav {
-          height: 72px;
-          gap: 16px;
-        }
-
-        .logo img {
-          width: 108px;
-          max-height: 62px;
-        }
-
-        .links.open {
-          top: 72px;
-          border-top: 0;
-          border-bottom: 1px solid var(--line);
-          box-shadow: 0 12px 25px rgba(0, 0, 0, .06);
-        }
-
-        .hero-grid {
-          padding-top: 48px;
-          padding-bottom: 55px;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .nav {
-          height: 68px;
-        }
-
-        .logo img {
-          width: 102px;
-          max-height: 58px;
-        }
-
-        .links.open {
-          top: 68px;
-        }
-
-        .hero-grid {
-          padding-top: 40px;
-          padding-bottom: 45px;
-        }
-      }
-
-      /* =========================================================
-       WHATSAPP FLOATING BUTTON
-       ========================================================= */
-
-      .float-wa {
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        width: 56px;
-        height: 56px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 16px;
-        background: #25d366;
-        color: #fff;
-        z-index: 70;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, .18);
-        transition: transform .2s ease, box-shadow .2s ease;
-      }
-
-      .float-wa svg {
-        width: 30px;
-        height: 30px;
-        display: block;
-        fill: currentColor;
-      }
-
-      .float-wa:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 14px 30px rgba(0, 0, 0, .22);
-      }
-
-      .float-wa:active {
-        transform: translateY(-1px);
-      }
-
-      @media (max-width: 600px) {
-        .float-wa {
-          right: 15px;
-          bottom: 15px;
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
-        }
-
-        .float-wa svg {
-          width: 28px;
-          height: 28px;
-        }
-      }
-
-      /* =========================================================
-       FINAL MOBILE NAVIGATION
-       - Desktop tetap seperti desain awal.
-       - HP memakai tombol hamburger 3 garis.
-       - Tidak ada menu horizontal yang terpotong.
-       ========================================================= */
-      .menu-btn {
-        display: none;
-        position: relative;
-        flex: 0 0 40px;
-        width: 40px;
-        height: 40px;
-        padding: 0;
-        border: 1px solid var(--line);
-        border-radius: 11px;
-        background: #fff;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 4px;
-        cursor: pointer;
-        z-index: 60;
-      }
-
-      .menu-btn span {
-        display: block;
-        width: 18px;
-        height: 2px;
-        border-radius: 99px;
-        background: #533c34;
-        transition: transform .2s ease, opacity .2s ease;
-      }
-
-      .menu-btn.is-open span:nth-child(1) {
-        transform: translateY(6px) rotate(45deg);
-      }
-
-      .menu-btn.is-open span:nth-child(2) {
-        opacity: 0;
-      }
-
-      .menu-btn.is-open span:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg);
-      }
-
-      @media (max-width: 980px) {
-        header .nav {
-          position: relative;
-        }
-
-        header .links {
-          display: none !important;
-        }
-
-        header .links.open {
-          display: flex !important;
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 100%;
-          width: 100%;
-          padding: 10px 14px 14px;
-          flex-direction: column;
-          gap: 4px;
-          background: #fffdf9;
-          border: 1px solid var(--line);
-          border-top: 0;
-          border-radius: 0 0 16px 16px;
-          box-shadow: 0 15px 30px rgba(50, 25, 18, .10);
-          z-index: 55;
-        }
-
-        header .links.open a {
-          display: flex;
-          width: 100%;
-          min-height: 42px;
-          align-items: center;
-          padding: 9px 12px;
-          border-radius: 10px;
-        }
-
-        header .menu-btn {
-          display: flex !important;
-        }
-
-        header .nav>.red {
-          display: none !important;
-        }
-      }
-
-      @media (max-width: 600px) {
-        body {
-          overflow-x: hidden;
-        }
-
-        header .nav {
-          height: 66px !important;
-          min-height: 66px;
-          width: 100%;
-          padding-left: 14px;
-          padding-right: 14px;
-          gap: 10px;
-        }
-
-        header .logo img {
-          width: 82px !important;
-          max-width: 82px;
-          height: auto;
-          object-fit: contain;
-        }
-
-        header .menu-btn {
-          width: 38px;
-          height: 38px;
-          flex-basis: 38px;
-        }
-
-        header .links.open {
-          top: 66px;
-        }
-      }
-  </style>
-  <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Restaurant","name":"Juragan Chicken","description":"Fried chicken dan coffee.","url":"https://DOMAIN-ANDA.vercel.app/","telephone":"6289537542514","servesCuisine":["Fried Chicken","Coffee"],"address":{"@type":"PostalAddress","addressLocality":"Subang","addressRegion":"Jawa Barat","addressCountry":"ID"},"openingHours":"Mo-Su 10:00-22:00"}
-</script>
-
-  <style id="mobile-header-hero-fix">
-    /* =========================================================
-       MOBILE HEADER + HERO — FINAL LAYOUT FIX
-       Hanya memperbaiki tampilan mobile.
-       ========================================================= */
-
-    @media (max-width: 980px) {
-
-      html,
-      body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-
-      .top .container,
-      header .container,
-      .hero .container {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      header {
-        border-bottom: 0 !important;
-        box-shadow: 0 2px 10px rgba(76, 32, 20, .04);
-      }
-
-      .nav {
-        height: 68px !important;
-        min-height: 68px;
-        padding-top: 0;
-        padding-bottom: 0;
-        gap: 10px;
-      }
-
-      .logo {
-        flex: 0 0 auto;
-      }
-
-      .logo img {
-        width: 92px !important;
-        max-height: 56px !important;
-        height: auto;
-        object-fit: contain;
-      }
-
-      /* Mobile: hanya 3 menu utama yang terlihat */
-      .links {
-        display: flex !important;
-        flex: 1 1 auto;
-        min-width: 0;
-        justify-content: flex-start;
-        gap: 10px;
-        overflow: hidden;
-        font-size: 12px;
-        white-space: nowrap;
-      }
-
-      .links a {
-        flex: 0 0 auto;
-        height: 38px;
-      }
-
-      .links a:nth-child(n + 4) {
-        display: none;
-      }
-
-      /* Saat hamburger dibuka, seluruh menu tetap tersedia */
-      .links.open {
-        display: flex !important;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        max-height: calc(100vh - 68px);
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 12px 4% 16px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 3px;
-        background: rgba(255, 255, 255, .98);
-        border-top: 0;
-        border-bottom: 1px solid var(--line);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, .07);
-      }
-
-      .links.open a,
-      .links.open a:nth-child(n + 4) {
-        display: flex;
-        flex: none;
-        width: 100%;
-        height: 42px;
-        align-items: center;
-        padding: 0 12px;
-        border-radius: 9px;
-      }
-
-      .links.open a:hover {
-        background: #fff5ef;
-      }
-
-      .nav>.red {
-        display: inline-flex !important;
-        flex: 0 0 auto;
-        min-width: 62px;
-        height: 38px;
-        padding: 0 13px;
-        font-size: 12px;
-      }
-
-      .menu-btn {
-        display: flex !important;
-        flex: 0 0 auto;
-        width: 38px;
-        height: 38px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px !important;
-        background: #fff;
-        border: 1px solid var(--line) !important;
-        font-size: 18px !important;
-        line-height: 1;
-      }
-
-      /* Hero benar-benar satu kolom di mobile */
-      .hero {
-        margin-top: 0 !important;
-        border-top: 0 !important;
-        overflow: hidden;
-      }
-
-      .hero-grid {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 34px;
-        padding-top: 42px !important;
-        padding-bottom: 48px !important;
+        padding: 45px 0;
       }
 
       .hero h1 {
         font-size: clamp(42px, 12vw, 58px);
-        line-height: .96;
-        letter-spacing: -1.5px;
       }
 
       .hero p {
-        max-width: 100%;
+        font-size: 16px;
       }
 
-      .hero-photo {
-        width: 100%;
-        margin: 0 !important;
+      .hero-img img {
+        height: auto;
+        max-height: 330px;
       }
 
-      .hero-photo img {
-        width: 100%;
-        height: auto !important;
-        max-height: 360px;
-        object-fit: cover;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .top .container {
-        min-height: 30px;
+      .cards,
+      .steps {
+        grid-template-columns: 1fr;
       }
 
-      .top span:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
+      .head h2 {
+        font-size: 34px;
       }
 
-      .nav {
-        height: 66px !important;
-        min-height: 66px;
+      section {
+        padding: 55px 0;
       }
 
-      .logo img {
-        width: 82px !important;
-        max-height: 52px !important;
+      footer .container {
+        flex-direction: column;
       }
 
-      .links {
-        gap: 7px;
-        font-size: 11px;
-      }
-
-      .links a {
-        height: 36px;
-      }
-
-      .nav>.red {
-        min-width: 58px;
-        height: 36px;
-        padding: 0 11px;
-        font-size: 11px;
-      }
-
-      .menu-btn {
-        width: 36px;
-        height: 36px;
-      }
-
-      .links.open {
-        top: 66px;
-      }
-
-      .hero-grid {
-        gap: 28px;
-        padding-top: 38px !important;
-        padding-bottom: 42px !important;
+      .float-wa {
+        right: 15px;
+        bottom: 15px;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
       }
     }
   </style>
-
 </head>
 
 <body>
-  <div class="top">
-    <div class="container"><span>🍗 Fried Chicken • ☕ Coffee • 🔥 Paket Juragan</span><span>Pesan Online • Outlet •
-        Franchise</span></div>
-  </div>
-  <header>
-    <div class="container nav"><a class="logo" href="#home"><img src="logo.jpg.png" alt="Logo Juragan Chicken"></a>
-      <nav class="links" id="links"><a href="#home">Home</a><a href="#menu">Menu</a><a href="#tentang">Tentang</a><a
-          href="#outlet">Outlet</a><a href="#galeri">Galeri</a><a href="#franchise">Franchise</a><a
-          href="#faq">FAQ</a><a href="#kontak">Kontak</a></nav><a class="btn red" href="#pesan">Pesan</a><button
-        class="menu-btn" id="menuBtn">☰</button>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" aria-label="Kembali ke Juragan Chicken">
+        <img class="logo" src="logo.jpg.png" alt="Juragan Chicken">
+      </a>
+
+      <nav class="nav-links" id="frNavLinks">
+        <a href="index.html">Website Utama</a>
+        <a href="#konsep">Konsep</a>
+        <a href="#proses">Proses</a>
+        <a href="#daftar">Daftar Minat</a>
+      </nav>
+
+      <a class="btn red" href="#daftar">Minat Franchise</a>
+
+      <button class="menu-btn" id="frMenuBtn" type="button" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+
   <main>
-    <section class="hero" id="home">
+    <section class="hero">
       <div class="container hero-grid">
-        <div><span class="eyebrow">JURAGAN • FRIED CHICKEN & COFFEE</span>
-          <h1>Renyahnya <span>bikin balik.</span></h1>
-          <p>Fried chicken crispy, coffee, snack dan paket hemat untuk makan sendiri, keluarga, nongkrong maupun acara.
-          </p>
-          <div class="actions"><a class="btn red" href="#menu">Lihat Menu →</a><a class="btn light"
-              href="#franchise">Info Franchise</a></div>
-          <div class="checks"><span>✓ Crispy chicken</span><span>✓ Coffee & drinks</span><span>✓ Pesan via
-              WhatsApp</span></div>
+        <div>
+          <span class="eyebrow">FRANCHISE & KEMITRAAN</span>
+          <h1>Bangun outlet Juragan bersama.</h1>
+          <p>Halaman khusus calon mitra untuk memahami konsep, kesiapan lokasi, proses pengajuan dan data yang
+            perlu disiapkan.</p>
+
+          <a class="btn red" href="#daftar">Ajukan Minat →</a>
+
+          <a class="wa-card"
+            href="https://wa.me/6289537542514?text=Halo%20Tim%20Juragan%20Chicken,%20saya%20ingin%20menanyakan%20informasi%20franchise."
+            target="_blank" rel="noopener">
+            💬 Hubungi WhatsApp 0895-3754-2514
+          </a>
         </div>
-        <div class="hero-photo"><img src="friedchickenpaha.png" alt="Fried chicken crispy Juragan Chicken"
-            fetchpriority="high">
-          <div class="badge">FRIED<br>CHICKEN<br>+ COFFEE</div>
-          <div class="note">🔥 Renyah di luar, juicy di dalam</div>
+
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=1300&q=85"
+            alt="Fried chicken Juragan Chicken" fetchpriority="high">
         </div>
       </div>
     </section>
 
-    <section class="trust">
-      <div class="container trust-grid">
-        <div class="trust-item">
-          <div class="icon">🍗</div>
-          <div><b>Fried Chicken</b><span>Menu utama</span></div>
-        </div>
-        <div class="trust-item">
-          <div class="icon">☕</div>
-          <div><b>Coffee</b><span>Teman santai</span></div>
-        </div>
-        <div class="trust-item">
-          <div class="icon">📦</div>
-          <div><b>Take Away</b><span>Praktis</span></div>
-        </div>
-        <div class="trust-item">
-          <div class="icon">🤝</div>
-          <div><b>Franchise</b><span>Peluang mitra</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="white" id="menu">
+    <section id="konsep">
       <div class="container">
-        <div class="section-head">
-          <div><span class="kicker">Menu Juragan</span>
-            <h2>Menu favorit.</h2>
-            </p>
-          </div><a class="btn red" href="#pesan">Pesan via WhatsApp</a>
+        <div class="head">
+          <span class="kicker">Konsep</span>
+          <h2>Yang perlu diketahui calon mitra.</h2>
+          <p>Detail komersial final harus mengikuti paket resmi Juragan Chicken.</p>
         </div>
-        <div class="tabs" id="tabs"></div>
-        <div class="grid" id="productGrid"></div>
-      </div>
-    </section>
 
-    <section id="tentang">
-      <div class="container about-grid">
-        <div class="about-img"><img src="chickencofee1.png" alt="Coffee Juragan Chicken" loading="lazy"></div>
-        <div><span class="kicker">Tentang Brand</span>
-          <h2>Fried chicken & coffee dalam satu brand.</h2>
-          <p class="muted">Juragan Chicken dirancang sebagai brand kuliner yang mudah dikenali, mudah dipesan dan siap
-            dikembangkan ke beberapa format outlet.</p>
-          <div class="feature-grid">
-            <div class="feature">🍗 Produk Utama<small>Fried chicken crispy</small></div>
-            <div class="feature">☕ Coffee<small>Minuman pendamping</small></div>
-            <div class="feature">📱 Digital Order<small>WhatsApp ordering</small></div>
-            <div class="feature">🤝 Franchise<small>Halaman kemitraan</small></div>
+        <div class="cards">
+          <div class="card"><b>🏪</b>
+            <h3>Konsep Outlet</h3>
+            <p>Format outlet, desain, signage dan perlengkapan mengikuti paket kerja sama.</p>
+          </div>
+          <div class="card"><b>🍗</b>
+            <h3>Produk</h3>
+            <p>Fried chicken, menu pendamping, coffee dan minuman.</p>
+          </div>
+          <div class="card"><b>📣</b>
+            <h3>Brand Support</h3>
+            <p>Identitas brand dan materi promosi sesuai standar yang ditetapkan.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="dark">
+    <section class="dark" id="proses">
       <div class="container">
-        <div class="section-head">
-          <div><span class="kicker">Cara Pesan</span>
-            <h2>Empat langkah.</h2>
-            <p>Alur sederhana dari katalog sampai konfirmasi pesanan.</p>
-          </div>
+        <div class="head">
+          <span class="kicker">Proses</span>
+          <h2>Alur pengajuan.</h2>
+          <p>Sesuaikan alur ini dengan SOP franchise resmi saat data final tersedia.</p>
         </div>
+
         <div class="steps">
           <div class="step">
-            <div class="num">01</div><b>Pilih menu</b>
-            <p>Lihat produk dan harga.</p>
+            <div class="num">01</div><b>Isi form</b>
+            <p>Kirim data kontak dan rencana lokasi.</p>
           </div>
           <div class="step">
-            <div class="num">02</div><b>Tambah pesanan</b>
-            <p>Masukkan item, jumlah dan outlet.</p>
+            <div class="num">02</div><b>Screening</b>
+            <p>Tim mempelajari area dan lokasi.</p>
           </div>
           <div class="step">
-            <div class="num">03</div><b>Kirim WhatsApp</b>
-            <p>Format pesan dibuat otomatis.</p>
+            <div class="num">03</div><b>Penawaran</b>
+            <p>Paket dan fasilitas dibahas.</p>
           </div>
           <div class="step">
-            <div class="num">04</div><b>Konfirmasi</b>
-            <p>Tim outlet mengonfirmasi.</p>
+            <div class="num">04</div><b>Persiapan</b>
+            <p>Outlet disiapkan sesuai kesepakatan.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="locations" id="outlet">
-      <div class="container">
-        <div class="section-head">
-          <div><span class="kicker">Outlet</span>
-            <h2>Temukan outlet.</h2>
-            <p>Dusun Jl. Raya Simpang No.003, RT.007, Tambakmekar, Kec. Jalancagak, Kabupaten Subang, Jawa Barat 41281
-            </p>
+    <section>
+      <div class="container requirements">
+        <div>
+          <span class="kicker">Kesiapan Mitra</span>
+          <h2 style="font:900 40px/1.08 Georgia,serif;color:#571e17">Siapkan data berikut.</h2>
+          <div class="check">✓ Nama & nomor WhatsApp</div>
+          <div class="check">✓ Kota / Kabupaten</div>
+          <div class="check">✓ Status lokasi: milik / sewa</div>
+          <div class="check">✓ Perkiraan luas lokasi</div>
+          <div class="check">✓ Target pembukaan</div>
+        </div>
+
+        <div class="note">
+          <h3>Catatan sebelum publikasi</h3>
+          <p>Masukkan investasi, franchise fee, royalty, estimasi omzet, margin, ROI atau klaim keuntungan
+            hanya berdasarkan dokumen resmi. Jangan menggunakan angka demo sebagai penawaran.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="daftar">
+      <div class="container form-grid">
+        <div>
+          <span class="kicker">Calon Mitra</span>
+          <h2 style="font:900 42px/1.08 Georgia,serif;color:#571e17">Mulai pembicaraan.</h2>
+          <p style="color:var(--mut)">Isi form. Setelah dikirim, data akan diteruskan melalui WhatsApp tim
+            Juragan Chicken.</p>
+
+          <a class="wa-card"
+            href="https://wa.me/6289537542514?text=Halo%20Tim%20Franchise%20Juragan%20Chicken,%20saya%20ingin%20menanyakan%20informasi%20kemitraan."
+            target="_blank" rel="noopener">
+            💬 WhatsApp Franchise
+          </a>
+        </div>
+
+        <form class="form" id="frForm">
+          <div class="field"><label for="fn">Nama Lengkap</label><input id="fn" required></div>
+          <div class="field"><label for="fw">No. WhatsApp</label><input id="fw" required></div>
+          <div class="field"><label for="fk">Kota / Kabupaten</label><input id="fk" required></div>
+          <div class="field">
+            <label for="fl">Status Lokasi</label>
+            <select id="fl">
+              <option>Sudah punya lokasi</option>
+              <option>Sedang mencari lokasi</option>
+              <option>Belum menentukan</option>
+            </select>
           </div>
-        </div>
-        <div class="outlets" id="outletGrid"></div>
-      </div>
-    </section>
-
-    <section class="white" id="galeri">
-      <div class="container">
-        <div class="section-head">
-          <div><span class="kicker">Galeri</span>
-            <h2>Our Menu</h2>
-          </div>
-        </div>
-        <div class="gallery-grid"><img src="friedchickenpaha.png" alt="Fried chicken" loading="lazy"><img
-            src="matcha.png" alt="Coffee" loading="lazy"><img src="burger.png" alt="Food" loading="lazy"><img
-            src="frenchfries.png" alt="Chicken wings" loading="lazy"><img src="chickencoffee.png" alt="Restaurant"
-            loading="lazy"></div>
-      </div>
-    </section>
-
-    <section class="franchise" id="franchise">
-      <div class="container fr-grid">
-        <div><span class="kicker">Franchise / Kemitraan</span>
-          <h2 style="font:900 clamp(36px,4vw,54px)/1.05 Georgia,serif;color:#572019;margin:8px 0 14px">Buka outlet
-            Juragan bersama.</h2>
-          <p class="muted">Pusat informasi calon mitra: konsep, proses, kesiapan lokasi dan form minat.</p>
-          <div class="fr-list">
-            <div>✓ Konsep & identitas outlet</div>
-            <div>✓ Standar operasional & produk</div>
-            <div>✓ Materi brand & promosi</div>
-            <div>✓ Pendampingan pembukaan sesuai kesepakatan</div>
-          </div><a class="btn red" href="franchise.html">Buka Halaman Franchise →</a>
-        </div>
-        <div class="fr-card">
-          <h3>Data calon mitra</h3>
-          <p class="muted">Siapkan kota, status lokasi, luas lokasi dan target waktu pembukaan.</p><a class="btn red"
-            href="franchise.html#daftar">Isi Form Minat</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="faq" id="faq">
-      <div class="container">
-        <div class="section-head">
-          <div><span class="kicker">FAQ</span>
-            <h2>Pertanyaan umum.</h2>
-          </div>
-        </div>
-        <div class="faq-grid">
-          <details class="faq-item" open>
-            <summary>Bagaimana cara pesan?</summary>
-            <p>Pilih produk, isi form pemesanan, lalu website membuka WhatsApp dengan format pesanan otomatis.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apakah harga dapat dikelola?</summary>
-            <p>Ya. Pada versi V4, struktur integrasi Google Sheets disiapkan agar produk, harga dan outlet dapat
-              dikelola dari database.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apakah ada franchise?</summary>
-            <p>Ya, tersedia halaman franchise terpisah. Data investasi final harus diisi berdasarkan dokumen resmi.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apakah website bisa dipasang di Vercel?</summary>
-            <p>Bisa. Frontend statis dapat di-host di Vercel dan terhubung ke Google Apps Script sebagai API.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="kontak">
-      <div class="container contact-grid">
-        <div><span class="kicker">Kontak</span>
-          <h2 style="font:900 clamp(35px,4vw,50px)/1.05 Georgia,serif;color:#572019;margin:8px 0 12px">Hubungi Juragan.
-          </h2>
-          <p class="muted">Ganti data demo di bagian konfigurasi dengan alamat, nomor WhatsApp, media sosial dan Google
-            Maps resmi.</p>
-        </div>
-        <div class="contact-card">
-          <h3>Informasi</h3>
-          <div class="contact-items">
-            <div class="contact-item">📍 <b>Dusun Jl. Raya Simpang No.003, RT.007, Tambakmekar, Kec. Jalancagak,
-                Kabupaten Subang, Jawa Barat 41281</b><small>Alamat Toko</small></div>
-            <div class="contact-item">📞 <b>+62 895-3754-52514</b><small>WhatsApp pemesanan</small></div>
-            <div class="contact-item">📸 <b>@juraganchicken</b><small>Instagram / TikTok</small></div>
-            <div class="contact-item">🕙 <b>07.00–22.00</b><small>Jam Operasional</small></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="order" id="pesan">
-      <div class="container order-grid">
-        <div><span class="kicker" style="color:#ffc078">Order</span>
-          <h2>Siap makan, Juragan?</h2>
-          <p>Pilih produk, outlet dan jumlah. Setelah dikirim, WhatsApp akan membawa detail pesanan.</p>
-        </div>
-        <form class="form" id="orderForm">
-          <div class="field"><label>Nama</label><input id="custName" required></div>
-          <div class="field"><label>No. WhatsApp</label><input id="custPhone" required placeholder="08xxxxxxxxxx"></div>
-          <div class="field"><label>Outlet</label><select id="outletSelect"></select></div>
-          <div class="field"><label>Produk</label><select id="productSelect"></select></div>
-          <div class="field"><label>Jumlah</label><input id="qty" type="number" min="1" value="1"></div>
-          <div class="field"><label>Catatan</label><textarea id="notes"
-              placeholder="Contoh: sambal tambahan, jam ambil..."></textarea></div><button class="btn red">Kirim Pesanan
-            ke WhatsApp →</button>
+          <div class="field"><label for="fu">Perkiraan luas</label><input id="fu" placeholder="Contoh: 30–50 m²"></div>
+          <div class="field"><label for="fc">Catatan</label><textarea id="fc"></textarea></div>
+          <button class="btn red" type="submit">Kirim Minat via WhatsApp →</button>
         </form>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container footer-grid">
-      <div class="footer-logo"><img src="logo.jpg.png" alt="Juragan Chicken">
-        <p>Fried chicken & coffee. Website siap dikembangkan dengan database dan sistem order.</p>
-      </div>
-      <div>
-        <h4>Menu</h4><a href="#menu">Produk</a><a href="#outlet">Outlet</a><a href="#galeri">Galeri</a>
-      </div>
-      <div>
-        <h4>Bisnis</h4><a href="#franchise">Franchise</a><a href="franchise.html">Kemitraan</a><a href="#faq">FAQ</a>
-      </div>
-      <div>
-        <h4>Kontak</h4><a href="#pesan">WhatsApp</a><a href="#kontak">Kontak</a><a href="#">Instagram</a>
-      </div>
+    <div class="container">
+      <span>© <span id="yr"></span> Juragan Chicken</span>
+      <a href="index.html">Website Utama</a>
     </div>
-    <div class="container copy">© <span id="year"></span> Juragan Chicken. Lengkapi data bisnis sebelum publikasi.</div>
   </footer>
-  <a class="float-wa" id="floatWa" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+  <a class="float-wa"
+    href="https://wa.me/6289537542514?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20franchise."
+    aria-label="WhatsApp Juragan Chicken" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
-        d="M20.52 3.48A11.78 11.78 0 0 0 12.1 0C5.58 0 .27 5.31.27 11.83c0 2.08.54 4.11 1.57 5.9L.17 24l6.42-1.63a11.83 11.83 0 0 0 5.51 1.36h.01c6.52 0 11.83-5.31 11.83-11.83 0-3.15-1.23-6.11-3.42-8.42ZM12.1 21.69h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.81.97 1.02-3.71-.23-.38a9.83 9.83 0 1 1 8.41 4.7Zm5.4-7.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.49s1.08 2.89 1.23 3.09c.15.2 2.13 3.25 5.17 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
+        d="M20.52 3.48A11.78 11.78 0 0 0 12.1 0C5.58 0 .27 5.31.27 11.83c0 2.08.54 4.11 1.57 5.9L.17 24l6.42-1.63a11.83 11.83 0 0 0 5.51 1.36h.01c6.52 0 11.83-5.31 11.83-11.83 0-3.15-1.23-6.11-3.42-8.42ZM12.1 21.69h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.81.97 1.02-3.71-.23-.38a9.83 9.83 0 1 1 8.41 4.7Zm5.4-7.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.49s1.08 2.89 1.23 3.09c.15.2 2.13 3.25 5.17 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z">
+      </path>
     </svg>
   </a>
-  <div class="modal" id="modal">
-    <div class="modal-card"><button class="close" id="close">×</button><img id="modalImg" alt="">
-      <div class="modal-copy"><span class="kicker">Detail Produk</span>
-        <h2 id="modalTitle"></h2>
-        <p id="modalDesc" class="muted"></p>
-        <div class="price" id="modalPrice"></div><br><button class="btn red" id="modalOrder">Pesan Produk →</button>
-      </div>
-    </div>
-  </div>
 
   <script>
-    const CONFIG = {
-      whatsapp: "6289537542514",
-      apiUrl: "", // isi URL Web App Google Apps Script setelah deployment
-      businessName: "Juragan Chicken"
-    };
-    const FALLBACK_PRODUCTS = [
-      { id: 1, name: "Chicken Paha Bawah", cat: "Chicken", price: 9500, src: "friedchickendada.png", desc: "Ayam crispy renyah untuk makan cepat atau take away." },
-      { id: 2, name: "Chicken Paha Atas/Dada", cat: "Chicken", price: 11000, src: "friedchickenpaha.png", desc: "Paket ayam dan nasi yang praktis." },
-      { id: 3, name: "Chicken Burger", cat: "Burger", price: 15000, src: "burger.png", desc: "Burger ayam dengan bun lembut." },
-      { id: 4, name: "Chicken Wings", cat: "Chicken", price: 9000, src: "chickenwings.png", desc: "Chicken wings untuk sharing." },
-      { id: 5, name: "French Fries", cat: "Snack", price: 12000, src: "frenchfries.png", desc: "Kentang goreng renyah." },
-      { id: 6, name: "Iced Coffee", cat: "Coffee", price: 15000, src: "kopisusu.png", desc: "Kopi dingin teman makan." },
-      { id: 7, name: "Cappuccino", cat: "Coffee", price: 15000, src: "cappucino1.png", desc: "Kopi creamy untuk santai." },
-      { id: 8, name: "Matcha Drink", cat: "Non-Coffee", price: 15000, src: "matcha.png", desc: "Minuman coklat lembut." }
-    ];
-    const FALLBACK_OUTLETS = [
-      { id: 1, name: "Juragan Chicken Tambakmekar", city: "Subang, Jawa Barat", wa: "6289537542514", maps: "#" },
-    ];
-    let products = [...FALLBACK_PRODUCTS], outlets = [...FALLBACK_OUTLETS];
-    const rupiah = n => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(Number(n) || 0);
-    const grid = document.getElementById("productGrid"), tabs = document.getElementById("tabs");
-    function renderTabs(active = "Semua") { const cats = ["Semua", ...new Set(products.map(p => p.cat))]; tabs.innerHTML = cats.map(c => `<button class="tab ${c === active ? "active" : ""}" data-cat="${c}">${c}</button>`).join(""); tabs.querySelectorAll(".tab").forEach(b => b.onclick = () => renderProducts(b.dataset.cat)) }
-    function renderProducts(cat = "Semua") { renderTabs(cat); const list = cat === "Semua" ? products : products.filter(p => p.cat === cat); grid.innerHTML = list.map(p => `<article class="card"><div class="pic"><img src="${p.src}" alt="${p.name}" loading="lazy"><span class="tag">${p.cat}</span></div><div class="body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-foot"><span class="price">${rupiah(p.price)}</span><button class="small-btn" onclick="showProduct(${p.id})">Detail</button></div></div></article>`).join("") }
-    function showProduct(id) { const p = products.find(x => String(x.id) === String(id)); if (!p) return; modalImg.src = p.src; modalImg.alt = p.name; modalTitle.textContent = p.name; modalDesc.textContent = p.desc; modalPrice.textContent = rupiah(p.price); modal.classList.add("open"); modalOrder.onclick = () => { productSelect.value = p.id; modal.classList.remove("open"); location.hash = "pesan" } }
-    function renderOutlets() { outletGrid.innerHTML = outlets.map(o => `<article class="outlet"><h3>${o.name}</h3><p>📍 ${o.city}</p><a href="${o.maps || "#"}" target="_blank" rel="noopener">Buka Maps →</a></article>`).join(""); outletSelect.innerHTML = outlets.map(o => `<option value="${o.id}">${o.name}</option>`).join("") }
-    function renderProductSelect() { productSelect.innerHTML = products.map(p => `<option value="${p.id}">${p.name} — ${rupiah(p.price)}</option>`).join("") }
-    async function loadDatabase() {
-      // Perubahan harga dari halaman admin langsung terbaca pada perangkat/browser yang sama.
-      try {
-        const savedProducts = JSON.parse(localStorage.getItem("jcProducts") || "null");
-        const savedOutlets = JSON.parse(localStorage.getItem("jcOutlets") || "null");
-        if (Array.isArray(savedProducts) && savedProducts.length) products = savedProducts;
-        if (Array.isArray(savedOutlets) && savedOutlets.length) outlets = savedOutlets;
-      } catch (e) {
-        console.warn("Data lokal tidak dapat dibaca.", e);
-      }
+    const WA = "6289537542514";
 
-      if (!CONFIG.apiUrl) {
-        renderProducts();
-        renderProductSelect();
-        renderOutlets();
-        return;
-      }
+    document.getElementById("frForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-      try {
-        const r = await fetch(CONFIG.apiUrl + "?action=publicData", { cache: "no-store" });
-        const d = await r.json();
-        if (Array.isArray(d.products) && d.products.length) products = d.products;
-        if (Array.isArray(d.outlets) && d.outlets.length) outlets = d.outlets;
-      } catch (e) {
-        console.warn("Database belum tersambung, memakai data lokal/demo.", e);
-      }
+      const text =
+        "Halo Tim Franchise Juragan Chicken,%0A%0A" +
+        "Saya berminat mengetahui informasi franchise.%0A%0A" +
+        "Nama: " + encodeURIComponent(document.getElementById("fn").value) + "%0A" +
+        "No. WhatsApp: " + encodeURIComponent(document.getElementById("fw").value) + "%0A" +
+        "Kota/Area: " + encodeURIComponent(document.getElementById("fk").value) + "%0A" +
+        "Status lokasi: " + encodeURIComponent(document.getElementById("fl").value) + "%0A" +
+        "Perkiraan luas: " + encodeURIComponent(document.getElementById("fu").value || "-") + "%0A" +
+        "Catatan: " + encodeURIComponent(document.getElementById("fc").value || "-");
 
-      renderProducts();
-      renderProductSelect();
-      renderOutlets();
-    }
-    orderForm.onsubmit = e => { e.preventDefault(); const p = products.find(x => String(x.id) === String(productSelect.value)); const o = outlets.find(x => String(x.id) === String(outletSelect.value)); const text = `Halo ${CONFIG.businessName},%0A%0ASaya ingin memesan:%0A%0ANama: ${encodeURIComponent(custName.value)}%0ANo. WhatsApp: ${encodeURIComponent(custPhone.value)}%0AOutlet: ${encodeURIComponent(o?.name || "-")}%0AMenu: ${encodeURIComponent(p?.name || "-")}%0AHarga: ${encodeURIComponent(rupiah(p?.price || 0))}%0AJumlah: ${qty.value}%0ACatatan: ${encodeURIComponent(notes.value || "-")}`; window.open(`https://wa.me/${CONFIG.whatsapp}?text=${text}`, "_blank") };
-    floatWa.href = `https://wa.me/${CONFIG.whatsapp}?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20menu.`;
-    close.onclick = () => modal.classList.remove("open"); modal.onclick = e => { if (e.target === modal) modal.classList.remove("open") };
-    menuBtn.onclick = () => {
-      const isOpen = links.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", String(isOpen));
-      menuBtn.classList.toggle("is-open", isOpen);
-    };
-    links.querySelectorAll("a").forEach(a => a.onclick = () => {
-      links.classList.remove("open");
-      menuBtn.setAttribute("aria-expanded", "false");
-      menuBtn.classList.remove("is-open");
+      window.open("https://wa.me/" + WA + "?text=" + text, "_blank");
     });
-    year.textContent = new Date().getFullYear(); renderProducts(); renderProductSelect(); renderOutlets(); loadDatabase();
+
+    const frMenuBtn = document.getElementById("frMenuBtn");
+    const frNavLinks = document.getElementById("frNavLinks");
+
+    frMenuBtn.addEventListener("click", () => {
+      const open = frNavLinks.classList.toggle("open");
+      frMenuBtn.setAttribute("aria-expanded", String(open));
+    });
+
+    frNavLinks.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        frNavLinks.classList.remove("open");
+        frMenuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("yr").textContent = new Date().getFullYear();
   </script>
+
 </body>
 
 </html>

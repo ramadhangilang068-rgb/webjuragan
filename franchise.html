@@ -5,19 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin | Juragan Chicken</title>
+    <title>Franchise Juragan Chicken | Kemitraan</title>
+    <meta name="description"
+        content="Informasi franchise dan kemitraan Juragan Chicken. Pelajari konsep outlet, dukungan, proses pengajuan dan isi form minat.">
+    <link rel="icon" href="logo.jpg.png" type="image/png">
 
     <style>
         :root {
             --r: #b91c1c;
             --o: #f97316;
-            --bg: #f7f3ef;
+            --c: #fff8ef;
             --ink: #241916;
-            --mut: #756861;
-            --line: #e5d8cf;
-            --white: #ffffff;
+            --mut: #71625b;
+            --line: #eaded5;
+            --white: #fff;
+            --shadow: 0 18px 55px rgba(77, 33, 20, .08);
             --wa: #25d366;
-            --shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -30,11 +33,21 @@
 
         body {
             margin: 0;
-            background: var(--bg);
+            background: var(--c);
             color: var(--ink);
             font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
         button,
@@ -44,71 +57,257 @@
             font: inherit;
         }
 
-        .wrap {
-            width: min(1180px, 94%);
-            margin: 0 auto;
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
         }
 
-        /* =========================
-       HEADER
-       ========================= */
-
-        header {
-            background: #241916;
-            color: #fff;
-            padding: 15px 0;
-        }
-
+        /* HEADER */
         .nav {
+            min-height: 76px;
+            background: #fff;
+            border-bottom: 1px solid var(--line);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            width: 100%;
         }
 
         .logo {
-            width: 160px;
-            max-width: 100%;
-            filter: brightness(0) invert(1);
+            width: 150px;
         }
 
-        #status {
-            font-size: 12px;
-            font-weight: 800;
-            white-space: nowrap;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+            font-weight: 850;
+            color: #533c34;
         }
 
-        /* =========================
-       COMMON PANEL
-       ========================= */
+        .nav-links a:hover {
+            color: var(--r);
+        }
 
-        .login,
-        .panel {
-            background: var(--white);
+        .btn {
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .red {
+            background: linear-gradient(135deg, var(--r), #e13a20);
+            color: #fff;
+            box-shadow: 0 9px 22px rgba(185, 28, 28, .16);
+        }
+
+        .light {
+            background: #fff;
             border: 1px solid var(--line);
-            border-radius: 18px;
-            padding: 22px;
+            color: #633d30;
+        }
+
+        .menu-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            background: #fff;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .menu-btn span {
+            width: 18px;
+            height: 2px;
+            border-radius: 99px;
+            background: #533c34;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 68px 0;
+            background: linear-gradient(135deg, #fff0d8, #ffd18d 55%, #ff9d3d);
+        }
+
+        .hero-grid,
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .eyebrow,
+        .kicker {
+            color: #99291c;
+            font-size: 11px;
+            font-weight: 950;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font: 900 clamp(43px, 6vw, 67px)/1 Georgia, serif;
+            color: #571e17;
+            margin: 10px 0 15px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #694b3e;
+            max-width: 650px;
+        }
+
+        .hero-img {
+            border-radius: 27px;
+            overflow: hidden;
             box-shadow: var(--shadow);
         }
 
-        .login {
-            width: min(430px, 100%);
-            margin: 80px auto;
+        .hero-img img {
+            height: 390px;
+            width: 100%;
+            object-fit: cover;
         }
 
-        .login h2 {
-            margin-top: 0;
+        section {
+            padding: 72px 0;
+        }
+
+        .head {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 30px;
+        }
+
+        .head h2 {
+            font: 900 42px/1.08 Georgia, serif;
             color: #571e17;
+            margin: 7px 0;
         }
 
-        /* =========================
-       FORM
-       ========================= */
+        .head p {
+            color: var(--mut);
+        }
+
+        .cards,
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 21px;
+        }
+
+        .card h3 {
+            margin: 8px 0;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: var(--mut);
+        }
+
+        .dark {
+            background: #241916;
+            color: #fff;
+        }
+
+        .dark .head h2 {
+            color: #fff;
+        }
+
+        .dark .head p {
+            color: #d8c4b8;
+        }
+
+        .steps {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .step {
+            border: 1px solid rgba(255, 255, 255, .13);
+            background: rgba(255, 255, 255, .03);
+            border-radius: 17px;
+            padding: 19px;
+        }
+
+        .num {
+            width: 37px;
+            height: 37px;
+            border-radius: 11px;
+            background: var(--o);
+            display: grid;
+            place-items: center;
+            font-weight: 950;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            font-size: 12px;
+            color: #d8c4b8;
+        }
+
+        .requirements {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .check {
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 12px;
+            border-radius: 13px;
+            margin: 8px 0;
+            font-weight: 850;
+        }
+
+        .note {
+            background: #fff0d8;
+            border: 1px solid #efcf9c;
+            border-radius: 21px;
+            padding: 23px;
+            color: #654638;
+        }
+
+        .form {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 23px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
 
         .field {
             display: grid;
             gap: 5px;
-            margin: 10px 0;
+            margin-bottom: 11px;
         }
 
         .field label {
@@ -120,281 +319,166 @@
         .field select,
         .field textarea {
             width: 100%;
-            padding: 10px;
             border: 1px solid var(--line);
-            border-radius: 10px;
-            background: #fff;
-            color: var(--ink);
+            border-radius: 11px;
+            padding: 10px;
             outline: none;
         }
 
-        .field input:focus,
-        .field select:focus,
-        .field textarea:focus {
-            border-color: #d39a83;
-            box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.06);
+        .field textarea {
+            min-height: 85px;
+            resize: vertical;
         }
 
-        /* =========================
-       BUTTONS
-       ========================= */
-
-        .btn {
-            border: 0;
-            border-radius: 10px;
-            padding: 10px 14px;
-            font-weight: 900;
-            cursor: pointer;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-        }
-
-        .red {
-            background: var(--r);
-            color: #fff;
-            box-shadow: 0 7px 18px rgba(185, 28, 28, 0.14);
-        }
-
-        .light {
-            background: #fff;
-            border: 1px solid var(--line);
-            color: var(--ink);
-        }
-
-        .danger {
-            background: #eee;
-            color: #8a1717;
-        }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        /* =========================
-       DASHBOARD
-       ========================= */
-
-        .dashboard {
-            display: none;
-            padding: 25px 0 50px;
-        }
-
-        .dashboard-title {
-            margin: 0 0 15px;
-            color: #571e17;
-        }
-
-        .notice {
-            background: #fff3df;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            margin: 12px 0;
-            border: 1px solid #f0dcc0;
-        }
-
-        /* =========================
-       STATS
-       ========================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .stat {
-            min-width: 0;
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: 15px;
-            padding: 17px;
-        }
-
-        .stat span {
-            display: block;
-            color: var(--mut);
-            font-size: 12px;
-        }
-
-        .stat b {
-            display: block;
-            margin-top: 3px;
-            font-size: 25px;
-            line-height: 1.2;
-        }
-
-        /* =========================
-       CONTENT GRID
-       ========================= */
-
-        .grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .panel h3 {
-            margin-top: 0;
-        }
-
-        /* =========================
-       TABLE
-       ========================= */
-
-        .table-wrap {
+        .form .btn {
             width: 100%;
-            overflow-x: auto;
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            background: #fff;
         }
 
-        table {
-            width: 100%;
-            min-width: 600px;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-
-        th,
-        td {
-            text-align: left;
-            vertical-align: middle;
-            padding: 9px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        th {
-            background: #fbf7f3;
-            font-weight: 900;
-            white-space: nowrap;
-        }
-
-        tr:last-child td {
-            border-bottom: 0;
-        }
-
-        table input {
-            min-width: 100px;
-            padding: 8px;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-        }
-
-        /* =========================
-       WHATSAPP
-       ========================= */
-
-        .wa-link {
+        .wa-card {
             display: inline-flex;
             align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: #e9f9ef;
+            color: #137a43;
+            font-weight: 900;
+            font-size: 13px;
+        }
+
+        footer {
+            background: #1d1411;
+            color: #d8c4b8;
+            padding: 27px 0;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            font-size: 12px;
+        }
+
+        .float-wa {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 6px;
-            margin-top: 8px;
-            padding: 7px 10px;
-            border-radius: 8px;
+            border-radius: 16px;
             background: var(--wa);
             color: #fff;
-            font-size: 11px;
-            font-weight: 900;
-            white-space: nowrap;
+            z-index: 70;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .18);
         }
 
-        .wa-link:hover {
-            filter: brightness(0.95);
+        .float-wa svg {
+            width: 30px;
+            height: 30px;
+            fill: currentColor;
         }
 
-        /* =========================
-       MOBILE
-       ========================= */
-
-        @media (max-width: 900px) {
-            .stats {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+        @media(max-width:900px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 76px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                padding: 10px 4% 14px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                border-bottom: 1px solid var(--line);
+                box-shadow: 0 15px 30px rgba(50, 25, 18, .10);
             }
 
-            .grid {
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 10px 12px;
+                border-radius: 10px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .hero-grid,
+            .form-grid,
+            .requirements {
                 grid-template-columns: 1fr;
             }
-        }
 
-        @media (max-width: 600px) {
-            header {
-                padding: 12px 0;
+            .cards {
+                grid-template-columns: 1fr 1fr;
             }
 
+            .steps {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width:600px) {
             .nav {
-                align-items: center;
+                min-height: 66px;
             }
 
-            .logo {
-                width: 125px;
-            }
-
-            #status {
-                font-size: 10px;
-            }
-
-            .dashboard {
-                padding-top: 18px;
-            }
-
-            .actions .btn {
-                flex: 1 1 auto;
-            }
-
-            .stats {
-                gap: 8px;
-            }
-
-            .stat {
-                padding: 14px;
-            }
-
-            .stat b {
-                font-size: 22px;
-            }
-
-            .login {
-                margin: 45px auto;
-                padding: 18px;
-            }
-
-            .panel {
-                padding: 17px;
-            }
-        }
-
-        @media (max-width: 420px) {
             .logo {
                 width: 110px;
             }
 
-            #status {
-                font-size: 9px;
+            .nav-links {
+                top: 66px;
             }
 
-            .stats {
-                grid-template-columns: 1fr 1fr;
+            .hero {
+                padding: 45px 0;
             }
 
-            .actions {
+            .hero h1 {
+                font-size: clamp(42px, 12vw, 58px);
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-img img {
+                height: auto;
+                max-height: 330px;
+            }
+
+            .cards,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .head h2 {
+                font-size: 34px;
+            }
+
+            section {
+                padding: 55px 0;
+            }
+
+            footer .container {
                 flex-direction: column;
             }
 
-            .actions .btn {
-                width: 100%;
+            .float-wa {
+                right: 15px;
+                bottom: 15px;
+                width: 52px;
+                height: 52px;
+                border-radius: 14px;
             }
         }
     </style>
@@ -402,515 +486,214 @@
 
 <body>
 
-    <!-- =========================
-       HEADER
-       ========================= -->
+    <header class="nav">
+        <div class="container nav-inner">
+            <a href="index.html" aria-label="Kembali ke Juragan Chicken">
+                <img class="logo" src="logo.jpg.png" alt="Juragan Chicken">
+            </a>
 
-    <header>
-        <div class="wrap nav">
-            <img class="logo" src="assets/logo-juragan-chicken.svg" alt="Juragan Chicken">
+            <nav class="nav-links" id="frNavLinks">
+                <a href="index.html">Website Utama</a>
+                <a href="#konsep">Konsep</a>
+                <a href="#proses">Proses</a>
+                <a href="#daftar">Daftar Minat</a>
+            </nav>
 
-            <div id="status">
-                Admin Demo
-            </div>
+            <a class="btn red" href="#daftar">Minat Franchise</a>
+
+            <button class="menu-btn" id="frMenuBtn" type="button" aria-label="Buka menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
-    <main class="wrap">
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">FRANCHISE & KEMITRAAN</span>
+                    <h1>Bangun outlet Juragan bersama.</h1>
+                    <p>Halaman khusus calon mitra untuk memahami konsep, kesiapan lokasi, proses pengajuan dan data yang
+                        perlu disiapkan.</p>
 
-        <!-- =========================
-         LOGIN
-         ========================= -->
+                    <a class="btn red" href="#daftar">Ajukan Minat →</a>
 
-        <section class="login" id="login">
-            <h2>Admin Juragan Chicken</h2>
+                    <a class="wa-card"
+                        href="https://wa.me/6289537542514?text=Halo%20Tim%20Juragan%20Chicken,%20saya%20ingin%20menanyakan%20informasi%20franchise."
+                        target="_blank" rel="noopener">
+                        💬 Hubungi WhatsApp 0895-3754-52514
+                    </a>
+                </div>
 
-            <p style="color:#756861;font-size:13px">
-                Login ini adalah proteksi demo frontend.
-                Untuk produksi, gunakan autentikasi server-side
-                sebelum dashboard dibuka publik.
-            </p>
-
-            <div class="field">
-                <label for="pw">Password Demo</label>
-                <input id="pw" type="password" placeholder="juragan123">
+                <div class="hero-img">
+                    <img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=1300&q=85"
+                        alt="Fried chicken Juragan Chicken" fetchpriority="high">
+                </div>
             </div>
-
-            <button class="btn red" type="button" onclick="login()">
-                Masuk
-            </button>
         </section>
 
-        <!-- =========================
-         DASHBOARD
-         ========================= -->
-
-        <section class="dashboard" id="dashboard">
-
-            <div class="actions">
-                <button class="btn light" type="button" onclick="load()">
-                    Refresh Database
-                </button>
-
-                <button class="btn red" type="button" onclick="saveProducts()">
-                    Simpan Produk
-                </button>
-
-                <button class="btn light" type="button" onclick="logout()">
-                    Keluar
-                </button>
-            </div>
-
-            <div class="notice">
-                API URL di bawah harus diisi dengan URL Web App Google Apps Script.
-                Jangan menaruh secret API key di JavaScript frontend.
-            </div>
-
-            <div class="field">
-                <label for="apiUrl">
-                    Google Apps Script API URL
-                </label>
-
-                <input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec">
-            </div>
-
-            <!-- =========================
-           STATISTICS
-           ========================= -->
-
-            <div class="stats">
-
-                <div class="stat">
-                    <span>Produk</span>
-                    <b id="sProducts">0</b>
+        <section id="konsep">
+            <div class="container">
+                <div class="head">
+                    <span class="kicker">Konsep</span>
+                    <h2>Yang perlu diketahui calon mitra.</h2>
+                    <p>Detail komersial final harus mengikuti paket resmi Juragan Chicken.</p>
                 </div>
 
-                <div class="stat">
-                    <span>Outlet</span>
-                    <b id="sOutlets">0</b>
-                </div>
-
-                <div class="stat">
-                    <span>Pesanan</span>
-                    <b id="sOrders">-</b>
-                </div>
-
-                <div class="stat">
-                    <span>Leads Franchise</span>
-                    <b id="sLeads">-</b>
-                </div>
-
-            </div>
-
-            <!-- =========================
-           DATA TABLES
-           ========================= -->
-
-            <div class="grid">
-
-                <!-- PRODUCTS -->
-
-                <div class="panel">
-                    <h3>Produk</h3>
-
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Kategori</th>
-                                    <th>Harga</th>
-                                    <th>Foto URL</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="productRows"></tbody>
-                        </table>
+                <div class="cards">
+                    <div class="card"><b>🏪</b>
+                        <h3>Konsep Outlet</h3>
+                        <p>Format outlet, desain, signage dan perlengkapan mengikuti paket kerja sama.</p>
                     </div>
-
-                    <p style="font-size:11px;color:#756861">
-                        Edit langsung pada tabel.
-                        Kolom foto memakai URL atau path seperti
-                        assets/products/chicken.jpg.
-                    </p>
-                </div>
-
-                <!-- OUTLETS -->
-
-                <div class="panel">
-                    <h3>Outlet</h3>
-
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Kota</th>
-                                    <th>WhatsApp</th>
-                                    <th>Maps</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="outletRows"></tbody>
-                        </table>
+                    <div class="card"><b>🍗</b>
+                        <h3>Produk</h3>
+                        <p>Fried chicken, menu pendamping, coffee dan minuman.</p>
+                    </div>
+                    <div class="card"><b>📣</b>
+                        <h3>Brand Support</h3>
+                        <p>Identitas brand dan materi promosi sesuai standar yang ditetapkan.</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
+        <section class="dark" id="proses">
+            <div class="container">
+                <div class="head">
+                    <span class="kicker">Proses</span>
+                    <h2>Alur pengajuan.</h2>
+                    <p>Sesuaikan alur ini dengan SOP franchise resmi saat data final tersedia.</p>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="num">01</div><b>Isi form</b>
+                        <p>Kirim data kontak dan rencana lokasi.</p>
+                    </div>
+                    <div class="step">
+                        <div class="num">02</div><b>Screening</b>
+                        <p>Tim mempelajari area dan lokasi.</p>
+                    </div>
+                    <div class="step">
+                        <div class="num">03</div><b>Penawaran</b>
+                        <p>Paket dan fasilitas dibahas.</p>
+                    </div>
+                    <div class="step">
+                        <div class="num">04</div><b>Persiapan</b>
+                        <p>Outlet disiapkan sesuai kesepakatan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container requirements">
+                <div>
+                    <span class="kicker">Kesiapan Mitra</span>
+                    <h2 style="font:900 40px/1.08 Georgia,serif;color:#571e17">Siapkan data berikut.</h2>
+                    <div class="check">✓ Nama & nomor WhatsApp</div>
+                    <div class="check">✓ Kota / Kabupaten</div>
+                    <div class="check">✓ Status lokasi: milik / sewa</div>
+                    <div class="check">✓ Perkiraan luas lokasi</div>
+                    <div class="check">✓ Target pembukaan</div>
+                </div>
+
+                <div class="note">
+                    <h3>Catatan sebelum publikasi</h3>
+                    <p>Masukkan investasi, franchise fee, royalty, estimasi omzet, margin, ROI atau klaim keuntungan
+                        hanya berdasarkan dokumen resmi. Jangan menggunakan angka demo sebagai penawaran.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="daftar">
+            <div class="container form-grid">
+                <div>
+                    <span class="kicker">Calon Mitra</span>
+                    <h2 style="font:900 42px/1.08 Georgia,serif;color:#571e17">Mulai pembicaraan.</h2>
+                    <p style="color:var(--mut)">Isi form. Setelah dikirim, data akan diteruskan melalui WhatsApp tim
+                        Juragan Chicken.</p>
+
+                    <a class="wa-card"
+                        href="https://wa.me/6289537542514?text=Halo%20Tim%20Franchise%20Juragan%20Chicken,%20saya%20ingin%20menanyakan%20informasi%20kemitraan."
+                        target="_blank" rel="noopener">
+                        💬 WhatsApp Franchise
+                    </a>
+                </div>
+
+                <form class="form" id="frForm">
+                    <div class="field"><label for="fn">Nama Lengkap</label><input id="fn" required></div>
+                    <div class="field"><label for="fw">No. WhatsApp</label><input id="fw" required></div>
+                    <div class="field"><label for="fk">Kota / Kabupaten</label><input id="fk" required></div>
+                    <div class="field">
+                        <label for="fl">Status Lokasi</label>
+                        <select id="fl">
+                            <option>Sudah punya lokasi</option>
+                            <option>Sedang mencari lokasi</option>
+                            <option>Belum menentukan</option>
+                        </select>
+                    </div>
+                    <div class="field"><label for="fu">Perkiraan luas</label><input id="fu"
+                            placeholder="Contoh: 30–50 m²"></div>
+                    <div class="field"><label for="fc">Catatan</label><textarea id="fc"></textarea></div>
+                    <button class="btn red" type="submit">Kirim Minat via WhatsApp →</button>
+                </form>
             </div>
         </section>
     </main>
 
+    <footer>
+        <div class="container">
+            <span>© <span id="yr"></span> Juragan Chicken</span>
+            <a href="index.html">Website Utama</a>
+        </div>
+    </footer>
+
+    <a class="float-wa"
+        href="https://wa.me/6289537542514?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20franchise."
+        aria-label="WhatsApp Juragan Chicken" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                d="M20.52 3.48A11.78 11.78 0 0 0 12.1 0C5.58 0 .27 5.31.27 11.83c0 2.08.54 4.11 1.57 5.9L.17 24l6.42-1.63a11.83 11.83 0 0 0 5.51 1.36h.01c6.52 0 11.83-5.31 11.83-11.83 0-3.15-1.23-6.11-3.42-8.42ZM12.1 21.69h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.81.97 1.02-3.71-.23-.38a9.83 9.83 0 1 1 8.41 4.7Zm5.4-7.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.49s1.08 2.89 1.23 3.09c.15.2 2.13 3.25 5.17 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z">
+            </path>
+        </svg>
+    </a>
+
     <script>
-        const DEMO_PASSWORD = "juragan123";
-
-        // Nomor WhatsApp utama Juragan Chicken
-        const DEFAULT_WHATSAPP = "6289537542514";
-
-        let products = [];
-        let outlets = [];
-
-        const $ = (id) => document.getElementById(id);
-
-        /* =========================
-           LOGIN
-           ========================= */
-
-        function login() {
-            if ($("pw").value === DEMO_PASSWORD) {
-                localStorage.jcAdmin = "1";
-
-                $("login").style.display = "none";
-                $("dashboard").style.display = "block";
-
-                load();
-            } else {
-                alert("Password demo salah.");
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem("jcAdmin");
-            location.reload();
-        }
-
-        /* =========================
-           PRODUCT ROW
-           ========================= */
-
-        function rowProduct(p, i) {
-            return `
-        <tr>
-          <td>
-            <input
-              data-p="${i}"
-              data-k="name"
-              value="${esc(p.name)}"
-            >
-          </td>
-
-          <td>
-            <input
-              data-p="${i}"
-              data-k="cat"
-              value="${esc(p.cat)}"
-            >
-          </td>
-
-          <td>
-            <input
-              data-p="${i}"
-              data-k="price"
-              type="number"
-              value="${p.price}"
-            >
-          </td>
-
-          <td>
-            <input
-              data-p="${i}"
-              data-k="img"
-              value="${esc(p.img)}"
-            >
-          </td>
-        </tr>
-      `;
-        }
-
-        /* =========================
-           OUTLET ROW
-           ========================= */
-
-        function rowOutlet(o, i) {
-            const whatsapp = o.wa || DEFAULT_WHATSAPP;
-
-            return `
-        <tr>
-          <td>
-            <input
-              data-o="${i}"
-              data-k="name"
-              value="${esc(o.name)}"
-            >
-          </td>
-
-          <td>
-            <input
-              data-o="${i}"
-              data-k="city"
-              value="${esc(o.city)}"
-            >
-          </td>
-
-          <td>
-            <input
-              data-o="${i}"
-              data-k="wa"
-              value="${esc(whatsapp)}"
-            >
-
-            <a
-              class="wa-link"
-              href="https://wa.me/${cleanPhone(whatsapp)}"
-              target="_blank"
-              rel="noopener"
-            >
-              WhatsApp
-            </a>
-          </td>
-
-          <td>
-            <input
-              data-o="${i}"
-              data-k="maps"
-              value="${esc(o.maps || "")}"
-            >
-          </td>
-        </tr>
-      `;
-        }
-
-        /* =========================
-           HELPERS
-           ========================= */
-
-        function esc(s) {
-            return String(s ?? "")
-                .replaceAll("&", "&amp;")
-                .replaceAll('"', "&quot;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;");
-        }
-
-        function cleanPhone(phone) {
-            let value = String(phone || DEFAULT_WHATSAPP)
-                .replace(/\D/g, "");
-
-            if (value.startsWith("0")) {
-                value = "62" + value.substring(1);
-            }
-
-            if (!value.startsWith("62")) {
-                value = "62" + value;
-            }
-
-            return value;
-        }
-
-        /* =========================
-           LOAD DATA
-           ========================= */
-
-        async function load() {
-            const url =
-                $("apiUrl").value ||
-                localStorage.jcApiUrl ||
-                "";
-
-            if (url) {
-                localStorage.jcApiUrl = url;
-
-                try {
-                    const r = await fetch(
-                        url + "?action=adminData"
-                    );
-
-                    const d = await r.json();
-
-                    products = d.products || [];
-                    outlets = d.outlets || [];
-
-                    $("sOrders").textContent =
-                        d.ordersCount ?? "-";
-
-                    $("sLeads").textContent =
-                        d.leadsCount ?? "-";
-
-                } catch (e) {
-                    alert(
-                        "API belum bisa diakses. Data lokal tetap ditampilkan."
-                    );
-
-                    fallback();
-                }
-            } else {
-                fallback();
-            }
-
-            render();
-        }
-
-        /* =========================
-           FALLBACK LOCAL DATA
-           ========================= */
-
-        function fallback() {
-            products = JSON.parse(
-                localStorage.jcProducts || "[]"
-            );
-
-            outlets = JSON.parse(
-                localStorage.jcOutlets || "[]"
-            );
-
-            if (!products.length) {
-                products = [
-                    {
-                        id: 1,
-                        name: "Chicken Crispy",
-                        cat: "Chicken",
-                        price: 15000,
-                        img: ""
-                    }
-                ];
-            }
-
-            if (!outlets.length) {
-                outlets = [
-                    {
-                        id: 1,
-                        name: "Juragan Chicken Subang",
-                        city: "Subang",
-                        wa: DEFAULT_WHATSAPP,
-                        maps: ""
-                    }
-                ];
-            }
-
-            // Pastikan outlet lama yang belum memiliki WhatsApp
-            // menggunakan nomor utama Juragan Chicken.
-            outlets = outlets.map((outlet) => ({
-                ...outlet,
-                wa: outlet.wa || DEFAULT_WHATSAPP
-            }));
-        }
-
-        /* =========================
-           RENDER
-           ========================= */
-
-        function render() {
-            $("productRows").innerHTML =
-                products.map(rowProduct).join("");
-
-            $("outletRows").innerHTML =
-                outlets.map(rowOutlet).join("");
-
-            $("sProducts").textContent =
-                products.length;
-
-            $("sOutlets").textContent =
-                outlets.length;
-        }
-
-        /* =========================
-           COLLECT TABLE DATA
-           ========================= */
-
-        function collect() {
-            document
-                .querySelectorAll("[data-p]")
-                .forEach((el) => {
-                    products[+el.dataset.p][el.dataset.k] =
-                        el.dataset.k === "price"
-                            ? Number(el.value)
-                            : el.value;
-                });
-
-            document
-                .querySelectorAll("[data-o]")
-                .forEach((el) => {
-                    outlets[+el.dataset.o][el.dataset.k] =
-                        el.value;
-                });
-
-            outlets = outlets.map((outlet) => ({
-                ...outlet,
-                wa: cleanPhone(outlet.wa)
-            }));
-        }
-
-        /* =========================
-           SAVE DATA
-           ========================= */
-
-        async function saveProducts() {
-            collect();
-
-            localStorage.jcProducts =
-                JSON.stringify(products);
-
-            localStorage.jcOutlets =
-                JSON.stringify(outlets);
-
-            const url =
-                $("apiUrl").value ||
-                localStorage.jcApiUrl ||
-                "";
-
-            if (url) {
-                try {
-                    const r = await fetch(url, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-                        },
-                        body: JSON.stringify({
-                            action: "saveCatalog",
-                            products,
-                            outlets
-                        })
-                    });
-
-                    alert(
-                        "Data tersimpan ke API: " +
-                        (await r.text())
-                    );
-
-                } catch (e) {
-                    alert(
-                        "Data disimpan lokal. POST ke Apps Script gagal, cek deployment API."
-                    );
-                }
-            } else {
-                alert(
-                    "Data tersimpan di browser. Isi API URL untuk menyimpan ke Google Sheets."
-                );
-            }
-
-            render();
-        }
-
-        /* =========================
-           AUTO LOGIN
-           ========================= */
-
-        if (localStorage.jcAdmin === "1") {
-            $("login").style.display = "none";
-            $("dashboard").style.display = "block";
-
-            load();
-        }
+        const WA = "6289537542514";
+
+        document.getElementById("frForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const text =
+                "Halo Tim Franchise Juragan Chicken,%0A%0A" +
+                "Saya berminat mengetahui informasi franchise.%0A%0A" +
+                "Nama: " + encodeURIComponent(document.getElementById("fn").value) + "%0A" +
+                "No. WhatsApp: " + encodeURIComponent(document.getElementById("fw").value) + "%0A" +
+                "Kota/Area: " + encodeURIComponent(document.getElementById("fk").value) + "%0A" +
+                "Status lokasi: " + encodeURIComponent(document.getElementById("fl").value) + "%0A" +
+                "Perkiraan luas: " + encodeURIComponent(document.getElementById("fu").value || "-") + "%0A" +
+                "Catatan: " + encodeURIComponent(document.getElementById("fc").value || "-");
+
+            window.open("https://wa.me/" + WA + "?text=" + text, "_blank");
+        });
+
+        const frMenuBtn = document.getElementById("frMenuBtn");
+        const frNavLinks = document.getElementById("frNavLinks");
+
+        frMenuBtn.addEventListener("click", () => {
+            const open = frNavLinks.classList.toggle("open");
+            frMenuBtn.setAttribute("aria-expanded", String(open));
+        });
+
+        frNavLinks.querySelectorAll("a").forEach(a => {
+            a.addEventListener("click", () => {
+                frNavLinks.classList.remove("open");
+                frMenuBtn.setAttribute("aria-expanded", "false");
+            });
+        });
+
+        document.getElementById("yr").textContent = new Date().getFullYear();
     </script>
 
 </body>

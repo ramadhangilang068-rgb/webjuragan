@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin | Juragan Chicken</title>
+    <title>Admin Menu | Juragan Chicken</title>
 
     <style>
         :root {
@@ -410,9 +410,7 @@
         <div class="wrap nav">
             <img class="logo" src="logo.jpg.png" alt="Juragan Chicken">
 
-            <div id="status">
-                Admin Demo
-            </div>
+            <div id="status">Admin • Kelola Menu</div>
         </div>
     </header>
 
@@ -424,6 +422,8 @@
 
         <section class="login" id="login">
             <h2>Admin Juragan Chicken</h2>
+            <div class="notice" style="margin-top:0">Halaman ini khusus admin untuk mengubah data menu dan harga.
+                Halaman franchise <b>bukan</b> bagian dari login admin dan tetap dapat diakses publik.</div>
 
             <p style="color:#756861;font-size:13px">
                 Login ini adalah proteksi demo frontend.
@@ -448,12 +448,13 @@
         <section class="dashboard" id="dashboard">
 
             <div class="actions">
+                <a class="btn light" href="index.html" target="_blank" rel="noopener">Website Utama</a>
                 <button class="btn light" type="button" onclick="load()">
                     Refresh Database
                 </button>
 
                 <button class="btn red" type="button" onclick="saveProducts()">
-                    Simpan Produk
+                    Simpan Perubahan Harga
                 </button>
 
                 <button class="btn light" type="button" onclick="logout()">
@@ -462,7 +463,8 @@
             </div>
 
             <div class="notice">
-                API URL di bawah harus diisi dengan URL Web App Google Apps Script.
+                Harga yang disimpan di sini akan dipakai website utama pada browser yang sama. Untuk sinkronisasi ke
+                semua perangkat, isi URL Web App Google Apps Script.
                 Jangan menaruh secret API key di JavaScript frontend.
             </div>
 
@@ -529,8 +531,8 @@
                     </div>
 
                     <p style="font-size:11px;color:#756861">
-                        Edit langsung pada tabel.
-                        Kolom foto memakai URL atau path seperti
+                        <b>Harga dapat diubah langsung pada kolom Harga.</b><br>
+                        Edit langsung pada tabel. Kolom foto memakai URL atau path seperti
                         assets/products/chicken.jpg.
                     </p>
                 </div>

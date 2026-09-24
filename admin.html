@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Admin | Juragan Chicken</title>
+
+    <style>
+        :root {
+            --r: #b91c1c;
+            --o: #f97316;
+            --bg: #f7f3ef;
+            --ink: #241916;
+            --mut: #756861;
+            --line: #e5d8cf;
+            --white: #ffffff;
+            --wa: #25d366;
+            --shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        .wrap {
+            width: min(1180px, 94%);
+            margin: 0 auto;
+        }
+
+        /* =========================
+       HEADER
+       ========================= */
+
+        header {
+            background: #241916;
+            color: #fff;
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 160px;
+            max-width: 100%;
+            filter: brightness(0) invert(1);
+        }
+
+        #status {
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        /* =========================
+       COMMON PANEL
+       ========================= */
+
+        .login,
+        .panel {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .login {
+            width: min(430px, 100%);
+            margin: 80px auto;
+        }
+
+        .login h2 {
+            margin-top: 0;
+            color: #571e17;
+        }
+
+        /* =========================
+       FORM
+       ========================= */
+
+        .field {
+            display: grid;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .field label {
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #fff;
+            color: var(--ink);
+            outline: none;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: #d39a83;
+            box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.06);
+        }
+
+        /* =========================
+       BUTTONS
+       ========================= */
+
+        .btn {
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-weight: 900;
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .red {
+            background: var(--r);
+            color: #fff;
+            box-shadow: 0 7px 18px rgba(185, 28, 28, 0.14);
+        }
+
+        .light {
+            background: #fff;
+            border: 1px solid var(--line);
+            color: var(--ink);
+        }
+
+        .danger {
+            background: #eee;
+            color: #8a1717;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+       DASHBOARD
+       ========================= */
+
+        .dashboard {
+            display: none;
+            padding: 25px 0 50px;
+        }
+
+        .dashboard-title {
+            margin: 0 0 15px;
+            color: #571e17;
+        }
+
+        .notice {
+            background: #fff3df;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 12px 0;
+            border: 1px solid #f0dcc0;
+        }
+
+        /* =========================
+       STATS
+       ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .stat {
+            min-width: 0;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            padding: 17px;
+        }
+
+        .stat span {
+            display: block;
+            color: var(--mut);
+            font-size: 12px;
+        }
+
+        .stat b {
+            display: block;
+            margin-top: 3px;
+            font-size: 25px;
+            line-height: 1.2;
+        }
+
+        /* =========================
+       CONTENT GRID
+       ========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .panel h3 {
+            margin-top: 0;
+        }
+
+        /* =========================
+       TABLE
+       ========================= */
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            vertical-align: middle;
+            padding: 9px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        th {
+            background: #fbf7f3;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        table input {
+            min-width: 100px;
+            padding: 8px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+
+        /* =========================
+       WHATSAPP
+       ========================= */
+
+        .wa-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 7px 10px;
+            border-radius: 8px;
+            background: var(--wa);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .wa-link:hover {
+            filter: brightness(0.95);
+        }
+
+        /* =========================
+       MOBILE
+       ========================= */
+
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 12px 0;
+            }
+
+            .nav {
+                align-items: center;
+            }
+
+            .logo {
+                width: 125px;
+            }
+
+            #status {
+                font-size: 10px;
+            }
+
+            .dashboard {
+                padding-top: 18px;
+            }
+
+            .actions .btn {
+                flex: 1 1 auto;
+            }
+
+            .stats {
+                gap: 8px;
+            }
+
+            .stat {
+                padding: 14px;
+            }
+
+            .stat b {
+                font-size: 22px;
+            }
+
+            .login {
+                margin: 45px auto;
+                padding: 18px;
+            }
+
+            .panel {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .logo {
+                width: 110px;
+            }
+
+            #status {
+                font-size: 9px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+       HEADER
+       ========================= -->
+
+    <header>
+        <div class="wrap nav">
+            <img class="logo" src="logo.jpg.png" alt="Juragan Chicken">
+
+            <div id="status">
+                Admin Demo
+            </div>
+        </div>
+    </header>
+
+    <main class="wrap">
+
+        <!-- =========================
+         LOGIN
+         ========================= -->
+
+        <section class="login" id="login">
+            <h2>Admin Juragan Chicken</h2>
+
+            <p style="color:#756861;font-size:13px">
+                Login ini adalah proteksi demo frontend.
+                Untuk produksi, gunakan autentikasi server-side
+                sebelum dashboard dibuka publik.
+            </p>
+
+            <div class="field">
+                <label for="pw">Password Demo</label>
+                <input id="pw" type="password" placeholder="juragan123">
+            </div>
+
+            <button class="btn red" type="button" onclick="login()">
+                Masuk
+            </button>
+        </section>
+
+        <!-- =========================
+         DASHBOARD
+         ========================= -->
+
+        <section class="dashboard" id="dashboard">
+
+            <div class="actions">
+                <button class="btn light" type="button" onclick="load()">
+                    Refresh Database
+                </button>
+
+                <button class="btn red" type="button" onclick="saveProducts()">
+                    Simpan Produk
+                </button>
+
+                <button class="btn light" type="button" onclick="logout()">
+                    Keluar
+                </button>
+            </div>
+
+            <div class="notice">
+                API URL di bawah harus diisi dengan URL Web App Google Apps Script.
+                Jangan menaruh secret API key di JavaScript frontend.
+            </div>
+
+            <div class="field">
+                <label for="apiUrl">
+                    Google Apps Script API URL
+                </label>
+
+                <input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec">
+            </div>
+
+            <!-- =========================
+           STATISTICS
+           ========================= -->
+
+            <div class="stats">
+
+                <div class="stat">
+                    <span>Produk</span>
+                    <b id="sProducts">0</b>
+                </div>
+
+                <div class="stat">
+                    <span>Outlet</span>
+                    <b id="sOutlets">0</b>
+                </div>
+
+                <div class="stat">
+                    <span>Pesanan</span>
+                    <b id="sOrders">-</b>
+                </div>
+
+                <div class="stat">
+                    <span>Leads Franchise</span>
+                    <b id="sLeads">-</b>
+                </div>
+
+            </div>
+
+            <!-- =========================
+           DATA TABLES
+           ========================= -->
+
+            <div class="grid">
+
+                <!-- PRODUCTS -->
+
+                <div class="panel">
+                    <h3>Produk</h3>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th>Harga</th>
+                                    <th>Foto URL</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="productRows"></tbody>
+                        </table>
+                    </div>
+
+                    <p style="font-size:11px;color:#756861">
+                        Edit langsung pada tabel.
+                        Kolom foto memakai URL atau path seperti
+                        assets/products/chicken.jpg.
+                    </p>
+                </div>
+
+                <!-- OUTLETS -->
+
+                <div class="panel">
+                    <h3>Outlet</h3>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Kota</th>
+                                    <th>WhatsApp</th>
+                                    <th>Maps</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="outletRows"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const DEMO_PASSWORD = "juragan123";
+
+        // Nomor WhatsApp utama Juragan Chicken
+        const DEFAULT_WHATSAPP = "6289537542514";
+
+        let products = [];
+        let outlets = [];
+
+        const $ = (id) => document.getElementById(id);
+
+        /* =========================
+           LOGIN
+           ========================= */
+
+        function login() {
+            if ($("pw").value === DEMO_PASSWORD) {
+                localStorage.jcAdmin = "1";
+
+                $("login").style.display = "none";
+                $("dashboard").style.display = "block";
+
+                load();
+            } else {
+                alert("Password demo salah.");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("jcAdmin");
+            location.reload();
+        }
+
+        /* =========================
+           PRODUCT ROW
+           ========================= */
+
+        function rowProduct(p, i) {
+            return `
+        <tr>
+          <td>
+            <input
+              data-p="${i}"
+              data-k="name"
+              value="${esc(p.name)}"
+            >
+          </td>
+
+          <td>
+            <input
+              data-p="${i}"
+              data-k="cat"
+              value="${esc(p.cat)}"
+            >
+          </td>
+
+          <td>
+            <input
+              data-p="${i}"
+              data-k="price"
+              type="number"
+              value="${p.price}"
+            >
+          </td>
+
+          <td>
+            <input
+              data-p="${i}"
+              data-k="img"
+              value="${esc(p.img)}"
+            >
+          </td>
+        </tr>
+      `;
+        }
+
+        /* =========================
+           OUTLET ROW
+           ========================= */
+
+        function rowOutlet(o, i) {
+            const whatsapp = o.wa || DEFAULT_WHATSAPP;
+
+            return `
+        <tr>
+          <td>
+            <input
+              data-o="${i}"
+              data-k="name"
+              value="${esc(o.name)}"
+            >
+          </td>
+
+          <td>
+            <input
+              data-o="${i}"
+              data-k="city"
+              value="${esc(o.city)}"
+            >
+          </td>
+
+          <td>
+            <input
+              data-o="${i}"
+              data-k="wa"
+              value="${esc(whatsapp)}"
+            >
+
+            <a
+              class="wa-link"
+              href="https://wa.me/${cleanPhone(whatsapp)}"
+              target="_blank"
+              rel="noopener"
+            >
+              WhatsApp
+            </a>
+          </td>
+
+          <td>
+            <input
+              data-o="${i}"
+              data-k="maps"
+              value="${esc(o.maps || "")}"
+            >
+          </td>
+        </tr>
+      `;
+        }
+
+        /* =========================
+           HELPERS
+           ========================= */
+
+        function esc(s) {
+            return String(s ?? "")
+                .replaceAll("&", "&amp;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
+        }
+
+        function cleanPhone(phone) {
+            let value = String(phone || DEFAULT_WHATSAPP)
+                .replace(/\D/g, "");
+
+            if (value.startsWith("0")) {
+                value = "62" + value.substring(1);
+            }
+
+            if (!value.startsWith("62")) {
+                value = "62" + value;
+            }
+
+            return value;
+        }
+
+        /* =========================
+           LOAD DATA
+           ========================= */
+
+        async function load() {
+            const url =
+                $("apiUrl").value ||
+                localStorage.jcApiUrl ||
+                "";
+
+            if (url) {
+                localStorage.jcApiUrl = url;
+
+                try {
+                    const r = await fetch(
+                        url + "?action=adminData"
+                    );
+
+                    const d = await r.json();
+
+                    products = d.products || [];
+                    outlets = d.outlets || [];
+
+                    $("sOrders").textContent =
+                        d.ordersCount ?? "-";
+
+                    $("sLeads").textContent =
+                        d.leadsCount ?? "-";
+
+                } catch (e) {
+                    alert(
+                        "API belum bisa diakses. Data lokal tetap ditampilkan."
+                    );
+
+                    fallback();
+                }
+            } else {
+                fallback();
+            }
+
+            render();
+        }
+
+        /* =========================
+           FALLBACK LOCAL DATA
+           ========================= */
+
+        function fallback() {
+            products = JSON.parse(
+                localStorage.jcProducts || "[]"
+            );
+
+            outlets = JSON.parse(
+                localStorage.jcOutlets || "[]"
+            );
+
+            if (!products.length) {
+                products = [
+                    {
+                        id: 1,
+                        name: "Chicken Crispy",
+                        cat: "Chicken",
+                        price: 15000,
+                        img: ""
+                    }
+                ];
+            }
+
+            if (!outlets.length) {
+                outlets = [
+                    {
+                        id: 1,
+                        name: "Juragan Chicken Subang",
+                        city: "Subang",
+                        wa: DEFAULT_WHATSAPP,
+                        maps: ""
+                    }
+                ];
+            }
+
+            // Pastikan outlet lama yang belum memiliki WhatsApp
+            // menggunakan nomor utama Juragan Chicken.
+            outlets = outlets.map((outlet) => ({
+                ...outlet,
+                wa: outlet.wa || DEFAULT_WHATSAPP
+            }));
+        }
+
+        /* =========================
+           RENDER
+           ========================= */
+
+        function render() {
+            $("productRows").innerHTML =
+                products.map(rowProduct).join("");
+
+            $("outletRows").innerHTML =
+                outlets.map(rowOutlet).join("");
+
+            $("sProducts").textContent =
+                products.length;
+
+            $("sOutlets").textContent =
+                outlets.length;
+        }
+
+        /* =========================
+           COLLECT TABLE DATA
+           ========================= */
+
+        function collect() {
+            document
+                .querySelectorAll("[data-p]")
+                .forEach((el) => {
+                    products[+el.dataset.p][el.dataset.k] =
+                        el.dataset.k === "price"
+                            ? Number(el.value)
+                            : el.value;
+                });
+
+            document
+                .querySelectorAll("[data-o]")
+                .forEach((el) => {
+                    outlets[+el.dataset.o][el.dataset.k] =
+                        el.value;
+                });
+
+            outlets = outlets.map((outlet) => ({
+                ...outlet,
+                wa: cleanPhone(outlet.wa)
+            }));
+        }
+
+        /* =========================
+           SAVE DATA
+           ========================= */
+
+        async function saveProducts() {
+            collect();
+
+            localStorage.jcProducts =
+                JSON.stringify(products);
+
+            localStorage.jcOutlets =
+                JSON.stringify(outlets);
+
+            const url =
+                $("apiUrl").value ||
+                localStorage.jcApiUrl ||
+                "";
+
+            if (url) {
+                try {
+                    const r = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        },
+                        body: JSON.stringify({
+                            action: "saveCatalog",
+                            products,
+                            outlets
+                        })
+                    });
+
+                    alert(
+                        "Data tersimpan ke API: " +
+                        (await r.text())
+                    );
+
+                } catch (e) {
+                    alert(
+                        "Data disimpan lokal. POST ke Apps Script gagal, cek deployment API."
+                    );
+                }
+            } else {
+                alert(
+                    "Data tersimpan di browser. Isi API URL untuk menyimpan ke Google Sheets."
+                );
+            }
+
+            render();
+        }
+
+        /* =========================
+           AUTO LOGIN
+           ========================= */
+
+        if (localStorage.jcAdmin === "1") {
+            $("login").style.display = "none";
+            $("dashboard").style.display = "block";
+
+            load();
+        }
+    </script>
+
+</body>
+
+</html>

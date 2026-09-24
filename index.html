@@ -1225,9 +1225,131 @@
           height: 28px;
         }
       }
+
+      /* =========================================================
+       FINAL MOBILE NAVIGATION
+       - Desktop tetap seperti desain awal.
+       - HP memakai tombol hamburger 3 garis.
+       - Tidak ada menu horizontal yang terpotong.
+       ========================================================= */
+      .menu-btn {
+        display: none;
+        position: relative;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: #fff;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        z-index: 60;
+      }
+
+      .menu-btn span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        border-radius: 99px;
+        background: #533c34;
+        transition: transform .2s ease, opacity .2s ease;
+      }
+
+      .menu-btn.is-open span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .menu-btn.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-btn.is-open span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      @media (max-width: 980px) {
+        header .nav {
+          position: relative;
+        }
+
+        header .links {
+          display: none !important;
+        }
+
+        header .links.open {
+          display: flex !important;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 100%;
+          width: 100%;
+          padding: 10px 14px 14px;
+          flex-direction: column;
+          gap: 4px;
+          background: #fffdf9;
+          border: 1px solid var(--line);
+          border-top: 0;
+          border-radius: 0 0 16px 16px;
+          box-shadow: 0 15px 30px rgba(50, 25, 18, .10);
+          z-index: 55;
+        }
+
+        header .links.open a {
+          display: flex;
+          width: 100%;
+          min-height: 42px;
+          align-items: center;
+          padding: 9px 12px;
+          border-radius: 10px;
+        }
+
+        header .menu-btn {
+          display: flex !important;
+        }
+
+        header .nav>.red {
+          display: none !important;
+        }
+      }
+
+      @media (max-width: 600px) {
+        body {
+          overflow-x: hidden;
+        }
+
+        header .nav {
+          height: 66px !important;
+          min-height: 66px;
+          width: 100%;
+          padding-left: 14px;
+          padding-right: 14px;
+          gap: 10px;
+        }
+
+        header .logo img {
+          width: 82px !important;
+          max-width: 82px;
+          height: auto;
+          object-fit: contain;
+        }
+
+        header .menu-btn {
+          width: 38px;
+          height: 38px;
+          flex-basis: 38px;
+        }
+
+        header .links.open {
+          top: 66px;
+        }
+      }
   </style>
   <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Restaurant","name":"Juragan Chicken","description":"Fried chicken dan coffee.","url":"https://DOMAIN-ANDA.vercel.app/","telephone":"0895375452514","servesCuisine":["Fried Chicken","Coffee"],"address":{"@type":"PostalAddress","addressLocality":"Subang","addressRegion":"Jawa Barat","addressCountry":"ID"},"openingHours":"Mo-Su 10:00-22:00"}
+{"@context":"https://schema.org","@type":"Restaurant","name":"Juragan Chicken","description":"Fried chicken dan coffee.","url":"https://DOMAIN-ANDA.vercel.app/","telephone":"6289537542514","servesCuisine":["Fried Chicken","Coffee"],"address":{"@type":"PostalAddress","addressLocality":"Subang","addressRegion":"Jawa Barat","addressCountry":"ID"},"openingHours":"Mo-Su 10:00-22:00"}
 </script>
 
   <style id="mobile-header-hero-fix">
@@ -1650,8 +1772,9 @@
         <div class="contact-card">
           <h3>Informasi</h3>
           <div class="contact-items">
-            <div class="contact-item">📍 <b>Dusun Jl. Raya Simpang No.003, RT.007, Tambakmekar, Kec. Jalancagak, Kabupaten Subang, Jawa Barat 41281</b><small>Alamat Toko</small></div>
-            <div class="contact-item">📞 <b>0895375452514</b><small>WhatsApp pemesanan</small></div>
+            <div class="contact-item">📍 <b>Dusun Jl. Raya Simpang No.003, RT.007, Tambakmekar, Kec. Jalancagak,
+                Kabupaten Subang, Jawa Barat 41281</b><small>Alamat Toko</small></div>
+            <div class="contact-item">📞 <b>+62 895-3754-52514</b><small>WhatsApp pemesanan</small></div>
             <div class="contact-item">📸 <b>@juraganchicken</b><small>Instagram / TikTok</small></div>
             <div class="contact-item">🕙 <b>07.00–22.00</b><small>Jam Operasional</small></div>
           </div>
@@ -1714,36 +1837,75 @@
 
   <script>
     const CONFIG = {
-      whatsapp: "0895375452514",
+      whatsapp: "6289537542514",
       apiUrl: "", // isi URL Web App Google Apps Script setelah deployment
       businessName: "Juragan Chicken"
     };
     const FALLBACK_PRODUCTS = [
-      {id: 1, name: "Chicken Paha Bawah", cat: "Chicken", price: 9500, src: "friedchickendada.png", desc: "Ayam crispy renyah untuk makan cepat atau take away."},
-      {id: 2, name: "Chicken Paha Atas/Dada", cat: "Chicken", price: 11000, src: "friedchickenpaha.png", desc: "Paket ayam dan nasi yang praktis."},
-      {id: 3, name: "Chicken Burger", cat: "Burger", price: 15000, src: "burger.png", desc: "Burger ayam dengan bun lembut."},
-      {id: 4, name: "Chicken Wings", cat: "Chicken", price: 9000, src: "chickenwings.png", desc: "Chicken wings untuk sharing."},
-      {id: 5, name: "French Fries", cat: "Snack", price: 12000, src: "frenchfries.png", desc: "Kentang goreng renyah."},
-      {id: 6, name: "Iced Coffee", cat: "Coffee", price: 15000, src: "kopisusu.png", desc: "Kopi dingin teman makan."},
-      {id: 7, name: "Cappuccino", cat: "Coffee", price: 15000, src: "cappucino1.png", desc: "Kopi creamy untuk santai."},
-      {id: 8, name: "Matcha Drink", cat: "Non-Coffee", price: 15000, src: "matcha.png", desc: "Minuman coklat lembut."}
+      { id: 1, name: "Chicken Paha Bawah", cat: "Chicken", price: 9500, src: "friedchickendada.png", desc: "Ayam crispy renyah untuk makan cepat atau take away." },
+      { id: 2, name: "Chicken Paha Atas/Dada", cat: "Chicken", price: 11000, src: "friedchickenpaha.png", desc: "Paket ayam dan nasi yang praktis." },
+      { id: 3, name: "Chicken Burger", cat: "Burger", price: 15000, src: "burger.png", desc: "Burger ayam dengan bun lembut." },
+      { id: 4, name: "Chicken Wings", cat: "Chicken", price: 9000, src: "chickenwings.png", desc: "Chicken wings untuk sharing." },
+      { id: 5, name: "French Fries", cat: "Snack", price: 12000, src: "frenchfries.png", desc: "Kentang goreng renyah." },
+      { id: 6, name: "Iced Coffee", cat: "Coffee", price: 15000, src: "kopisusu.png", desc: "Kopi dingin teman makan." },
+      { id: 7, name: "Cappuccino", cat: "Coffee", price: 15000, src: "cappucino1.png", desc: "Kopi creamy untuk santai." },
+      { id: 8, name: "Matcha Drink", cat: "Non-Coffee", price: 15000, src: "matcha.png", desc: "Minuman coklat lembut." }
     ];
     const FALLBACK_OUTLETS = [
-      {id: 1, name: "Juragan Chicken Tambakmekar", city: "Subang, Jawa Barat", wa: "0895375452514", maps: "#"},
+      { id: 1, name: "Juragan Chicken Tambakmekar", city: "Subang, Jawa Barat", wa: "6289537542514", maps: "#" },
     ];
     let products = [...FALLBACK_PRODUCTS], outlets = [...FALLBACK_OUTLETS];
-    const rupiah = n => new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR", maximumFractionDigits: 0}).format(Number(n) || 0);
+    const rupiah = n => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(Number(n) || 0);
     const grid = document.getElementById("productGrid"), tabs = document.getElementById("tabs");
-    function renderTabs(active = "Semua") {const cats = ["Semua", ...new Set(products.map(p => p.cat))]; tabs.innerHTML = cats.map(c => `<button class="tab ${c === active ? "active" : ""}" data-cat="${c}">${c}</button>`).join(""); tabs.querySelectorAll(".tab").forEach(b => b.onclick = () => renderProducts(b.dataset.cat))}
-    function renderProducts(cat = "Semua") {renderTabs(cat); const list = cat === "Semua" ? products : products.filter(p => p.cat === cat); grid.innerHTML = list.map(p => `<article class="card"><div class="pic"><img src="${p.src}" alt="${p.name}" loading="lazy"><span class="tag">${p.cat}</span></div><div class="body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-foot"><span class="price">${rupiah(p.price)}</span><button class="small-btn" onclick="showProduct(${p.id})">Detail</button></div></div></article>`).join("")}
-    function showProduct(id) {const p = products.find(x => String(x.id) === String(id)); if (!p) return; modalImg.src = p.src; modalImg.alt = p.name; modalTitle.textContent = p.name; modalDesc.textContent = p.desc; modalPrice.textContent = rupiah(p.price); modal.classList.add("open"); modalOrder.onclick = () => {productSelect.value = p.id; modal.classList.remove("open"); location.hash = "pesan"}}
-    function renderOutlets() {outletGrid.innerHTML = outlets.map(o => `<article class="outlet"><h3>${o.name}</h3><p>📍 ${o.city}</p><a href="${o.maps || "#"}" target="_blank" rel="noopener">Buka Maps →</a></article>`).join(""); outletSelect.innerHTML = outlets.map(o => `<option value="${o.id}">${o.name}</option>`).join("")}
-    function renderProductSelect() {productSelect.innerHTML = products.map(p => `<option value="${p.id}">${p.name} — ${rupiah(p.price)}</option>`).join("")}
-    async function loadDatabase() {if (!CONFIG.apiUrl) return; try {const r = await fetch(CONFIG.apiUrl + "?action=publicData", {cache: "no-store"}); const d = await r.json(); if (Array.isArray(d.products) && d.products.length) products = d.products; if (Array.isArray(d.outlets) && d.outlets.length) outlets = d.outlets; renderProducts(); renderProductSelect(); renderOutlets()} catch (e) {console.warn("Database belum tersambung, memakai data demo.", e)} }
-    orderForm.onsubmit = e => {e.preventDefault(); const p = products.find(x => String(x.id) === String(productSelect.value)); const o = outlets.find(x => String(x.id) === String(outletSelect.value)); const text = `Halo ${CONFIG.businessName},%0A%0ASaya ingin memesan:%0A%0ANama: ${encodeURIComponent(custName.value)}%0ANo. WhatsApp: ${encodeURIComponent(custPhone.value)}%0AOutlet: ${encodeURIComponent(o?.name || "-")}%0AMenu: ${encodeURIComponent(p?.name || "-")}%0AHarga: ${encodeURIComponent(rupiah(p?.price || 0))}%0AJumlah: ${qty.value}%0ACatatan: ${encodeURIComponent(notes.value || "-")}`; window.open(`https://wa.me/${o?.wa || CONFIG.whatsapp}?text=${text}`, "_blank")};
+    function renderTabs(active = "Semua") { const cats = ["Semua", ...new Set(products.map(p => p.cat))]; tabs.innerHTML = cats.map(c => `<button class="tab ${c === active ? "active" : ""}" data-cat="${c}">${c}</button>`).join(""); tabs.querySelectorAll(".tab").forEach(b => b.onclick = () => renderProducts(b.dataset.cat)) }
+    function renderProducts(cat = "Semua") { renderTabs(cat); const list = cat === "Semua" ? products : products.filter(p => p.cat === cat); grid.innerHTML = list.map(p => `<article class="card"><div class="pic"><img src="${p.src}" alt="${p.name}" loading="lazy"><span class="tag">${p.cat}</span></div><div class="body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-foot"><span class="price">${rupiah(p.price)}</span><button class="small-btn" onclick="showProduct(${p.id})">Detail</button></div></div></article>`).join("") }
+    function showProduct(id) { const p = products.find(x => String(x.id) === String(id)); if (!p) return; modalImg.src = p.src; modalImg.alt = p.name; modalTitle.textContent = p.name; modalDesc.textContent = p.desc; modalPrice.textContent = rupiah(p.price); modal.classList.add("open"); modalOrder.onclick = () => { productSelect.value = p.id; modal.classList.remove("open"); location.hash = "pesan" } }
+    function renderOutlets() { outletGrid.innerHTML = outlets.map(o => `<article class="outlet"><h3>${o.name}</h3><p>📍 ${o.city}</p><a href="${o.maps || "#"}" target="_blank" rel="noopener">Buka Maps →</a></article>`).join(""); outletSelect.innerHTML = outlets.map(o => `<option value="${o.id}">${o.name}</option>`).join("") }
+    function renderProductSelect() { productSelect.innerHTML = products.map(p => `<option value="${p.id}">${p.name} — ${rupiah(p.price)}</option>`).join("") }
+    async function loadDatabase() {
+      // Perubahan harga dari halaman admin langsung terbaca pada perangkat/browser yang sama.
+      try {
+        const savedProducts = JSON.parse(localStorage.getItem("jcProducts") || "null");
+        const savedOutlets = JSON.parse(localStorage.getItem("jcOutlets") || "null");
+        if (Array.isArray(savedProducts) && savedProducts.length) products = savedProducts;
+        if (Array.isArray(savedOutlets) && savedOutlets.length) outlets = savedOutlets;
+      } catch (e) {
+        console.warn("Data lokal tidak dapat dibaca.", e);
+      }
+
+      if (!CONFIG.apiUrl) {
+        renderProducts();
+        renderProductSelect();
+        renderOutlets();
+        return;
+      }
+
+      try {
+        const r = await fetch(CONFIG.apiUrl + "?action=publicData", { cache: "no-store" });
+        const d = await r.json();
+        if (Array.isArray(d.products) && d.products.length) products = d.products;
+        if (Array.isArray(d.outlets) && d.outlets.length) outlets = d.outlets;
+      } catch (e) {
+        console.warn("Database belum tersambung, memakai data lokal/demo.", e);
+      }
+
+      renderProducts();
+      renderProductSelect();
+      renderOutlets();
+    }
+    orderForm.onsubmit = e => { e.preventDefault(); const p = products.find(x => String(x.id) === String(productSelect.value)); const o = outlets.find(x => String(x.id) === String(outletSelect.value)); const text = `Halo ${CONFIG.businessName},%0A%0ASaya ingin memesan:%0A%0ANama: ${encodeURIComponent(custName.value)}%0ANo. WhatsApp: ${encodeURIComponent(custPhone.value)}%0AOutlet: ${encodeURIComponent(o?.name || "-")}%0AMenu: ${encodeURIComponent(p?.name || "-")}%0AHarga: ${encodeURIComponent(rupiah(p?.price || 0))}%0AJumlah: ${qty.value}%0ACatatan: ${encodeURIComponent(notes.value || "-")}`; window.open(`https://wa.me/${o?.wa || CONFIG.whatsapp}?text=${text}`, "_blank") };
     floatWa.href = `https://wa.me/${CONFIG.whatsapp}?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20menu.`;
-    close.onclick = () => modal.classList.remove("open"); modal.onclick = e => {if (e.target === modal) modal.classList.remove("open")};
-    menuBtn.onclick = () => links.classList.toggle("open"); links.querySelectorAll("a").forEach(a => a.onclick = () => links.classList.remove("open"));
+    close.onclick = () => modal.classList.remove("open"); modal.onclick = e => { if (e.target === modal) modal.classList.remove("open") };
+    menuBtn.onclick = () => {
+      const isOpen = links.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.classList.toggle("is-open", isOpen);
+    };
+    links.querySelectorAll("a").forEach(a => a.onclick = () => {
+      links.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuBtn.classList.remove("is-open");
+    });
     year.textContent = new Date().getFullYear(); renderProducts(); renderProductSelect(); renderOutlets(); loadDatabase();
   </script>
 </body>

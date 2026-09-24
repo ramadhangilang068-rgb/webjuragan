@@ -1444,7 +1444,56 @@
         padding-top: 38px !important;
         padding-bottom: 42px !important;
       }
-    }
+    }/* =========================================================
+   MOBILE SPACING + HERO IMAGE STRAIGHT FIX
+   ========================================================= */
+
+@media (max-width: 980px) {
+
+  /* Beri jarak aman dari sisi layar */
+  .top .container,
+  header .container,
+  .hero .container,
+  section > .container,
+  footer .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Foto hero tidak lagi miring */
+  .hero-photo {
+    transform: none !important;
+  }
+
+  /* Pastikan gambar juga benar-benar lurus */
+  .hero-photo img {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+
+  /* Jarak sisi layar sedikit lebih nyaman di HP */
+  .top .container,
+  header .container,
+  .hero .container,
+  section > .container,
+  footer .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Hero image lurus */
+  .hero-photo {
+    transform: none !important;
+  }
+
+  .hero-photo img {
+    transform: none !important;
+  }
+}
   </style>
 
 </head>

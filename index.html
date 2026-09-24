@@ -1893,7 +1893,7 @@
       renderProductSelect();
       renderOutlets();
     }
-    orderForm.onsubmit = e => { e.preventDefault(); const p = products.find(x => String(x.id) === String(productSelect.value)); const o = outlets.find(x => String(x.id) === String(outletSelect.value)); const text = `Halo ${CONFIG.businessName},%0A%0ASaya ingin memesan:%0A%0ANama: ${encodeURIComponent(custName.value)}%0ANo. WhatsApp: ${encodeURIComponent(custPhone.value)}%0AOutlet: ${encodeURIComponent(o?.name || "-")}%0AMenu: ${encodeURIComponent(p?.name || "-")}%0AHarga: ${encodeURIComponent(rupiah(p?.price || 0))}%0AJumlah: ${qty.value}%0ACatatan: ${encodeURIComponent(notes.value || "-")}`; window.open(`https://wa.me/${o?.wa || CONFIG.whatsapp}?text=${text}`, "_blank") };
+    orderForm.onsubmit = e => { e.preventDefault(); const p = products.find(x => String(x.id) === String(productSelect.value)); const o = outlets.find(x => String(x.id) === String(outletSelect.value)); const text = `Halo ${CONFIG.businessName},%0A%0ASaya ingin memesan:%0A%0ANama: ${encodeURIComponent(custName.value)}%0ANo. WhatsApp: ${encodeURIComponent(custPhone.value)}%0AOutlet: ${encodeURIComponent(o?.name || "-")}%0AMenu: ${encodeURIComponent(p?.name || "-")}%0AHarga: ${encodeURIComponent(rupiah(p?.price || 0))}%0AJumlah: ${qty.value}%0ACatatan: ${encodeURIComponent(notes.value || "-")}`; window.open(`https://wa.me/${CONFIG.whatsapp}?text=${text}`, "_blank") };
     floatWa.href = `https://wa.me/${CONFIG.whatsapp}?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20menu.`;
     close.onclick = () => modal.classList.remove("open"); modal.onclick = e => { if (e.target === modal) modal.classList.remove("open") };
     menuBtn.onclick = () => {

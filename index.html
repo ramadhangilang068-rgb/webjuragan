@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Juragan Chicken | Fried Chicken & Coffee Subang</title>
   <meta name="description"
-    content="Juragan Chicken — fried chicken crispy, coffee, paket hemat, outlet dan informasi franchise. Pesan online melalui WhatsApp.">
+    content="Juragan Chicken menyajikan fried chicken crispy, coffee, snack, dan paket pilihan yang praktis untuk makan sendiri, bersama keluarga, maupun untuk acara. Temukan menu, outlet, pemesanan, dan informasi kemitraan di sini.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://DOMAIN-ANDA.vercel.app/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Juragan Chicken | Fried Chicken & Coffee">
   <meta property="og:description"
-    content="Fried chicken crispy, coffee, paket hemat dan peluang franchise Juragan Chicken.">
+    content="Nikmati fried chicken crispy, coffee, snack, dan paket pilihan Juragan Chicken. Temukan menu, outlet, cara pesan, serta informasi kemitraan dalam satu tempat.">
   <!-- Share Preview / Open Graph -->
   <meta property="og:image" content="https://webjuragan.vercel.app/logo.jpg.png">
   <meta property="og:image:alt" content="Logo Juragan Chicken">
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Juragan Chicken | Fried Chicken & Coffee">
   <meta name="twitter:description"
-    content="Fried chicken crispy, coffee, paket hemat dan peluang franchise Juragan Chicken.">
+    content="Nikmati fried chicken crispy, coffee, snack, dan paket pilihan Juragan Chicken. Temukan menu, outlet, cara pesan, serta informasi kemitraan dalam satu tempat.">
   <meta name="twitter:image" content="https://webjuragan.vercel.app/logo.jpg.png">
   <meta name="twitter:image:alt" content="Logo Juragan Chicken">
 
@@ -1230,6 +1230,235 @@
 {"@context":"https://schema.org","@type":"Restaurant","name":"Juragan Chicken","description":"Fried chicken dan coffee.","url":"https://DOMAIN-ANDA.vercel.app/","telephone":"0895375452514","servesCuisine":["Fried Chicken","Coffee"],"address":{"@type":"PostalAddress","addressLocality":"Subang","addressRegion":"Jawa Barat","addressCountry":"ID"},"openingHours":"Mo-Su 10:00-22:00"}
 </script>
 
+  <style id="shopping-cart-phase1">
+    /* =========================================================
+       SHOPPING CART — PHASE 1
+       Hanya menambahkan fungsi keranjang tanpa mengubah
+       struktur desain utama website.
+       ========================================================= */
+    .cart-trigger {
+      position: fixed;
+      right: 20px;
+      bottom: 88px;
+      z-index: 75;
+      border: 0;
+      border-radius: 16px;
+      background: #b91c1c;
+      color: #fff;
+      min-width: 58px;
+      height: 56px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .18);
+    }
+
+    .cart-count {
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 999px;
+      background: #fbbf24;
+      color: #241916;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      background: rgba(24, 11, 8, .48);
+      display: none;
+      justify-content: flex-end;
+    }
+
+    .cart-drawer.open {
+      display: flex;
+    }
+
+    .cart-panel {
+      width: min(440px, 100%);
+      height: 100%;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -12px 0 35px rgba(0, 0, 0, .14);
+    }
+
+    .cart-head {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .cart-head h3 {
+      margin: 0;
+      color: #572019;
+      font: 900 25px Georgia, serif;
+    }
+
+    .cart-close {
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: #fff0df;
+      color: #8f2b1e;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .cart-empty {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      padding: 25px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 66px 1fr auto;
+      gap: 11px;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cart-item img {
+      width: 66px;
+      height: 66px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .cart-item h4 {
+      margin: 0 0 3px;
+      font-size: 14px;
+    }
+
+    .cart-item-price {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    .cart-qty button {
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--line);
+      background: #fffaf4;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .cart-qty span {
+      min-width: 20px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .cart-remove {
+      border: 0;
+      background: transparent;
+      color: #9b2a1d;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .cart-footer {
+      border-top: 1px solid var(--line);
+      padding: 16px;
+      background: #fffaf4;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-weight: 950;
+    }
+
+    .cart-total strong {
+      color: var(--red);
+      font-size: 18px;
+    }
+
+    .cart-checkout {
+      width: 100%;
+    }
+
+    .cart-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .add-cart-btn {
+      border: 0;
+      background: #fff0df;
+      color: #a13b22;
+      border-radius: 11px;
+      padding: 8px 10px;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .add-cart-btn:hover {
+      background: #ffe0bf;
+    }
+
+    @media (max-width: 600px) {
+      .cart-trigger {
+        right: 15px;
+        bottom: 78px;
+        height: 52px;
+        min-width: 52px;
+        border-radius: 14px;
+      }
+
+      .cart-trigger .cart-label {
+        display: none;
+      }
+
+      .cart-panel {
+        width: 100%;
+      }
+    }
+  </style>
+
   <style id="mobile-header-hero-fix">
     /* =========================================================
        MOBILE HEADER + HERO — FINAL LAYOUT FIX
@@ -1444,75 +1673,7 @@
         padding-top: 38px !important;
         padding-bottom: 42px !important;
       }
-    }/* =========================================================
-   MOBILE SPACING + HERO IMAGE STRAIGHT FIX
-   ========================================================= */
-
-@media (max-width: 980px) {
-
-  /* Beri jarak aman dari sisi layar */
-  .top .container,
-  header .container,
-  .hero .container,
-  section > .container,
-  footer .container {
-    width: 100%;
-    max-width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  /* Foto hero tidak lagi miring */
-  .hero-photo {
-    transform: none !important;
-  }
-
-  /* Pastikan gambar juga benar-benar lurus */
-  .hero-photo img {
-    transform: none !important;
-  }
-}
-
-@media (max-width: 600px) {
-
-  /* Jarak sisi layar sedikit lebih nyaman di HP */
-  .top .container,
-  header .container,
-  .hero .container,
-  section > .container,
-  footer .container {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  /* Hero image lurus */
-  .hero-photo {
-    transform: none !important;
-  }
-
-  .hero-photo img {
-    transform: none !important;
-  }.hero-photo {
-  position: relative;
-  padding: 13px;
-  background: #ffffffbb;
-  border-radius: 30px;
-  box-shadow: var(--shadow);
-  transform: rotate(1deg);
-}
-}
-
-/* =========================================================
-   FIX HERO IMAGE DESKTOP — LURUS
-   ========================================================= */
-
-.hero-photo {
-  transform: none !important;
-}
-
-.hero-photo img {
-  transform: none !important;
-}
+    }
   </style>
 
 </head>
@@ -1534,8 +1695,9 @@
     <section class="hero" id="home">
       <div class="container hero-grid">
         <div><span class="eyebrow">JURAGAN • FRIED CHICKEN & COFFEE</span>
-          <h1>Renyahnya <span>bikin ketagihan dan balik lagi.</span></h1>
-          <p>Fried chicken crispy, coffee, snack dan paket hemat untuk makan sendiri, keluarga, nongkrong maupun acara.
+          <h1>Renyahnya <span>bikin balik.</span></h1>
+          <p>Nikmati fried chicken yang renyah, pilihan coffee dan snack, serta paket praktis untuk menemani waktu
+            makan, santai bersama teman, keluarga, maupun berbagai acara.
           </p>
           <div class="actions"><a class="btn red" href="#menu">Lihat Menu →</a><a class="btn light"
               href="#franchise">Info Franchise</a></div>
@@ -1554,19 +1716,19 @@
       <div class="container trust-grid">
         <div class="trust-item">
           <div class="icon">🍗</div>
-          <div><b>Fried Chicken</b><span>Menu utama</span></div>
+          <div><b>Fried Chicken</b><span>Pilihan ayam favorit</span></div>
         </div>
         <div class="trust-item">
           <div class="icon">☕</div>
-          <div><b>Coffee</b><span>Teman santai</span></div>
+          <div><b>Coffee</b><span>Pilihan minuman</span></div>
         </div>
         <div class="trust-item">
           <div class="icon">📦</div>
-          <div><b>Take Away</b><span>Praktis</span></div>
+          <div><b>Take Away</b><span>Siap dibawa</span></div>
         </div>
         <div class="trust-item">
           <div class="icon">🤝</div>
-          <div><b>Franchise</b><span>Peluang mitra</span></div>
+          <div><b>Franchise</b><span>Kesempatan kemitraan</span></div>
         </div>
       </div>
     </section>
@@ -1589,13 +1751,14 @@
         <div class="about-img"><img src="chickencofee1.png" alt="Coffee Juragan Chicken" loading="lazy"></div>
         <div><span class="kicker">Tentang Brand</span>
           <h2>Fried chicken & coffee dalam satu brand.</h2>
-          <p class="muted">Juragan Chicken dirancang sebagai brand kuliner yang mudah dikenali, mudah dipesan dan siap
-            dikembangkan ke beberapa format outlet.</p>
+          <p class="muted">Juragan Chicken hadir dengan perpaduan fried chicken, minuman, dan pilihan menu pendamping
+            yang mudah dinikmati. Konsepnya dibuat praktis untuk pemesanan harian sekaligus memiliki ruang untuk
+            dikembangkan melalui outlet dan kemitraan.</p>
           <div class="feature-grid">
-            <div class="feature">🍗 Produk Utama<small>Fried chicken crispy</small></div>
-            <div class="feature">☕ Coffee<small>Minuman pendamping</small></div>
-            <div class="feature">📱 Digital Order<small>WhatsApp ordering</small></div>
-            <div class="feature">🤝 Franchise<small>Halaman kemitraan</small></div>
+            <div class="feature">🍗 Produk Utama<small>Ayam crispy dengan rasa gurih dan tekstur renyah</small></div>
+            <div class="feature">☕ Coffee<small>Pelengkap waktu makan</small></div>
+            <div class="feature">📱 Digital Order<small>Pemesanan mudah melalui WhatsApp</small></div>
+            <div class="feature">🤝 Franchise<small>Informasi kemitraan tersedia</small></div>
           </div>
         </div>
       </div>
@@ -1606,7 +1769,8 @@
         <div class="section-head">
           <div><span class="kicker">Cara Pesan</span>
             <h2>Empat langkah.</h2>
-            <p>Alur sederhana dari katalog sampai konfirmasi pesanan.</p>
+            <p>Pesan dengan alur yang sederhana: pilih menu, tentukan jumlah dan outlet, lalu kirim detail pesanan
+              melalui WhatsApp untuk dikonfirmasi oleh tim.</p>
           </div>
         </div>
         <div class="steps">
@@ -1662,7 +1826,8 @@
         <div><span class="kicker">Franchise / Kemitraan</span>
           <h2 style="font:900 clamp(36px,4vw,54px)/1.05 Georgia,serif;color:#572019;margin:8px 0 14px">Buka outlet
             Juragan bersama.</h2>
-          <p class="muted">Pusat informasi calon mitra: konsep, proses, kesiapan lokasi dan form minat.</p>
+          <p class="muted">Informasi bagi calon mitra mengenai konsep outlet, tahapan proses, kesiapan lokasi, dan
+            pengajuan minat kemitraan.</p>
           <div class="fr-list">
             <div>✓ Konsep & identitas outlet</div>
             <div>✓ Standar operasional & produk</div>
@@ -1688,20 +1853,23 @@
         <div class="faq-grid">
           <details class="faq-item" open>
             <summary>Bagaimana cara pesan?</summary>
-            <p>Pilih produk, isi form pemesanan, lalu website membuka WhatsApp dengan format pesanan otomatis.</p>
+            <p>Pilih menu dan jumlah pesanan, lengkapi data yang diperlukan, lalu kirim melalui WhatsApp. Detail pesanan
+              akan tersusun otomatis agar lebih mudah diperiksa sebelum dikonfirmasi.</p>
           </details>
           <details class="faq-item">
             <summary>Apakah harga dapat dikelola?</summary>
-            <p>Ya. Pada versi V4, struktur integrasi Google Sheets disiapkan agar produk, harga dan outlet dapat
-              dikelola dari database.</p>
+            <p>Informasi produk, harga, dan outlet pada website dapat disiapkan untuk dikelola melalui database ketika
+              integrasi sistem sudah diaktifkan.</p>
           </details>
           <details class="faq-item">
             <summary>Apakah ada franchise?</summary>
-            <p>Ya, tersedia halaman franchise terpisah. Data investasi final harus diisi berdasarkan dokumen resmi.</p>
+            <p>Tersedia halaman khusus untuk informasi franchise/kemitraan. Detail investasi, persyaratan, dan ketentuan
+              mengikuti informasi resmi yang ditetapkan oleh Juragan Chicken.</p>
           </details>
           <details class="faq-item">
             <summary>Apakah website bisa dipasang di Vercel?</summary>
-            <p>Bisa. Frontend statis dapat di-host di Vercel dan terhubung ke Google Apps Script sebagai API.</p>
+            <p>Website dapat dikembangkan dan di-host menggunakan Vercel, dengan opsi integrasi ke layanan seperti
+              Google Apps Script untuk mendukung pengelolaan data dan proses bisnis.</p>
           </details>
         </div>
       </div>
@@ -1732,7 +1900,8 @@
       <div class="container order-grid">
         <div><span class="kicker" style="color:#ffc078">Order</span>
           <h2>Siap makan, Juragan?</h2>
-          <p>Pilih produk, outlet dan jumlah. Setelah dikirim, WhatsApp akan membawa detail pesanan.</p>
+          <p>Pilih menu, tentukan outlet dan jumlah yang diinginkan. Setelah dikirim, detail pesanan akan diteruskan ke
+            WhatsApp untuk proses konfirmasi.</p>
         </div>
         <form class="form" id="orderForm">
           <div class="field"><label>Nama</label><input id="custName" required></div>
@@ -1751,7 +1920,8 @@
   <footer>
     <div class="container footer-grid">
       <div class="footer-logo"><img src="logo.jpg.png" alt="Juragan Chicken">
-        <p>Fried chicken & coffee. Website siap dikembangkan dengan database dan sistem order.</p>
+        <p>Fried chicken, coffee, snack, dan pilihan menu untuk menemani berbagai momen. Pesan dengan mudah melalui
+          website dan WhatsApp.</p>
       </div>
       <div>
         <h4>Menu</h4><a href="#menu">Produk</a><a href="#outlet">Outlet</a><a href="#galeri">Galeri</a>
@@ -1763,7 +1933,7 @@
         <h4>Kontak</h4><a href="#pesan">WhatsApp</a><a href="#kontak">Kontak</a><a href="#">Instagram</a>
       </div>
     </div>
-    <div class="container copy">© <span id="year"></span> Juragan Chicken. dibuat dengan Hati</div>
+    <div class="container copy">© <span id="year"></span> Juragan Chicken. Lengkapi data bisnis sebelum publikasi.</div>
   </footer>
   <a class="float-wa" id="floatWa" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1771,6 +1941,23 @@
         d="M20.52 3.48A11.78 11.78 0 0 0 12.1 0C5.58 0 .27 5.31.27 11.83c0 2.08.54 4.11 1.57 5.9L.17 24l6.42-1.63a11.83 11.83 0 0 0 5.51 1.36h.01c6.52 0 11.83-5.31 11.83-11.83 0-3.15-1.23-6.11-3.42-8.42ZM12.1 21.69h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.81.97 1.02-3.71-.23-.38a9.83 9.83 0 1 1 8.41 4.7Zm5.4-7.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.49s1.08 2.89 1.23 3.09c.15.2 2.13 3.25 5.17 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
     </svg>
   </a>
+  <button class="cart-trigger" id="cartTrigger" type="button" aria-label="Buka keranjang">🛒 <span
+      class="cart-label">Keranjang</span><span class="cart-count" id="cartCount">0</span></button>
+
+  <div class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="cart-head">
+        <h3 id="cartTitle">Keranjang Juragan</h3>
+        <button class="cart-close" id="cartClose" type="button" aria-label="Tutup keranjang">×</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-footer">
+        <div class="cart-total"><span>Total</span><strong id="cartTotal">Rp0</strong></div>
+        <button class="btn red cart-checkout" id="cartCheckout" type="button">Lanjut Checkout →</button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="modal">
     <div class="modal-card"><button class="close" id="close">×</button><img id="modalImg" alt="">
       <div class="modal-copy"><span class="kicker">Detail Produk</span>
@@ -1788,32 +1975,86 @@
       businessName: "Juragan Chicken"
     };
     const FALLBACK_PRODUCTS = [
-      { id: 1, name: "Chicken Paha Bawah", cat: "Chicken", price: 9500, src: "friedchickendada.png", desc: "Ayam crispy renyah untuk makan cepat atau take away." },
-      { id: 2, name: "Chicken Paha Atas/Dada", cat: "Chicken", price: 11000, src: "friedchickenpaha.png", desc: "Paket ayam dan nasi yang praktis." },
-      { id: 3, name: "Chicken Burger", cat: "Burger", price: 15000, src: "burger.png", desc: "Burger ayam dengan bun lembut." },
-      { id: 4, name: "Chicken Wings", cat: "Chicken", price: 9000, src: "chickenwings.png", desc: "Chicken wings untuk sharing." },
-      { id: 5, name: "French Fries", cat: "Snack", price: 12000, src: "frenchfries.png", desc: "Kentang goreng renyah." },
-      { id: 6, name: "Iced Coffee", cat: "Coffee", price: 15000, src: "kopisusu.png", desc: "Kopi dingin teman makan." },
-      { id: 7, name: "Cappuccino", cat: "Coffee", price: 15000, src: "cappucino1.png", desc: "Kopi creamy untuk santai." },
-      { id: 8, name: "Matcha Drink", cat: "Non-Coffee", price: 15000, src: "matcha.png", desc: "Minuman coklat lembut." }
+      { id: 1, name: "Chicken Paha Bawah", cat: "Chicken", price: 9500, src: "friedchickendada.png", desc: "Ayam crispy dengan balutan renyah dan rasa gurih, cocok untuk makan sendiri maupun dibawa pulang." },
+      { id: 2, name: "Chicken Paha Atas/Dada", cat: "Chicken", price: 11000, src: "friedchickenpaha.png", desc: "Potongan ayam pilihan yang renyah dan gurih, cocok dinikmati sebagai menu utama." },
+      { id: 3, name: "Chicken Burger", cat: "Burger", price: 15000, src: "burger.png", desc: "Burger ayam dengan bun lembut dan isian gurih, cocok untuk pilihan makan yang praktis." },
+      { id: 4, name: "Chicken Wings", cat: "Chicken", price: 9000, src: "chickenwings.png", desc: "Chicken wings dengan rasa gurih dan tekstur renyah, pas untuk dinikmati sendiri atau bersama." },
+      { id: 5, name: "French Fries", cat: "Snack", price: 12000, src: "frenchfries.png", desc: "Kentang goreng dengan tekstur renyah, cocok sebagai camilan atau teman makan." },
+      { id: 6, name: "Iced Coffee", cat: "Coffee", price: 15000, src: "kopisusu.png", desc: "Kopi dingin yang menyegarkan untuk menemani menu utama maupun waktu santai." },
+      { id: 7, name: "Cappuccino", cat: "Coffee", price: 15000, src: "cappucino1.png", desc: "Cita rasa kopi creamy yang lembut, cocok dinikmati saat bersantai." },
+      { id: 8, name: "Matcha Drink", cat: "Non-Coffee", price: 15000, src: "matcha.png", desc: "Minuman matcha dengan rasa lembut dan menyegarkan sebagai pilihan non-coffee." }
     ];
     const FALLBACK_OUTLETS = [
       { id: 1, name: "Juragan Chicken Tambakmekar", city: "Subang, Jawa Barat", wa: "0895375452514", maps: "https://www.google.com/maps/search/?api=1&query=Dusun%20Jl.%20Raya%20Simpang%20No.003%2C%20RT.007%2C%20Tambakmekar%2C%20Kec.%20Jalancagak%2C%20Kabupaten%20Subang%2C%20Jawa%20Barat%2041281" },
     ];
     let products = [...FALLBACK_PRODUCTS], outlets = [...FALLBACK_OUTLETS];
+    let cart = JSON.parse(localStorage.getItem("juraganChickenCart") || "[]");
+    const cartDrawer = document.getElementById("cartDrawer");
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
+    function saveCart() { localStorage.setItem("juraganChickenCart", JSON.stringify(cart)); }
+    function cartItemCount() { return cart.reduce((sum, item) => sum + item.qty, 0); }
+    function cartGrandTotal() { return cart.reduce((sum, item) => sum + (item.price * item.qty), 0); }
+    function addToCart(id) {
+      const p = products.find(x => String(x.id) === String(id));
+      if (!p) return;
+      const existing = cart.find(x => String(x.id) === String(p.id));
+      if (existing) existing.qty += 1;
+      else cart.push({ id: p.id, name: p.name, price: Number(p.price) || 0, src: p.src, qty: 1 });
+      saveCart();
+      renderCart();
+      openCart();
+    }
+    function changeCartQty(id, delta) {
+      const item = cart.find(x => String(x.id) === String(id));
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(x => String(x.id) !== String(id));
+      saveCart();
+      renderCart();
+    }
+    function removeFromCart(id) {
+      cart = cart.filter(x => String(x.id) !== String(id));
+      saveCart();
+      renderCart();
+    }
+    function renderCart() {
+      const count = cartItemCount();
+      cartCount.textContent = count;
+      cartTotal.textContent = rupiah(cartGrandTotal());
+      if (!cart.length) {
+        cartItems.innerHTML = `<div class="cart-empty"><div><div style="font-size:38px;margin-bottom:8px">🛒</div><b>Keranjang masih kosong</b><br><span>Pilih menu favoritmu untuk mulai memesan.</span></div></div>`;
+        return;
+      }
+      cartItems.innerHTML = cart.map(item => `<div class="cart-item"><img src="${item.src}" alt="${item.name}"><div><h4>${item.name}</h4><div class="cart-item-price">${rupiah(item.price)} × ${item.qty}</div><div class="cart-qty"><button type="button" onclick="changeCartQty(${item.id},-1)">−</button><span>${item.qty}</span><button type="button" onclick="changeCartQty(${item.id},1)">+</button></div></div><button class="cart-remove" type="button" onclick="removeFromCart(${item.id})">Hapus</button></div>`).join("");
+    }
+    function openCart() { cartDrawer.classList.add("open"); cartDrawer.setAttribute("aria-hidden", "false"); }
+    function closeCart() { cartDrawer.classList.remove("open"); cartDrawer.setAttribute("aria-hidden", "true"); }
+
     const rupiah = n => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(Number(n) || 0);
     const grid = document.getElementById("productGrid"), tabs = document.getElementById("tabs");
     function renderTabs(active = "Semua") { const cats = ["Semua", ...new Set(products.map(p => p.cat))]; tabs.innerHTML = cats.map(c => `<button class="tab ${c === active ? "active" : ""}" data-cat="${c}">${c}</button>`).join(""); tabs.querySelectorAll(".tab").forEach(b => b.onclick = () => renderProducts(b.dataset.cat)) }
-    function renderProducts(cat = "Semua") { renderTabs(cat); const list = cat === "Semua" ? products : products.filter(p => p.cat === cat); grid.innerHTML = list.map(p => `<article class="card"><div class="pic"><img src="${p.src}" alt="${p.name}" loading="lazy"><span class="tag">${p.cat}</span></div><div class="body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-foot"><span class="price">${rupiah(p.price)}</span><button class="small-btn" onclick="showProduct(${p.id})">Detail</button></div></div></article>`).join("") }
-    function showProduct(id) { const p = products.find(x => String(x.id) === String(id)); if (!p) return; modalImg.src = p.src; modalImg.alt = p.name; modalTitle.textContent = p.name; modalDesc.textContent = p.desc; modalPrice.textContent = rupiah(p.price); modal.classList.add("open"); modalOrder.onclick = () => { productSelect.value = p.id; modal.classList.remove("open"); location.hash = "pesan" } }
+    function renderProducts(cat = "Semua") { renderTabs(cat); const list = cat === "Semua" ? products : products.filter(p => p.cat === cat); grid.innerHTML = list.map(p => `<article class="card"><div class="pic"><img src="${p.src}" alt="${p.name}" loading="lazy"><span class="tag">${p.cat}</span></div><div class="body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-foot"><span class="price">${rupiah(p.price)}</span><div class="cart-actions"><button class="small-btn" onclick="showProduct(${p.id})">Detail</button><button class="add-cart-btn" onclick="addToCart(${p.id})">+ Keranjang</button></div></div></div></article>`).join("") }
+    function showProduct(id) { const p = products.find(x => String(x.id) === String(id)); if (!p) return; modalImg.src = p.src; modalImg.alt = p.name; modalTitle.textContent = p.name; modalDesc.textContent = p.desc; modalPrice.textContent = rupiah(p.price); modal.classList.add("open"); modalOrder.onclick = () => { addToCart(p.id); modal.classList.remove("open"); } }
     function renderOutlets() { outletGrid.innerHTML = outlets.map(o => `<article class="outlet"><h3>${o.name}</h3><p>📍 ${o.city}</p><a href="${o.maps || "#"}" target="_blank" rel="noopener">Buka Maps →</a></article>`).join(""); outletSelect.innerHTML = outlets.map(o => `<option value="${o.id}">${o.name}</option>`).join("") }
     function renderProductSelect() { productSelect.innerHTML = products.map(p => `<option value="${p.id}">${p.name} — ${rupiah(p.price)}</option>`).join("") }
     async function loadDatabase() { if (!CONFIG.apiUrl) return; try { const r = await fetch(CONFIG.apiUrl + "?action=publicData", { cache: "no-store" }); const d = await r.json(); if (Array.isArray(d.products) && d.products.length) products = d.products; if (Array.isArray(d.outlets) && d.outlets.length) outlets = d.outlets; renderProducts(); renderProductSelect(); renderOutlets() } catch (e) { console.warn("Database belum tersambung, memakai data demo.", e) } }
     orderForm.onsubmit = e => { e.preventDefault(); const p = products.find(x => String(x.id) === String(productSelect.value)); const o = outlets.find(x => String(x.id) === String(outletSelect.value)); const text = `Halo ${CONFIG.businessName},%0A%0ASaya ingin memesan:%0A%0ANama: ${encodeURIComponent(custName.value)}%0ANo. WhatsApp: ${encodeURIComponent(custPhone.value)}%0AOutlet: ${encodeURIComponent(o?.name || "-")}%0AMenu: ${encodeURIComponent(p?.name || "-")}%0AHarga: ${encodeURIComponent(rupiah(p?.price || 0))}%0AJumlah: ${qty.value}%0ACatatan: ${encodeURIComponent(notes.value || "-")}`; window.open(`https://wa.me/${o?.wa || CONFIG.whatsapp}?text=${text}`, "_blank") };
     floatWa.href = `https://wa.me/${CONFIG.whatsapp}?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20menu.`;
+    document.getElementById("cartTrigger").onclick = openCart;
+    document.getElementById("cartClose").onclick = closeCart;
+    cartDrawer.onclick = e => { if (e.target === cartDrawer) closeCart(); };
+    document.getElementById("cartCheckout").onclick = () => {
+      if (!cart.length) { alert("Keranjang masih kosong. Silakan pilih menu terlebih dahulu."); return; }
+      closeCart();
+      location.hash = "pesan";
+      document.getElementById("orderForm").scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
     close.onclick = () => modal.classList.remove("open"); modal.onclick = e => { if (e.target === modal) modal.classList.remove("open") };
     menuBtn.onclick = () => links.classList.toggle("open"); links.querySelectorAll("a").forEach(a => a.onclick = () => links.classList.remove("open"));
-    year.textContent = new Date().getFullYear(); renderProducts(); renderProductSelect(); renderOutlets(); loadDatabase();
+    year.textContent = new Date().getFullYear(); renderProducts(); renderProductSelect(); renderOutlets(); renderCart(); loadDatabase();
   </script>
 </body>
 

@@ -316,6 +316,63 @@
         }
 
         /* =========================
+       PHASE 5 — ORDER MANAGEMENT
+       ========================= */
+
+        .order-toolbar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .order-toolbar input,
+        .order-toolbar select {
+            min-width: 170px;
+            padding: 9px 10px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: #fff;
+        }
+
+        .order-table { min-width: 1050px; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 900;
+            white-space: nowrap;
+            background: #f2ece7;
+        }
+
+        .badge.paid { background: #e7f7ed; color: #147a43; }
+        .badge.pending { background: #fff4d9; color: #8a5a00; }
+        .badge.failed { background: #fde8e8; color: #a61b1b; }
+        .badge.process { background: #eee8ff; color: #5a3ca6; }
+
+        .status-select {
+            min-width: 145px;
+            padding: 7px 8px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            font-size: 11px;
+        }
+
+        .order-items {
+            max-width: 260px;
+            white-space: normal;
+            line-height: 1.45;
+        }
+
+        .mini { font-size: 11px; color: var(--mut); }
+
+        /* =========================
        MOBILE
        ========================= */
 
@@ -476,6 +533,11 @@
                 <input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec">
             </div>
 
+            <div class="field">
+                <label for="adminToken">Admin API Token <span class="mini">(opsional)</span></label>
+                <input id="adminToken" type="password" placeholder="Isi jika ADMIN_API_TOKEN di Script Properties digunakan">
+            </div>
+
             <!-- =========================
            STATISTICS
            ========================= -->
@@ -502,6 +564,76 @@
                     <b id="sLeads">-</b>
                 </div>
 
+            </div>
+
+            <!-- =========================
+           PHASE 5 — ORDER MANAGEMENT
+           ========================= -->
+
+            <div class="panel" style="margin-top:15px">
+                <h3>Order Management</h3>
+                <p class="mini">Kelola status pesanan berdasarkan invoice. Status pembayaran berasal dari Midtrans Notification untuk transaksi online.</p>
+
+                <div class="order-toolbar">
+                    <input id="orderSearch" placeholder="Cari invoice / nama / WhatsApp / outlet">
+                    <select id="paymentFilter">
+                        <option value="">Semua pembayaran</option>
+                        <option value="PAID">PAID</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="FAILED">FAILED</option>
+                        <option value="BAYAR_DI_OUTLET">BAYAR_DI_OUTLET</option>
+                    </select>
+                    <select id="orderFilter">
+                        <option value="">Semua status order</option>
+                        <option value="NEW">NEW</option>
+                        <option value="CONFIRMED">CONFIRMED</option>
+                        <option value="PREPARING">PREPARING</option>
+                        <option value="READY">READY</option>
+                        <option value="COMPLETED">COMPLETED</option>
+                        <option value="CANCELLED">CANCELLED</option>
+                    </select>
+                    <button class="btn light" type="button" onclick="renderOrders()">Terapkan Filter</button>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="order-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice</th>
+                                <th>Tanggal</th>
+                                <th>Customer</th>
+                                <th>Outlet</th>
+                                <th>Pesanan</th>
+                                <th>Total</th>
+                                <th>Pembayaran</th>
+                                <th>Status Order</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderRows"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="panel">
+                    <h3>Riwayat Pembayaran</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>Invoice</th><th>Status</th><th>Transaction ID</th><th>Payment Type</th><th>Aksi</th></tr></thead>
+                            <tbody id="paymentRows"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>Lead Franchise</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>Nama</th><th>WhatsApp</th><th>Kota</th><th>Status</th></tr></thead>
+                            <tbody id="leadRows"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- =========================
@@ -570,6 +702,9 @@
 
         let products = [];
         let outlets = [];
+        let orders = [];
+        let payments = [];
+        let leads = [];
 
         const $ = (id) => document.getElementById(id);
 
@@ -584,6 +719,7 @@
                 $("login").style.display = "none";
                 $("dashboard").style.display = "block";
 
+                localStorage.jcAdminToken = $("adminToken").value || localStorage.jcAdminToken || "";
                 load();
             } else {
                 alert("Password demo salah.");
@@ -728,30 +864,30 @@
                 localStorage.jcApiUrl ||
                 "";
 
+            $("apiUrl").value = url;
+            $("adminToken").value = localStorage.jcAdminToken || "";
+
             if (url) {
                 localStorage.jcApiUrl = url;
+                localStorage.jcAdminToken = $("adminToken").value || "";
 
                 try {
-                    const r = await fetch(
-                        url + "?action=adminData"
-                    );
-
+                    const token = encodeURIComponent(localStorage.jcAdminToken || "");
+                    const r = await fetch(url + "?action=adminData&token=" + token, { cache: "no-store" });
                     const d = await r.json();
+                    if (!r.ok || !d.ok) throw new Error(d.error || "API admin menolak akses.");
 
                     products = d.products || [];
                     outlets = d.outlets || [];
+                    orders = d.orders || [];
+                    payments = d.payments || [];
+                    leads = d.leads || [];
 
-                    $("sOrders").textContent =
-                        d.ordersCount ?? "-";
-
-                    $("sLeads").textContent =
-                        d.leadsCount ?? "-";
-
+                    $("sOrders").textContent = d.ordersCount ?? orders.length;
+                    $("sLeads").textContent = d.leadsCount ?? leads.length;
                 } catch (e) {
-                    alert(
-                        "API belum bisa diakses. Data lokal tetap ditampilkan."
-                    );
-
+                    console.warn(e);
+                    alert("Data admin belum bisa diambil dari API. Periksa API URL, deployment Apps Script, dan Admin API Token jika digunakan.");
                     fallback();
                 }
             } else {
@@ -759,6 +895,9 @@
             }
 
             render();
+            renderOrders();
+            renderPayments();
+            renderLeads();
         }
 
         /* =========================
@@ -766,6 +905,9 @@
            ========================= */
 
         function fallback() {
+            orders = JSON.parse(localStorage.jcOrders || "[]");
+            payments = JSON.parse(localStorage.jcPayments || "[]");
+            leads = JSON.parse(localStorage.jcLeads || "[]");
             products = JSON.parse(
                 localStorage.jcProducts || "[]"
             );
@@ -811,17 +953,100 @@
            ========================= */
 
         function render() {
-            $("productRows").innerHTML =
-                products.map(rowProduct).join("");
+            $("productRows").innerHTML = products.map(rowProduct).join("");
+            $("outletRows").innerHTML = outlets.map(rowOutlet).join("");
+            $("sProducts").textContent = products.length;
+            $("sOutlets").textContent = outlets.length;
+            $("sOrders").textContent = orders.length;
+            $("sLeads").textContent = leads.length;
+        }
 
-            $("outletRows").innerHTML =
-                outlets.map(rowOutlet).join("");
+        function rupiah(n) {
+            return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(Number(n) || 0);
+        }
 
-            $("sProducts").textContent =
-                products.length;
+        function parseItems(order) {
+            if (Array.isArray(order.items)) return order.items;
+            try { return JSON.parse(order.items_json || "[]"); } catch (e) { return []; }
+        }
 
-            $("sOutlets").textContent =
-                outlets.length;
+        function badgeClass(value) {
+            const v = String(value || "").toUpperCase();
+            if (v === "PAID") return "paid";
+            if (v === "PENDING" || v === "BAYAR_DI_OUTLET") return "pending";
+            if (v === "FAILED") return "failed";
+            return "process";
+        }
+
+        function rowOrder(order) {
+            const items = parseItems(order);
+            const itemText = items.length ? items.map(x => `${esc(x.name)} × ${Number(x.qty) || 1}`).join("<br>") : esc(order.product || "-");
+            const payment = String(order.payment_status || "-").toUpperCase();
+            const status = String(order.order_status || "NEW").toUpperCase();
+            const date = order.timestamp || order.createdAt || "-";
+            const wa = cleanPhone(order.phone || DEFAULT_WHATSAPP);
+            return `<tr>
+                <td><b>${esc(order.invoice || "-")}</b></td>
+                <td class="mini">${esc(date)}</td>
+                <td><b>${esc(order.name || "-")}</b><br><a class="wa-link" href="https://wa.me/${wa}" target="_blank" rel="noopener">WhatsApp</a></td>
+                <td>${esc(order.outlet || "-")}</td>
+                <td class="order-items">${itemText}</td>
+                <td><b>${rupiah(order.total)}</b></td>
+                <td><span class="badge ${badgeClass(payment)}">${esc(payment)}</span></td>
+                <td><select class="status-select" id="status-${esc(String(order.invoice || "").replace(/[^a-zA-Z0-9_-]/g,""))}" data-status-invoice="${esc(order.invoice || "")}">${["NEW","CONFIRMED","PREPARING","READY","COMPLETED","CANCELLED"].map(s => `<option value="${s}" ${s === status ? "selected" : ""}>${s}</option>`).join("")}</select></td>
+                <td><button class="btn red" type="button" onclick="saveOrderStatus('${encodeURIComponent(String(order.invoice || ""))}')">Simpan</button></td>
+            </tr>`;
+        }
+
+        function renderOrders() {
+            const search = String($("orderSearch")?.value || "").toLowerCase().trim();
+            const paymentFilter = String($("paymentFilter")?.value || "").toUpperCase();
+            const orderFilter = String($("orderFilter")?.value || "").toUpperCase();
+            const filtered = orders.filter(o => {
+                const hay = [o.invoice,o.name,o.phone,o.outlet].map(x => String(x || "").toLowerCase()).join(" ");
+                const p = String(o.payment_status || "").toUpperCase();
+                const st = String(o.order_status || "NEW").toUpperCase();
+                return (!search || hay.includes(search)) && (!paymentFilter || p === paymentFilter) && (!orderFilter || st === orderFilter);
+            });
+            $("orderRows").innerHTML = filtered.length ? filtered.map(rowOrder).join("") : `<tr><td colspan="9" style="text-align:center;padding:30px;color:#756861">Belum ada order sesuai filter.</td></tr>`;
+        }
+
+        async function saveOrderStatus(encodedInvoice) {
+            const invoice = decodeURIComponent(encodedInvoice);
+            const select = document.querySelector(`[data-status-invoice="${CSS.escape(invoice)}"]`);
+            const orderStatus = select ? select.value : "NEW";
+            const url = $("apiUrl").value || localStorage.jcApiUrl || "";
+            if (!url) { alert("Isi API URL terlebih dahulu."); return; }
+            try {
+                const r = await fetch(url, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "updateOrderStatus", token: localStorage.jcAdminToken || "", invoice, orderStatus }) });
+                const d = await r.json();
+                if (!r.ok || !d.ok) throw new Error(d.error || "Gagal memperbarui status.");
+                const target = orders.find(o => String(o.invoice) === invoice);
+                if (target) target.order_status = orderStatus;
+                alert(`Status ${invoice} menjadi ${orderStatus}.`);
+                renderOrders();
+            } catch (e) { alert(e.message || "Gagal memperbarui status order."); }
+        }
+
+        function renderPayments() {
+            $("paymentRows").innerHTML = payments.length ? payments.slice().reverse().map(p => `<tr><td><b>${esc(p.invoice || "-")}</b></td><td><span class="badge ${badgeClass(p.status)}">${esc(p.status || "-")}</span></td><td>${esc(p.transaction_id || "-")}</td><td>${esc(p.payment_type || p.payment_method || "-")}</td><td><button class="btn light" type="button" onclick="verifyPayment('${encodeURIComponent(String(p.invoice || ""))}')">Verifikasi</button></td></tr>`).join("") : `<tr><td colspan="5" style="text-align:center;padding:25px;color:#756861">Belum ada riwayat pembayaran.</td></tr>`;
+        }
+
+        async function verifyPayment(encodedInvoice) {
+            const invoice = decodeURIComponent(encodedInvoice);
+            const url = $("apiUrl").value || localStorage.jcApiUrl || "";
+            if (!url) { alert("Isi API URL terlebih dahulu."); return; }
+            try {
+                const r = await fetch(url, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "verifyPayment", token: localStorage.jcAdminToken || "", invoice }) });
+                const d = await r.json();
+                if (!r.ok || !d.ok) throw new Error(d.error || "Gagal memverifikasi pembayaran.");
+                alert(`Status pembayaran ${invoice}: ${d.paymentStatus}`);
+                await load();
+            } catch (e) { alert(e.message || "Gagal memverifikasi pembayaran."); }
+        }
+
+        function renderLeads() {
+            $("leadRows").innerHTML = leads.length ? leads.slice().reverse().map(l => `<tr><td>${esc(l.name || "-")}</td><td>${esc(l.phone || "-")}</td><td>${esc(l.city || "-")}</td><td><span class="badge">${esc(l.status || "NEW")}</span></td></tr>`).join("") : `<tr><td colspan="4" style="text-align:center;padding:25px;color:#756861">Belum ada lead.</td></tr>`;
         }
 
         /* =========================
@@ -903,6 +1128,10 @@
             render();
         }
 
+        $("orderSearch").addEventListener("input", renderOrders);
+        $("paymentFilter").addEventListener("change", renderOrders);
+        $("orderFilter").addEventListener("change", renderOrders);
+
         /* =========================
            AUTO LOGIN
            ========================= */
@@ -910,6 +1139,8 @@
         if (localStorage.jcAdmin === "1") {
             $("login").style.display = "none";
             $("dashboard").style.display = "block";
+            $("apiUrl").value = localStorage.jcApiUrl || "";
+            $("adminToken").value = localStorage.jcAdminToken || "";
 
             load();
         }

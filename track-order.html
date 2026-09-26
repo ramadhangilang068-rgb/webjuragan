@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lacak Pesanan | Juragan Chicken</title>
+<meta name="description" content="Lacak status pesanan Juragan Chicken berdasarkan invoice dan nomor WhatsApp.">
+<style>
+:root{--red:#b91c1c;--red2:#8f1515;--cream:#fffaf3;--ink:#251b18;--muted:#756863;--line:#eadfd7;--card:#fff;--green:#16844a;--yellow:#b77900}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#fffaf3,#fff 45%);color:var(--ink)}a{text-decoration:none;color:inherit}.container{width:min(1080px,calc(100% - 32px));margin:auto}
+header{background:rgba(255,250,243,.96);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo img{width:112px;max-height:62px;object-fit:contain}.nav-links{display:flex;gap:22px;font-size:13px;font-weight:800;color:#533c34}.nav-links a:hover{color:var(--red)}.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:850;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}.btn.red{background:var(--red);color:#fff}.btn.light{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.hero{padding:70px 0 30px;text-align:center}.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:900;color:var(--red)}h1{font-size:clamp(34px,5vw,54px);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);max-width:620px;margin:0 auto;line-height:1.7}
+.search-card{max-width:700px;margin:30px auto 42px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 18px 45px rgba(76,32,20,.08);text-align:left}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-size:12px;font-weight:850;color:#5b4a44;display:block;margin-bottom:7px}input{width:100%;border:1px solid #d9ccc4;border-radius:12px;padding:13px 14px;font:inherit;outline:none}input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(185,28,28,.08)}.search-card .btn{width:100%;margin-top:15px}.hint{font-size:12px;color:var(--muted);margin:10px 0 0}
+#result{display:none}.order-head{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.order-head h2{margin:5px 0 7px}.invoice{font-weight:900;color:var(--red);letter-spacing:.03em}.badge{display:inline-flex;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:900;background:#fff3df;color:#875800}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}.summary .item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px}.summary span{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.summary b{font-size:14px}
+.track-card,.items-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;margin:14px 0}.track-card h3,.items-card h3{margin:0 0 20px}.timeline{position:relative;padding-left:34px}.timeline:before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:#e8ddd5}.step{position:relative;padding:0 0 25px}.step:last-child{padding-bottom:0}.dot{position:absolute;left:-30px;top:1px;width:20px;height:20px;border-radius:50%;background:#ddd3cc;border:4px solid #fff;box-shadow:0 0 0 1px #ddd3cc}.step.active .dot{background:var(--red);box-shadow:0 0 0 1px var(--red)}.step h4{margin:0 0 5px;font-size:14px}.step p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}.items{display:grid;gap:9px}.row{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #f0e8e3;font-size:13px}.row:last-child{border-bottom:0}.total{display:flex;justify-content:space-between;margin-top:12px;font-size:18px;font-weight:900}.error{display:none;background:#fff0ef;border:1px solid #f2c9c6;color:#9f1b16;border-radius:14px;padding:13px;font-size:13px;margin-top:12px}.loading{opacity:.65;pointer-events:none}
+footer{padding:55px 0;text-align:center;color:var(--muted);font-size:12px}.back{margin-top:18px}.mobile-menu{display:none}
+@media(max-width:700px){.nav-links{display:none}.fields{grid-template-columns:1fr}.hero{padding-top:48px}.search-card{padding:18px}.order-head{display:block}.order-head .badge{margin-top:15px}.summary{grid-template-columns:1fr 1fr}.container{width:min(100% - 24px,1080px)}}
+</style>
+</head>
+<body>
+<header><div class="container nav"><a class="logo" href="index.html"><img src="logo.jpg.png" alt="Juragan Chicken"></a><nav class="nav-links"><a href="order-dashboard.html" style="margin-right:14px">Dashboard</a><a href="index.html">Beranda</a><a href="index.html#menu">Menu</a><a href="index.html#outlet">Outlet</a><a href="franchise.html">Franchise</a></nav><a class="btn red" href="index.html#pesan">Pesan</a></div></header>
+<main class="container">
+<section class="hero"><div class="eyebrow">JURAGAN CHICKEN</div><h1>Lacak Pesanan</h1><p>Masukkan nomor invoice dan nomor WhatsApp yang digunakan saat checkout untuk melihat status pesanan terbaru.</p></section>
+<section class="search-card" id="searchCard"><div class="fields"><div><label for="invoice">Nomor Invoice</label><input id="invoice" placeholder="Contoh: INV-JC-20260926-0001" autocomplete="off"></div><div><label for="phone">Nomor WhatsApp</label><input id="phone" placeholder="Contoh: 0895375452514" inputmode="tel" autocomplete="tel"></div></div><button class="btn red" id="trackBtn">Lacak Pesanan →</button><p class="hint">Data digunakan untuk mencocokkan pesanan. Nomor WhatsApp tidak ditampilkan pada hasil.</p><div class="error" id="errorBox"></div></section>
+<section id="result"></section>
+</main>
+<footer><div class="container">© <span id="year"></span> Juragan Chicken. <div class="back"><a class="btn light" href="index.html">← Kembali ke Website</a></div></div></footer>
+<script>
+const CONFIG={apiUrl:""};
+const STEPS=[
+  ["NEW","Pesanan diterima","Pesanan sudah masuk ke sistem Juragan Chicken."],
+  ["CONFIRMED","Pesanan dikonfirmasi","Pesanan telah dikonfirmasi oleh outlet."],
+  ["PREPARING","Sedang diproses","Pesanan sedang disiapkan oleh outlet."],
+  ["READY","Siap diambil / dikirim","Pesanan sudah siap untuk proses berikutnya."],
+  ["COMPLETED","Pesanan selesai","Pesanan telah selesai."],
+  ["CANCELLED","Pesanan dibatalkan","Pesanan berstatus dibatalkan."]
+];
+const $=id=>document.getElementById(id);
+function rupiah(n){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Number(n)||0)}
+function esc(v){return String(v??"").replace(/[&<>'"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[m]))}
+function dateText(v){if(!v)return "";const d=new Date(v);return Number.isNaN(d.getTime())?String(v):d.toLocaleString("id-ID",{dateStyle:"medium",timeStyle:"short"})}
+function currentStep(status){const i=STEPS.findIndex(x=>x[0]===status);return i<0?0:i}
+function render(data){
+  const o=data.order||{}; const status=String(o.orderStatus||"NEW").toUpperCase(); const active=currentStep(status);
+  const timeline=(data.timeline||[]).map(x=>`<div class="step active"><span class="dot"></span><h4>${esc(x.orderStatus||"")}</h4><p>${esc(labelStatus(x.orderStatus||""))}${x.note?" — "+esc(x.note):""}${x.timestamp?"<br>"+esc(dateText(x.timestamp)):""}</p></div>`).join("");
+  const fallback=STEPS.slice(0,status==="CANCELLED"?STEPS.length:5).map((x,i)=>`<div class="step ${i<=active?'active':''}"><span class="dot"></span><h4>${esc(x[1])}</h4><p>${i<=active?esc(x[2]):"Menunggu proses sebelumnya selesai."}</p></div>`).join("");
+  const items=(o.items||[]).map(x=>`<div class="row"><span>${esc(x.name||"Produk")} × ${esc(x.qty||1)}</span><b>${rupiah((Number(x.price)||0)*(Number(x.qty)||1))}</b></div>`).join("");
+  $("result").innerHTML=`<div class="order-head"><div><div class="invoice">${esc(o.invoice)}</div><h2>${esc(o.name||"Pelanggan")}</h2><div style="color:var(--muted);font-size:13px">${esc(o.outlet||"-")} · ${esc(o.type||"-")}</div></div><span class="badge">${esc(labelStatus(status))}</span></div><div class="summary"><div class="item"><span>Pembayaran</span><b>${esc(o.paymentStatus||"-")}</b></div><div class="item"><span>Metode</span><b>${esc(o.paymentMethod||"-")}</b></div><div class="item"><span>Total</span><b>${rupiah(o.total)}</b></div><div class="item"><span>Dibuat</span><b>${esc(dateText(o.createdAt))}</b></div></div><div class="track-card"><h3>Perjalanan Pesanan</h3><div class="timeline">${timeline||fallback}</div></div><div class="items-card"><h3>Detail Pesanan</h3><div class="items">${items||'<div style="color:var(--muted);font-size:13px">Detail item tidak tersedia.</div>'}</div><div class="total"><span>Total</span><span>${rupiah(o.total)}</span></div></div>`;
+  $("result").style.display="block";
+}
+function labelStatus(s){const f=STEPS.find(x=>x[0]===String(s).toUpperCase());return f?f[1]:String(s||"Menunggu").replaceAll("_"," ")}
+async function track(){
+  const invoice=$("invoice").value.trim(),phone=$("phone").value.trim(),err=$("errorBox"),btn=$("trackBtn"),card=$("searchCard");err.style.display="none";
+  if(!invoice||!phone){err.textContent="Invoice dan nomor WhatsApp wajib diisi.";err.style.display="block";return}
+  if(!CONFIG.apiUrl){err.textContent="API belum dikonfigurasi. Isi CONFIG.apiUrl dengan URL Web App Google Apps Script.";err.style.display="block";return}
+  btn.textContent="Memuat...";card.classList.add("loading");
+  try{const u=CONFIG.apiUrl+"?action=trackOrder&invoice="+encodeURIComponent(invoice)+"&phone="+encodeURIComponent(phone);const r=await fetch(u);const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||"Pesanan tidak ditemukan.");render(d)}catch(e){err.textContent=e.message||"Pesanan tidak dapat ditemukan.";err.style.display="block";$("result").style.display="none"}finally{btn.textContent="Lacak Pesanan →";card.classList.remove("loading")}
+}
+$("trackBtn").onclick=track;$("phone").addEventListener("keydown",e=>{if(e.key==="Enter")track()});$("invoice").addEventListener("keydown",e=>{if(e.key==="Enter")track()});$("year").textContent=new Date().getFullYear();
+const q=new URLSearchParams(location.search);if(q.get("invoice")){ $("invoice").value=q.get("invoice");$("phone").value=q.get("phone")||""; }
+</script>
+</body>
+</html>

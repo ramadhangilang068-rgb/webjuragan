@@ -1021,7 +1021,7 @@
         height: 210px;
         min-height: 0
       }
-       }
+
       /* =========================================================
        HEADER + HERO REFINEMENT
        Hanya memperbaiki tampilan header dan hero
@@ -1459,6 +1459,330 @@
     }
   </style>
 
+
+  <style id="phase3-invoice-payment">
+    /* =========================================================
+       PHASE 3 — CHECKOUT, INVOICE & PAYMENT
+       Tambahan fitur tanpa mengubah desain utama.
+       ========================================================= */
+    .checkout-modal,
+    .invoice-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(24, 11, 8, .62);
+      place-items: center;
+      padding: 16px;
+    }
+
+    .checkout-modal.open,
+    .invoice-modal.open {
+      display: grid;
+    }
+
+    .checkout-card,
+    .invoice-card {
+      width: min(820px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
+    }
+
+    .phase3-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .phase3-head h3 {
+      margin: 0;
+      color: #572019;
+      font: 900 27px Georgia, serif;
+    }
+
+    .phase3-close {
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: #fff0df;
+      color: #8f2b1e;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .checkout-body,
+    .invoice-body {
+      padding: 22px 24px 24px;
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .phase3-summary {
+      background: #fffaf4;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 18px;
+    }
+
+    .phase3-summary h4 {
+      margin: 0 0 10px;
+      color: #572019;
+    }
+
+    .phase3-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .phase3-item:last-child {
+      border-bottom: 0;
+    }
+
+    .phase3-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding-top: 12px;
+      font-weight: 950;
+      font-size: 16px;
+    }
+
+    .phase3-total strong {
+      color: var(--red);
+      font-size: 20px;
+    }
+
+    .payment-options {
+      display: grid;
+      gap: 9px;
+      margin-top: 8px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 12px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .payment-option:has(input:checked) {
+      border-color: var(--red);
+      background: #fff7f1;
+    }
+
+    .payment-option input {
+      accent-color: var(--red);
+    }
+
+    .payment-option b {
+      display: block;
+      font-size: 13px;
+    }
+
+    .payment-option small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .invoice-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .invoice-brand {
+      padding: 18px 20px;
+      background: #fffaf4;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .invoice-brand b {
+      color: #572019;
+      font: 900 22px Georgia, serif;
+    }
+
+    .invoice-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff0df;
+      color: #9b2a1d;
+      font-size: 10px;
+      font-weight: 950;
+    }
+
+    .invoice-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 18px 20px;
+      font-size: 12px;
+    }
+
+    .invoice-meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
+
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+      padding: 10px 20px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .invoice-table th:last-child,
+    .invoice-table td:last-child {
+      text-align: right;
+    }
+
+    .invoice-grand {
+      display: flex;
+      justify-content: space-between;
+      padding: 17px 20px;
+      background: #fffaf4;
+      font-weight: 950;
+      font-size: 17px;
+    }
+
+    .invoice-grand strong {
+      color: var(--red);
+      font-size: 21px;
+    }
+
+    .invoice-note {
+      padding: 15px 20px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .phase3-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .phase3-actions .btn {
+      flex: 1;
+      min-width: 170px;
+    }
+
+    @media(max-width:600px) {
+
+      .checkout-grid,
+      .invoice-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-body,
+      .invoice-body {
+        padding: 16px;
+      }
+
+      .phase3-head {
+        padding: 16px;
+      }
+
+      .phase3-head h3 {
+        font-size: 23px;
+      }
+
+      .invoice-table th,
+      .invoice-table td {
+        padding: 9px 12px;
+      }
+
+      .invoice-brand {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <style id="payment-phase4">
+    /* =========================================================
+       PAYMENT GATEWAY — PHASE 4
+       UI pembayaran online tanpa mengubah desain utama.
+       ========================================================= */
+    .payment-gateway-box {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fffaf4;
+    }
+
+    .payment-gateway-box h4 {
+      margin: 0 0 6px;
+      color: #572019;
+    }
+
+    .payment-gateway-box p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .payment-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff0df;
+      color: #9b2a1d;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .payment-action {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .payment-info {
+      margin-top: 10px;
+      padding: 11px 12px;
+      border-radius: 11px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 11px;
+      color: var(--muted);
+    }
+  </style>
+
   <style id="mobile-header-hero-fix">
     /* =========================================================
        MOBILE HEADER + HERO — FINAL LAYOUT FIX
@@ -1672,28 +1996,8 @@
         gap: 28px;
         padding-top: 38px !important;
         padding-bottom: 42px !important;
-      }@media (max-width: 600px) {
-
-  /* CSS mobile yang sudah ada */
-
-  .hero-photo img {
-    transform: none !important;
-  }
-
-} /* ← TUTUP @media 600px */
-
-}
-/* =========================================================
-   FIX HERO IMAGE DESKTOP — LURUS
-   ========================================================= */
-
-.hero-photo {
-  transform: none !important;
-}
-
-.hero-photo img {
-  transform: none !important;
-}
+      }
+    }
   </style>
 
 </head>
@@ -1978,6 +2282,77 @@
     </div>
   </div>
 
+
+  <div class="checkout-modal" id="checkoutModal" aria-hidden="true">
+    <div class="checkout-card" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <div class="phase3-head">
+        <h3 id="checkoutTitle">Checkout Pesanan</h3>
+        <button class="phase3-close" id="checkoutClose" type="button" aria-label="Tutup checkout">×</button>
+      </div>
+      <div class="checkout-body">
+        <div class="phase3-summary">
+          <h4>Ringkasan Pesanan</h4>
+          <div id="checkoutItems"></div>
+          <div class="phase3-total"><span>Total</span><strong id="checkoutTotal">Rp0</strong></div>
+        </div>
+        <div class="checkout-grid">
+          <div>
+            <div class="field"><label>Nama</label><input id="checkoutName" required placeholder="Nama pelanggan"></div>
+            <div class="field"><label>No. WhatsApp</label><input id="checkoutPhone" required placeholder="08xxxxxxxxxx">
+            </div>
+            <div class="field"><label>Outlet</label><select id="checkoutOutlet"></select></div>
+            <div class="field"><label>Tipe Pesanan</label>
+              <select id="checkoutType">
+                <option value="Take Away">Take Away</option>
+                <option value="Dine In">Dine In</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="field"><label>Metode Pembayaran</label>
+              <div class="payment-options">
+                <label class="payment-option"><input type="radio" name="paymentMethod" value="Bayar di Outlet"
+                    checked><span><b>Bayar di Outlet</b><small>Pembayaran dilakukan saat mengambil
+                      pesanan.</small></span></label>
+                <label class="payment-option"><input type="radio" name="paymentMethod"
+                    value="Transfer Bank"><span><b>Transfer Bank</b><small>Detail rekening akan diberikan saat
+                      konfirmasi.</small></span></label>
+                <label class="payment-option"><input type="radio" name="paymentMethod"
+                    value="QRIS"><span><b>QRIS</b><small>QRIS akan dikonfirmasi oleh admin
+                      outlet.</small></span></label>
+              </div>
+            </div>
+            <div class="field"><label>Catatan</label><textarea id="checkoutNotes"
+                placeholder="Contoh: sambal tambahan, jam ambil, dll."></textarea></div>
+          </div>
+        </div>
+        <div class="phase3-actions">
+          <button class="btn light" id="checkoutBack" type="button">Kembali ke Keranjang</button>
+          <button class="btn red" id="createInvoice" type="button">Buat Invoice →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="invoice-modal" id="invoiceModal" aria-hidden="true">
+    <div class="invoice-card" role="dialog" aria-modal="true" aria-labelledby="invoiceTitle">
+      <div class="phase3-head">
+        <h3 id="invoiceTitle">Invoice Pesanan</h3>
+        <button class="phase3-close" id="invoiceClose" type="button" aria-label="Tutup invoice">×</button>
+      </div>
+      <div class="invoice-body">
+        <div class="invoice-box" id="invoiceBox"></div>
+        <div id="paymentGatewayBox" class="payment-gateway-box" style="display:none"></div>
+        <div class="phase3-actions">
+          <button class="btn light" id="printInvoice" type="button">Cetak Invoice</button>
+          <button class="btn red" id="payNow" type="button" style="display:none">Bayar Sekarang →</button>
+          <button class="btn light" id="trackInvoice" type="button">Lacak Pesanan</button><button class="btn red"
+            id="sendInvoiceWA" type="button">Konfirmasi via WhatsApp →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="modal">
     <div class="modal-card"><button class="close" id="close">×</button><img id="modalImg" alt="">
       <div class="modal-copy"><span class="kicker">Detail Produk</span>
@@ -1992,7 +2367,13 @@
     const CONFIG = {
       whatsapp: "0895375452514",
       apiUrl: "", // isi URL Web App Google Apps Script setelah deployment
-      businessName: "Juragan Chicken"
+      businessName: "Juragan Chicken",
+      // PHASE 4 — Payment Gateway
+      // Gunakan "manual" selama gateway belum dikonfigurasi.
+      paymentProvider: "midtrans",
+      paymentApiUrl: "",
+      paymentClientKey: "SB-MIDTRANS-CLIENT-KEY-DIISI",
+      paymentEnvironment: "sandbox"
     };
     const FALLBACK_PRODUCTS = [
       { id: 1, name: "Chicken Paha Bawah", cat: "Chicken", price: 9500, src: "friedchickendada.png", desc: "Ayam crispy dengan balutan renyah dan rasa gurih, cocok untuk makan sendiri maupun dibawa pulang." },
@@ -2065,12 +2446,260 @@
     document.getElementById("cartTrigger").onclick = openCart;
     document.getElementById("cartClose").onclick = closeCart;
     cartDrawer.onclick = e => { if (e.target === cartDrawer) closeCart(); };
-    document.getElementById("cartCheckout").onclick = () => {
+    const checkoutModal = document.getElementById("checkoutModal");
+    const invoiceModal = document.getElementById("invoiceModal");
+    const checkoutItems = document.getElementById("checkoutItems");
+    const checkoutTotal = document.getElementById("checkoutTotal");
+    const checkoutOutlet = document.getElementById("checkoutOutlet");
+    let currentInvoice = null;
+
+    function openCheckout() {
       if (!cart.length) { alert("Keranjang masih kosong. Silakan pilih menu terlebih dahulu."); return; }
       closeCart();
-      location.hash = "pesan";
-      document.getElementById("orderForm").scrollIntoView({ behavior: "smooth", block: "start" });
+      checkoutOutlet.innerHTML = outlets.map(o => `<option value="${o.id}">${o.name}</option>`).join("");
+      checkoutItems.innerHTML = cart.map(item => `<div class="phase3-item"><span>${item.name} × ${item.qty}</span><strong>${rupiah(item.price * item.qty)}</strong></div>`).join("");
+      checkoutTotal.textContent = rupiah(cartGrandTotal());
+      checkoutModal.classList.add("open");
+      checkoutModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeCheckout() {
+      checkoutModal.classList.remove("open");
+      checkoutModal.setAttribute("aria-hidden", "true");
+    }
+
+    function makeInvoiceNumber() {
+      const d = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      const date = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+      const seqKey = "juraganChickenInvoiceSeq";
+      const seq = Number(localStorage.getItem(seqKey) || 0) + 1;
+      localStorage.setItem(seqKey, String(seq));
+      return `INV-JC-${date}-${String(seq).padStart(4, "0")}`;
+    }
+
+    function selectedPayment() {
+      return document.querySelector('input[name="paymentMethod"]:checked')?.value || "Bayar di Outlet";
+    }
+
+    async function saveOrderToDatabase(inv) {
+      if (!CONFIG.apiUrl || !inv) return { ok: false, skipped: true };
+      try {
+        const response = await fetch(CONFIG.apiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "createOrder", invoice: inv })
+        });
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw new Error(data.error || "Order gagal disimpan.");
+        return data;
+      } catch (error) {
+        console.warn("Order belum tersimpan ke database:", error);
+        return { ok: false, error: error.message };
+      }
+    }
+
+    async function createInvoice() {
+      const name = document.getElementById("checkoutName").value.trim();
+      const phone = document.getElementById("checkoutPhone").value.trim();
+      const outletId = document.getElementById("checkoutOutlet").value;
+      const type = document.getElementById("checkoutType").value;
+      const notes = document.getElementById("checkoutNotes").value.trim();
+      if (!name || !phone || !outletId) { alert("Lengkapi nama, nomor WhatsApp, dan outlet terlebih dahulu."); return; }
+      const outlet = outlets.find(o => String(o.id) === String(outletId));
+      const payment = selectedPayment();
+      currentInvoice = {
+        number: makeInvoiceNumber(), name, phone, outlet: outlet?.name || "-", outletWa: outlet?.wa || CONFIG.whatsapp, type, payment, notes, items: cart.map(item => ({ ...item })), total: cartGrandTotal(), createdAt: new Date().toISOString(),
+        paymentStatus: payment === "Bayar di Outlet" ? "BAYAR DI OUTLET" : "PENDING",
+        orderStatus: "NEW"
+      };
+
+      const saved = await saveOrderToDatabase(currentInvoice);
+      currentInvoice.databaseStatus = saved.ok ? "SAVED" : (saved.skipped ? "LOCAL_ONLY" : "SAVE_FAILED");
+      localStorage.setItem("juraganChickenLastInvoice", JSON.stringify(currentInvoice));
+      renderInvoice(currentInvoice);
+      renderPaymentGateway(currentInvoice);
+      closeCheckout();
+      invoiceModal.classList.add("open");
+      invoiceModal.setAttribute("aria-hidden", "false");
+    }
+
+    function renderInvoice(inv) {
+      const paymentStatus = inv.paymentStatus || (inv.payment === "Bayar di Outlet" ? "BAYAR DI OUTLET" : "MENUNGGU PEMBAYARAN");
+      const rows = inv.items.map(item => `<tr><td>${item.name} × ${item.qty}</td><td>${rupiah(item.price * item.qty)}</td></tr>`).join("");
+      invoiceBox.innerHTML = `<div class="invoice-brand"><div><b>JURAGAN CHICKEN</b><div style="font-size:11px;color:var(--muted)">${inv.number}</div></div><span class="invoice-status">${paymentStatus}</span></div><div class="invoice-meta"><div><span>Customer</span><b>${escapeHtml(inv.name)}</b></div><div><span>No. WhatsApp</span><b>${escapeHtml(inv.phone)}</b></div><div><span>Outlet</span><b>${escapeHtml(inv.outlet)}</b></div><div><span>Tipe Pesanan</span><b>${escapeHtml(inv.type)}</b></div><div><span>Pembayaran</span><b>${escapeHtml(inv.payment)}</b></div><div><span>Tanggal</span><b>${new Date(inv.createdAt).toLocaleString("id-ID")}</b></div></div><table class="invoice-table"><thead><tr><th>Pesanan</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table><div class="invoice-grand"><span>TOTAL</span><strong>${rupiah(inv.total)}</strong></div><div class="invoice-note">${inv.notes ? `Catatan: ${escapeHtml(inv.notes)}<br>` : ""}Untuk pembayaran Transfer Bank atau QRIS, detail pembayaran dikonfirmasi oleh admin outlet melalui WhatsApp.</div>`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    }
+
+    /* =========================================================
+       PHASE 4 — PAYMENT GATEWAY & VERIFICATION HOOK
+       ========================================================= */
+    const paymentGatewayBox = document.getElementById("paymentGatewayBox");
+    const payNowButton = document.getElementById("payNow");
+
+    function isOnlinePayment(inv) {
+      return inv && ["Transfer Bank", "QRIS"].includes(inv.payment);
+    }
+
+    function renderPaymentGateway(inv) {
+      if (!paymentGatewayBox || !payNowButton) return;
+      const online = isOnlinePayment(inv);
+      paymentGatewayBox.style.display = online ? "block" : "none";
+      payNowButton.style.display = online ? "inline-flex" : "none";
+      if (!online) { paymentGatewayBox.innerHTML = ""; return; }
+      paymentGatewayBox.innerHTML = `
+        <h4>Pembayaran Online</h4>
+        <p>Status: <span class="payment-status">${escapeHtml(inv.paymentStatus || "MENUNGGU PEMBAYARAN")}</span></p>
+        <div class="payment-info">
+          Gunakan tombol <b>Bayar Sekarang</b> untuk membuka halaman pembayaran Midtrans.
+          Status pembayaran final ditentukan server melalui notifikasi atau verifikasi status Midtrans.
+          <br><button class="btn light" type="button" id="verifyPaymentBtn" style="margin-top:10px">Cek Status Pembayaran</button>
+        </div>`;
+      const verifyButton = document.getElementById("verifyPaymentBtn");
+      if (verifyButton) verifyButton.onclick = verifyCurrentPayment;
+    }
+
+    async function startPayment() {
+      if (!currentInvoice || !isOnlinePayment(currentInvoice)) return;
+
+      if (CONFIG.paymentProvider !== "midtrans") {
+        alert("Payment gateway belum dikonfigurasi.");
+        return;
+      }
+
+      if (!CONFIG.paymentApiUrl || !CONFIG.paymentClientKey || CONFIG.paymentClientKey.includes("DIISI")) {
+        alert("Midtrans belum dikonfigurasi. Isi paymentApiUrl dan paymentClientKey terlebih dahulu.");
+        return;
+      }
+
+      payNowButton.disabled = true;
+      payNowButton.textContent = "Membuka pembayaran...";
+
+      try {
+        const response = await fetch(CONFIG.paymentApiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "createPayment", invoice: currentInvoice })
+        });
+        const data = await response.json();
+        if (!response.ok || !data.ok || !data.token) {
+          throw new Error(data.error || data.message || "Token pembayaran tidak tersedia.");
+        }
+
+        await loadMidtransSnap();
+
+        window.snap.pay(data.token, {
+          onSuccess: function (result) {
+            updateInvoicePaymentStatus("PAID", result);
+            verifyCurrentPayment();
+            alert("Pembayaran berhasil. Status final akan diverifikasi server.");
+          },
+          onPending: function (result) {
+            updateInvoicePaymentStatus("PENDING", result);
+            verifyCurrentPayment();
+            alert("Pembayaran belum selesai. Silakan selesaikan pembayaran.");
+          },
+          onError: function (result) {
+            updateInvoicePaymentStatus("FAILED", result);
+            verifyCurrentPayment();
+            alert("Pembayaran gagal. Status final tetap mengikuti server Midtrans.");
+          },
+          onClose: function () {
+            payNowButton.disabled = false;
+            payNowButton.textContent = "Bayar Sekarang →";
+          }
+        });
+      } catch (error) {
+        console.error("Midtrans error:", error);
+        alert("Pembayaran belum dapat dibuka. Periksa konfigurasi Midtrans.");
+      } finally {
+        payNowButton.disabled = false;
+        payNowButton.textContent = "Bayar Sekarang →";
+      }
+    }
+
+    function loadMidtransSnap() {
+      if (window.snap) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[data-juragan-midtrans]');
+        if (existing) {
+          existing.addEventListener("load", resolve, { once: true });
+          existing.addEventListener("error", reject, { once: true });
+          return;
+        }
+        const script = document.createElement("script");
+        script.setAttribute("data-juragan-midtrans", "1");
+        script.src = CONFIG.paymentEnvironment === "production"
+          ? "https://app.midtrans.com/snap/snap.js"
+          : "https://app.sandbox.midtrans.com/snap/snap.js";
+        script.setAttribute("data-client-key", CONFIG.paymentClientKey);
+        script.onload = resolve;
+        script.onerror = () => reject(new Error("Snap JS gagal dimuat."));
+        document.head.appendChild(script);
+      });
+    }
+
+    function updateInvoicePaymentStatus(status, gatewayResult) {
+      if (!currentInvoice) return;
+      currentInvoice.paymentStatus = status;
+      currentInvoice.gatewayResult = gatewayResult || null;
+      localStorage.setItem("juraganChickenLastInvoice", JSON.stringify(currentInvoice));
+      renderInvoice(currentInvoice);
+      renderPaymentGateway(currentInvoice);
+    }
+
+    async function verifyCurrentPayment() {
+      if (!currentInvoice || !CONFIG.paymentApiUrl) return;
+      const button = document.getElementById("verifyPaymentBtn");
+      if (button) { button.disabled = true; button.textContent = "Memeriksa..."; }
+      try {
+        const url = CONFIG.paymentApiUrl + "?action=checkPaymentStatus&invoice=" + encodeURIComponent(currentInvoice.number) + "&phone=" + encodeURIComponent(currentInvoice.phone);
+        const response = await fetch(url, { cache: "no-store" });
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw new Error(data.error || "Status pembayaran belum dapat diverifikasi.");
+        currentInvoice.paymentStatus = data.paymentStatus || currentInvoice.paymentStatus;
+        currentInvoice.paymentVerifiedAt = data.verifiedAt || null;
+        currentInvoice.transactionStatus = data.transactionStatus || "";
+        localStorage.setItem("juraganChickenLastInvoice", JSON.stringify(currentInvoice));
+        renderInvoice(currentInvoice);
+        renderPaymentGateway(currentInvoice);
+        alert("Status pembayaran: " + currentInvoice.paymentStatus);
+      } catch (error) {
+        alert(error.message || "Status pembayaran belum dapat diverifikasi.");
+      } finally {
+        const b = document.getElementById("verifyPaymentBtn");
+        if (b) { b.disabled = false; b.textContent = "Cek Status Pembayaran"; b.onclick = verifyCurrentPayment; }
+      }
+    }
+
+    function sendInvoiceToWhatsApp() {
+      if (!currentInvoice) return;
+      const inv = currentInvoice;
+      const lines = inv.items.map(item => `• ${item.name} x${item.qty} = ${rupiah(item.price * item.qty)}`).join("\n");
+      const text = `Halo ${CONFIG.businessName}, saya ingin konfirmasi pesanan.\n\nInvoice: ${inv.number}\nNama: ${inv.name}\nNo. WhatsApp: ${inv.phone}\nOutlet: ${inv.outlet}\nTipe: ${inv.type}\nPembayaran: ${inv.payment}\n\n${lines}\n\nTOTAL: ${rupiah(inv.total)}\nCatatan: ${inv.notes || "-"}`;
+      const wa = String(inv.outletWa || CONFIG.whatsapp).replace(/\D/g, "").replace(/^0/, "62");
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, "_blank");
+    }
+
+    document.getElementById("cartCheckout").onclick = openCheckout;
+    document.getElementById("checkoutClose").onclick = closeCheckout;
+    document.getElementById("checkoutBack").onclick = () => { closeCheckout(); openCart(); };
+    document.getElementById("createInvoice").onclick = createInvoice;
+    checkoutModal.onclick = e => { if (e.target === checkoutModal) closeCheckout(); };
+    document.getElementById("invoiceClose").onclick = () => { invoiceModal.classList.remove("open"); invoiceModal.setAttribute("aria-hidden", "true"); };
+    invoiceModal.onclick = e => { if (e.target === invoiceModal) { invoiceModal.classList.remove("open"); invoiceModal.setAttribute("aria-hidden", "true"); } };
+    document.getElementById("payNow").onclick = startPayment;
+    document.getElementById("printInvoice").onclick = () => {
+      const content = document.getElementById("invoiceBox").innerHTML;
+      const w = window.open("", "_blank", "width=850,height=900");
+      w.document.write(`<html><head><title>${currentInvoice?.number || "Invoice Juragan Chicken"}</title><style>body{font-family:Arial,sans-serif;padding:30px;color:#241916}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}th:last-child,td:last-child{text-align:right}.invoice-grand{display:flex;justify-content:space-between;padding:15px 0;font-weight:700;font-size:18px}.invoice-grand strong{color:#b91c1c}.invoice-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.invoice-meta span{display:block;color:#777;font-size:11px}</style></head><body>${content}</body></html>`);
+      w.document.close(); w.focus(); w.print();
     };
+    document.getElementById("sendInvoiceWA").onclick = sendInvoiceToWhatsApp;
+    document.getElementById("trackInvoice").onclick = () => { if (!currentInvoice) return; window.location.href = `track-order.html?invoice=${encodeURIComponent(currentInvoice.number)}&phone=${encodeURIComponent(currentInvoice.phone)}`; };
 
     close.onclick = () => modal.classList.remove("open"); modal.onclick = e => { if (e.target === modal) modal.classList.remove("open") };
     menuBtn.onclick = () => links.classList.toggle("open"); links.querySelectorAll("a").forEach(a => a.onclick = () => links.classList.remove("open"));

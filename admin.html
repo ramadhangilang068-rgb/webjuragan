@@ -1057,6 +1057,7 @@
 
             render();
             renderPaymentVerification();
+            resolveMissingPaymentProofs();
             updateDashboardMonitor();
 
             const currentWaiting = getWaitingInvoices();
@@ -1418,8 +1419,9 @@
                                     rel="noopener">
                                     Lihat Bukti Pembayaran
                                    </a>`
-                    : `<button class="btn light" type="button" disabled>
-                                    Bukti Tidak Tersedia
+                    : `<button class="btn light proof-missing" type="button"
+                                    data-proof-invoice="${esc(invoice)}" disabled>
+                                    Mencari Bukti...
                                    </button>`
                 }
 
@@ -1439,6 +1441,48 @@
                     </div>
                 </article>
             `;
+        }
+
+        async function resolveMissingPaymentProofs() {
+            const buttons = document.querySelectorAll('.proof-missing[data-proof-invoice]');
+            if (!buttons.length) return;
+
+            const url =
+                $("apiUrl").value ||
+                localStorage.jcApiUrl ||
+                "";
+
+            if (!url) return;
+
+            for (const button of buttons) {
+                const invoice = button.getAttribute('data-proof-invoice') || '';
+                if (!invoice) continue;
+
+                try {
+                    const response = await fetch(
+                        url + "?action=getPaymentProof&invoice=" +
+                        encodeURIComponent(invoice) +
+                        (getAdminToken() ? "&token=" + encodeURIComponent(getAdminToken()) : ""),
+                        { cache: "no-store" }
+                    );
+                    const data = await response.json();
+
+                    if (response.ok && data.ok && data.proofUrl) {
+                        const a = document.createElement('a');
+                        a.className = 'btn light';
+                        a.href = data.proofUrl;
+                        a.target = '_blank';
+                        a.rel = 'noopener';
+                        a.textContent = 'Lihat Bukti Pembayaran';
+                        button.replaceWith(a);
+                    } else {
+                        button.textContent = 'Bukti Tidak Tersedia';
+                    }
+                } catch (error) {
+                    console.warn('Gagal mencari bukti pembayaran:', error);
+                    button.textContent = 'Bukti Tidak Tersedia';
+                }
+            }
         }
 
         async function verifyPayment(encodedInvoice, status) {

@@ -603,7 +603,8 @@
                     Google Apps Script API URL
                 </label>
 
-                <input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec">
+                <input id="apiUrl"
+                    value="https://script.google.com/macros/s/AKfycbyOhlIyXG1jRIhzatRhrsCFDg9IN3B9zP4RMU7EX37Dd1MH-NYsQOVY6zmopRJoZyYeKg/exec">
             </div>
 
             <!-- =========================
@@ -1003,12 +1004,11 @@
             dashboardLoading = true;
 
             const previousWaiting = new Set(knownWaitingInvoices);
-            const url =
-                $("apiUrl").value ||
-                localStorage.jcApiUrl ||
-                "";
+            const DEFAULT_API_URL = "https://script.google.com/macros/s/AKfycbyOhlIyXG1jRIhzatRhrsCFDg9IN3B9zP4RMU7EX37Dd1MH-NYsQOVY6zmopRJoZyYeKg/exec";
+            const url = DEFAULT_API_URL;
 
             if (url) {
+                $("apiUrl").value = url;
                 localStorage.jcApiUrl = url;
 
                 try {

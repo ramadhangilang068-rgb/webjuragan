@@ -2366,7 +2366,7 @@
   <script>
     const CONFIG = {
       whatsapp: "0895375452514",
-      apiUrl: "https://script.google.com/macros/s/AKfycbzzyLLfTAxCj1rnwC9gtpoPnks_J7B0ZRSJoYPHYgPXbRVv2ombMYnovIFONDXPISN4fg/exec",
+      apiUrl: "https://script.google.com/macros/s/AKfycbyOhlIyXG1jRIhzatRhrsCFDg9IN3B9zP4RMU7EX37Dd1MH-NYsQOVY6zmopRJoZyYeKg/exec",
       businessName: "Juragan Chicken",
       // PHASE 8 — Manual Payment
       // Pembayaran Transfer Bank / QRIS dilakukan manual dan diverifikasi admin.
@@ -2535,7 +2535,7 @@
       const payment = selectedPayment();
       currentInvoice = {
         number: makeInvoiceNumber(), name, phone, outlet: outlet?.name || "-", outletWa: outlet?.wa || CONFIG.whatsapp, type, payment, notes, items: cart.map(item => ({ ...item })), total: cartGrandTotal(), createdAt: new Date().toISOString(),
-        paymentStatus: payment === "Bayar di Outlet" ? "BAYAR DI OUTLET" : "MENUNGGU PEMBAYARAN",
+        paymentStatus: payment === "Bayar di Outlet" ? "BAYAR DI OUTLET" : "PENDING",
         orderStatus: "NEW"
       };
 
@@ -2552,7 +2552,7 @@
     function renderInvoice(inv) {
       const paymentStatus = inv.paymentStatus || (inv.payment === "Bayar di Outlet" ? "BAYAR DI OUTLET" : "MENUNGGU PEMBAYARAN");
       const rows = inv.items.map(item => `<tr><td>${item.name} × ${item.qty}</td><td>${rupiah(item.price * item.qty)}</td></tr>`).join("");
-      invoiceBox.innerHTML = `<div class="invoice-brand"><div><b>JURAGAN CHICKEN</b><div style="font-size:11px;color:var(--muted)">${inv.number}</div></div><span class="invoice-status">${paymentStatus}</span></div><div class="invoice-meta"><div><span>Customer</span><b>${escapeHtml(inv.name)}</b></div><div><span>No. WhatsApp</span><b>${escapeHtml(inv.phone)}</b></div><div><span>Outlet</span><b>${escapeHtml(inv.outlet)}</b></div><div><span>Tipe Pesanan</span><b>${escapeHtml(inv.type)}</b></div><div><span>Pembayaran</span><b>${escapeHtml(inv.payment)}</b></div><div><span>Tanggal</span><b>${new Date(inv.createdAt).toLocaleString("id-ID")}</b></div></div><table class="invoice-table"><thead><tr><th>Pesanan</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table><div class="invoice-grand"><span>TOTAL</span><strong>${rupiah(inv.total)}</strong></div><div class="invoice-note">${inv.notes ? `Catatan: ${escapeHtml(inv.notes)}<br>` : ""}Untuk pembayaran Transfer Bank atau QRIS, lakukan pembayaran sesuai detail dari admin outlet, lalu upload bukti pembayaran untuk verifikasi manual.</div>`;
+      invoiceBox.innerHTML = `<div class="invoice-brand"><div><b>JURAGAN CHICKEN</b><div style="font-size:11px;color:var(--muted)">${inv.number}</div></div><span class="invoice-status">${paymentStatus}</span></div><div class="invoice-meta"><div><span>Customer</span><b>${escapeHtml(inv.name)}</b></div><div><span>No. WhatsApp</span><b>${escapeHtml(inv.phone)}</b></div><div><span>Outlet</span><b>${escapeHtml(inv.outlet)}</b></div><div><span>Tipe Pesanan</span><b>${escapeHtml(inv.type)}</b></div><div><span>Pembayaran</span><b>${escapeHtml(inv.payment)}</b></div><div><span>Tanggal</span><b>${new Date(inv.createdAt).toLocaleString("id-ID")}</b></div></div><table class="invoice-table"><thead><tr><th>Pesanan</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table><div class="invoice-grand"><span>TOTAL</span><strong>${rupiah(inv.total)}</strong></div><div class="invoice-note">${inv.notes ? `Catatan: ${escapeHtml(inv.notes)}<br>` : ""}Untuk pembayaran Transfer Bank atau QRIS, lakukan pembayaran sesuai detail dari admin outlet lalu upload bukti pembayaran untuk verifikasi manual.</div>`;
     }
 
     function escapeHtml(value) {
@@ -2560,108 +2560,72 @@
     }
 
     /* =========================================================
-       PHASE 8 — MANUAL PAYMENT & PAYMENT PROOF — FINAL
-       Hanya mengatur pembayaran Transfer Bank / QRIS.
+       PHASE 8 — MANUAL PAYMENT & PAYMENT PROOF
+       Hanya mengganti alur pembayaran online.
        ========================================================= */
     const paymentGatewayBox = document.getElementById("paymentGatewayBox");
     const payNowButton = document.getElementById("payNow");
 
-    function isManualPayment(inv) {
+    function isOnlinePayment(inv) {
       return inv && ["Transfer Bank", "QRIS"].includes(inv.payment);
     }
 
     function renderPaymentGateway(inv) {
-      if (!paymentGatewayBox) return;
+      if (!paymentGatewayBox || !payNowButton) return;
 
-      const manual = isManualPayment(inv);
-      paymentGatewayBox.style.display = manual ? "block" : "none";
+      const online = isOnlinePayment(inv);
+      paymentGatewayBox.style.display = online ? "block" : "none";
 
-      /* Tombol lama Midtrans tidak digunakan pada pembayaran manual. */
-      if (payNowButton) payNowButton.style.display = "none";
+      /* Tombol lama "Bayar Sekarang" tetap tidak digunakan pada pembayaran manual. */
+      payNowButton.style.display = "none";
 
-      if (!manual) {
+      if (!online) {
         paymentGatewayBox.innerHTML = "";
         return;
       }
 
-      const status = String(
-        inv.paymentStatus || "MENUNGGU PEMBAYARAN"
-      ).toUpperCase();
-
+      const status = String(inv.paymentStatus || "PENDING").toUpperCase();
       const proofName = inv.proofFileName || "";
-
-      let statusText = status;
-      if (status === "PENDING") statusText = "MENUNGGU PEMBAYARAN";
-      if (status === "WAITING_VERIFICATION") statusText = "MENUNGGU VERIFIKASI";
-      if (status === "PAID") statusText = "PEMBAYARAN DITERIMA";
-      if (status === "REJECTED") statusText = "PEMBAYARAN DITOLAK";
 
       paymentGatewayBox.innerHTML = `
         <h4>Pembayaran Manual</h4>
-
-        <p>
-          Metode:
-          <b>${escapeHtml(inv.payment)}</b>
-        </p>
-
-        <p style="margin-top:7px">
-          Status:
-          <span class="payment-status">${escapeHtml(statusText)}</span>
-        </p>
-
+        <p>Status: <span class="payment-status">${escapeHtml(status)}</span></p>
         <div class="payment-info">
-          <b>Langkah Pembayaran</b><br>
-          1. Lakukan pembayaran sesuai detail rekening atau QRIS yang diberikan
-          oleh admin outlet.<br>
-          2. Setelah pembayaran berhasil, pilih bukti pembayaran di bawah.<br>
-          3. Upload bukti untuk diverifikasi oleh admin.
+          <b>${escapeHtml(inv.payment)}</b><br>
+          Silakan lakukan pembayaran sesuai detail yang diberikan oleh admin outlet.
+          Setelah transfer/QRIS selesai, upload bukti pembayaran di bawah ini.
         </div>
 
         <div class="payment-info" style="margin-top:10px">
-          <label for="paymentProofInput"
-            style="display:block;font-weight:900;color:#572019;margin-bottom:7px">
-            Upload Bukti Pembayaran
+          <label for="paymentProofInput" style="display:block;font-weight:900;color:#572019;margin-bottom:7px">
+            Bukti Pembayaran
           </label>
-
-          <input
-            id="paymentProofInput"
-            type="file"
-            accept="image/jpeg,image/png,image/webp,application/pdf"
+          <input id="paymentProofInput" type="file"
+            accept="image/*,.pdf"
             style="width:100%;padding:10px;border:1px solid var(--line);border-radius:11px;background:#fff">
 
-          <div id="paymentProofInfo"
-            style="margin-top:8px;font-size:11px;color:var(--muted)">
+          <div id="paymentProofInfo" style="margin-top:8px;font-size:11px;color:var(--muted)">
             ${proofName
           ? `Bukti dipilih: <b>${escapeHtml(proofName)}</b>`
           : "Format JPG, PNG, WEBP, atau PDF. Maksimal 5 MB."}
           </div>
 
-          <button
-            class="btn red"
-            type="button"
-            id="uploadProofBtn"
-            style="margin-top:10px;width:100%">
+          <button class="btn light" type="button" id="uploadProofBtn" style="margin-top:10px;width:100%">
             Upload Bukti Pembayaran
           </button>
 
-          <div id="paymentProofResult"
-            style="margin-top:8px;font-size:11px"></div>
+          <div id="paymentProofResult" style="margin-top:8px;font-size:11px"></div>
         </div>
 
         <div class="payment-info" style="margin-top:10px">
-          Setelah bukti pembayaran berhasil dikirim, status akan menjadi
-          <b>MENUNGGU VERIFIKASI</b>. Admin akan memeriksa bukti pembayaran
-          sebelum status berubah menjadi <b>PEMBAYARAN DITERIMA</b>.
+          Setelah bukti dikirim, admin akan melakukan verifikasi secara manual.
+          <br><b>Status akan berubah menjadi PAID setelah pembayaran diverifikasi.</b>
         </div>
 
-        <button
-          class="btn light"
-          type="button"
-          id="verifyPaymentBtn"
+        <button class="btn light" type="button" id="verifyPaymentBtn"
           style="margin-top:10px;width:100%">
           Cek Status Pembayaran
-        </button>
-      `;
+        </button>`;
 
       const proofInput = document.getElementById("paymentProofInput");
       const uploadButton = document.getElementById("uploadProofBtn");
@@ -2673,45 +2637,30 @@
           if (!file) return;
 
           const info = document.getElementById("paymentProofInfo");
-
           if (file.size > 5 * 1024 * 1024) {
             proofInput.value = "";
-            if (info) {
-              info.textContent = "File terlalu besar. Maksimal 5 MB.";
-            }
+            if (info) info.textContent = "File terlalu besar. Maksimal 5 MB.";
             return;
           }
 
           inv.proofFileName = file.name;
           inv.proofFileSize = file.size;
-
-          localStorage.setItem(
-            "juraganChickenLastInvoice",
-            JSON.stringify(inv)
-          );
+          localStorage.setItem("juraganChickenLastInvoice", JSON.stringify(inv));
 
           if (info) {
-            info.innerHTML =
-              `Bukti dipilih: <b>${escapeHtml(file.name)}</b>`;
+            info.innerHTML = `Bukti dipilih: <b>${escapeHtml(file.name)}</b>`;
           }
         };
       }
 
-      if (uploadButton) {
-        uploadButton.onclick = uploadPaymentProof;
-      }
-
-      if (verifyButton) {
-        verifyButton.onclick = verifyManualPayment;
-      }
+      if (uploadButton) uploadButton.onclick = uploadPaymentProof;
+      if (verifyButton) verifyButton.onclick = verifyManualPayment;
     }
 
     function updateManualPaymentStatus(status, extra = {}) {
       if (!currentInvoice) return;
 
-      currentInvoice.paymentStatus =
-        String(status || "PENDING").toUpperCase();
-
+      currentInvoice.paymentStatus = String(status || "PENDING").toUpperCase();
       Object.assign(currentInvoice, extra);
 
       localStorage.setItem(
@@ -2723,8 +2672,13 @@
       renderPaymentGateway(currentInvoice);
     }
 
+    /*
+     * Frontend sudah disiapkan untuk endpoint uploadPaymentProof.
+     * Jika backend belum memiliki endpoint tersebut, sistem tidak mengubah
+     * data order dan memberikan fallback konfirmasi melalui WhatsApp.
+     */
     async function uploadPaymentProof() {
-      if (!currentInvoice || !isManualPayment(currentInvoice)) return;
+      if (!currentInvoice || !isOnlinePayment(currentInvoice)) return;
 
       const input = document.getElementById("paymentProofInput");
       const resultBox = document.getElementById("paymentProofResult");
@@ -2741,39 +2695,26 @@
         return;
       }
 
-      const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-        "application/pdf"
-      ];
-
-      if (file.type && !allowedTypes.includes(file.type)) {
-        alert("Format file harus JPG, PNG, WEBP, atau PDF.");
-        return;
-      }
-
       if (button) {
         button.disabled = true;
         button.textContent = "Mengirim bukti...";
       }
 
-      if (resultBox) {
-        resultBox.textContent = "Sedang mengunggah bukti pembayaran...";
-      }
-
       try {
+        /*
+         * Endpoint ini akan digunakan ketika backend manual-payment
+         * sudah diaktifkan. Untuk saat ini Phase 8 tetap aman jika
+         * endpoint belum tersedia.
+         */
         if (!CONFIG.apiUrl) {
-          throw new Error("API pembayaran belum tersedia.");
+          throw new Error("API belum tersedia.");
         }
 
         const base64 = await readFileAsBase64(file);
 
         const response = await fetch(CONFIG.apiUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({
             action: "uploadPaymentProof",
             invoice: currentInvoice.number,
@@ -2789,43 +2730,46 @@
         const data = await response.json();
 
         if (!response.ok || !data.ok) {
-          throw new Error(
-            data.error || "Bukti pembayaran gagal dikirim."
-          );
+          throw new Error(data.error || "Upload bukti belum tersedia.");
         }
 
         updateManualPaymentStatus("WAITING_VERIFICATION", {
           proofFileName: file.name,
-          proofUploadedAt: data.uploadedAt || new Date().toISOString(),
+          proofUploadedAt: new Date().toISOString(),
           proofUrl: data.fileUrl || ""
         });
 
         const box = document.getElementById("paymentProofResult");
         if (box) {
-          box.innerHTML =
-            "✓ Bukti pembayaran berhasil dikirim. " +
-            "Status: <b>MENUNGGU VERIFIKASI</b>.";
+          box.innerHTML = "✓ Bukti pembayaran berhasil dikirim dan menunggu verifikasi admin.";
         }
 
-        alert(
-          "Bukti pembayaran berhasil dikirim dan menunggu verifikasi admin."
-        );
-
+        alert("Bukti pembayaran berhasil dikirim. Silakan tunggu verifikasi admin.");
       } catch (error) {
-        console.error("Upload bukti pembayaran:", error);
+        console.warn("Upload bukti pembayaran:", error);
+
+        /*
+         * Fallback untuk tahap pengujian sebelum endpoint backend manual
+         * diaktifkan: data order tetap tersimpan, lalu customer diarahkan
+         * untuk mengonfirmasi melalui WhatsApp dan melampirkan bukti.
+         */
+        currentInvoice.proofFileName = file.name;
+        currentInvoice.proofSelectedAt = new Date().toISOString();
+        localStorage.setItem(
+          "juraganChickenLastInvoice",
+          JSON.stringify(currentInvoice)
+        );
 
         const box = document.getElementById("paymentProofResult");
         if (box) {
           box.innerHTML =
-            "✕ Bukti pembayaran belum berhasil dikirim. " +
-            "Silakan coba kembali.";
+            "Bukti sudah dipilih. Untuk pengujian saat ini, kirim bukti melalui WhatsApp dengan tombol konfirmasi di bawah.";
         }
 
         alert(
-          error.message ||
-          "Bukti pembayaran belum berhasil dikirim."
+          "Upload ke database belum aktif. Bukti pembayaran sudah dipilih. " +
+          "Silakan tekan 'Konfirmasi via WhatsApp' dan lampirkan file bukti tersebut di WhatsApp."
         );
-
       } finally {
         const b = document.getElementById("uploadProofBtn");
         if (b) {
@@ -2842,14 +2786,10 @@
         reader.onload = () => {
           const result = String(reader.result || "");
           const comma = result.indexOf(",");
-          resolve(
-            comma >= 0 ? result.substring(comma + 1) : result
-          );
+          resolve(comma >= 0 ? result.substring(comma + 1) : result);
         };
 
-        reader.onerror = () =>
-          reject(new Error("File tidak dapat dibaca."));
-
+        reader.onerror = () => reject(new Error("File tidak dapat dibaca."));
         reader.readAsDataURL(file);
       });
     }
@@ -2861,7 +2801,6 @@
       }
 
       const button = document.getElementById("verifyPaymentBtn");
-
       if (button) {
         button.disabled = true;
         button.textContent = "Memeriksa...";
@@ -2870,22 +2809,17 @@
       try {
         const url =
           CONFIG.apiUrl +
-          "?action=trackOrder" +
-          "&invoice=" +
+          "?action=trackOrder&invoice=" +
           encodeURIComponent(currentInvoice.number) +
           "&phone=" +
           encodeURIComponent(currentInvoice.phone);
 
-        const response = await fetch(url, {
-          cache: "no-store"
-        });
-
+        const response = await fetch(url, { cache: "no-store" });
         const data = await response.json();
 
         if (!response.ok || !data.ok) {
           throw new Error(
-            data.error ||
-            "Status pembayaran belum dapat diperiksa."
+            data.error || "Status pembayaran belum dapat diperiksa."
           );
         }
 
@@ -2896,20 +2830,14 @@
 
         updateManualPaymentStatus(paymentStatus);
 
-        alert(
-          "Status pembayaran: " +
-          currentInvoice.paymentStatus
-        );
-
+        alert("Status pembayaran: " + currentInvoice.paymentStatus);
       } catch (error) {
         alert(
           error.message ||
           "Status pembayaran belum dapat diverifikasi."
         );
-
       } finally {
         const b = document.getElementById("verifyPaymentBtn");
-
         if (b) {
           b.disabled = false;
           b.textContent = "Cek Status Pembayaran";

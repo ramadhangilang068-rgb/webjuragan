@@ -649,6 +649,19 @@
                     <span class="verification-count" id="verificationCount">0</span>
                 </div>
 
+                <div class="dashboard-monitor">
+                    <div class="monitor-left">
+                        <span class="monitor-dot" id="monitorDot"></span>
+                        <span id="monitorStatus">Auto-refresh aktif setiap 30 detik</span>
+                        <span>•</span>
+                        <span>Update terakhir: <b id="lastDashboardUpdate">-</b></span>
+                    </div>
+                    <div class="monitor-actions">
+                        <button class="monitor-btn" type="button" id="refreshDashboardBtn">↻ Refresh Sekarang</button>
+                        <button class="monitor-btn" type="button" id="notificationBtn">🔔 Aktifkan Notifikasi</button>
+                    </div>
+                </div>
+
                 <div class="field">
                     <label for="adminToken">Admin API Token (opsional)</label>
                     <input id="adminToken" type="password"
@@ -661,6 +674,8 @@
                     </div>
                 </div>
             </section>
+
+            <div class="dashboard-toast" id="dashboardToast"></div>
 
             <!-- =========================
            DATA TABLES
@@ -879,10 +894,115 @@
         }
 
         /* =========================
+           DASHBOARD MONITORING
+           ========================= */
+
+        let dashboardRefreshTimer = null;
+        let dashboardHasLoadedOnce = false;
+        let knownWaitingInvoices = new Set();
+        let dashboardLoading = false;
+
+        function getWaitingInvoices() {
+            const result = new Set();
+
+            payments.forEach((payment) => {
+                const invoice = String(payment.invoice || "").trim();
+                if (!invoice) return;
+                const order = getOrderForInvoice(invoice);
+                if (isWaitingVerification(order, payment)) result.add(invoice);
+            });
+
+            orders.forEach((order) => {
+                const invoice = String(order.invoice || "").trim();
+                if (!invoice) return;
+                if (String(order.payment_status || "").toUpperCase() === "WAITING_VERIFICATION") {
+                    result.add(invoice);
+                }
+            });
+
+            return result;
+        }
+
+        function showDashboardToast(message) {
+            const toast = $("dashboardToast");
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add("show");
+            clearTimeout(showDashboardToast.timer);
+            showDashboardToast.timer = setTimeout(() => {
+                toast.classList.remove("show");
+            }, 5000);
+        }
+
+        function updateDashboardMonitor() {
+            const el = $("lastDashboardUpdate");
+            if (el) {
+                el.textContent = new Date().toLocaleTimeString("id-ID", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                });
+            }
+        }
+
+        async function enableBrowserNotifications() {
+            if (!("Notification" in window)) {
+                alert("Browser ini belum mendukung notifikasi desktop.");
+                return;
+            }
+
+            if (Notification.permission === "granted") {
+                showDashboardToast("Notifikasi browser sudah aktif.");
+                return;
+            }
+
+            const permission = await Notification.requestPermission();
+            if (permission === "granted") {
+                if ($("notificationBtn")) $("notificationBtn").textContent = "🔔 Notifikasi Aktif";
+                showDashboardToast("Notifikasi browser berhasil diaktifkan.");
+            } else {
+                showDashboardToast("Notifikasi belum diizinkan oleh browser.");
+            }
+        }
+
+        function notifyNewPayments(newInvoices) {
+            if (!newInvoices.length) return;
+
+            const message = newInvoices.length === 1
+                ? "Ada 1 pembayaran baru yang menunggu verifikasi."
+                : `Ada ${newInvoices.length} pembayaran baru yang menunggu verifikasi.`;
+
+            showDashboardToast("🔔 " + message);
+
+            if ("Notification" in window && Notification.permission === "granted") {
+                try {
+                    new Notification("Juragan Chicken — Pembayaran Baru", {
+                        body: message + " Buka dashboard untuk memeriksa bukti pembayaran."
+                    });
+                } catch (e) {
+                    console.warn("Notifikasi browser gagal ditampilkan.", e);
+                }
+            }
+        }
+
+        function startDashboardAutoRefresh() {
+            clearInterval(dashboardRefreshTimer);
+            dashboardRefreshTimer = setInterval(() => {
+                if (!dashboardLoading && document.visibilityState !== "hidden") {
+                    load(true);
+                }
+            }, 30000);
+        }
+
+        /* =========================
            LOAD DATA
            ========================= */
 
-        async function load() {
+        async function load(silent = false) {
+            if (dashboardLoading) return;
+            dashboardLoading = true;
+
+            const previousWaiting = new Set(knownWaitingInvoices);
             const url =
                 $("apiUrl").value ||
                 localStorage.jcApiUrl ||
@@ -916,10 +1036,14 @@
                         d.leadsCount ?? "-";
 
                 } catch (e) {
-                    alert(
-                        e.message ||
-                        "API belum bisa diakses. Data lokal tetap ditampilkan."
-                    );
+                    if (!silent) {
+                        alert(
+                            e.message ||
+                            "API belum bisa diakses. Data lokal tetap ditampilkan."
+                        );
+                    } else {
+                        showDashboardToast("⚠ Dashboard gagal memperbarui data. Akan mencoba lagi.");
+                    }
 
                     fallback();
                     orders = [];
@@ -933,6 +1057,17 @@
 
             render();
             renderPaymentVerification();
+            updateDashboardMonitor();
+
+            const currentWaiting = getWaitingInvoices();
+            if (dashboardHasLoadedOnce) {
+                const newInvoices = [...currentWaiting].filter((invoice) => !previousWaiting.has(invoice));
+                notifyNewPayments(newInvoices);
+            }
+
+            knownWaitingInvoices = currentWaiting;
+            dashboardHasLoadedOnce = true;
+            dashboardLoading = false;
         }
 
         /* =========================
@@ -1394,6 +1529,24 @@
             }
         }
 
+
+        /* =========================
+           DASHBOARD CONTROLS
+           ========================= */
+
+        if ($("refreshDashboardBtn")) {
+            $("refreshDashboardBtn").addEventListener("click", () => load(false));
+        }
+
+        if ($("notificationBtn")) {
+            $("notificationBtn").addEventListener("click", enableBrowserNotifications);
+        }
+
+        startDashboardAutoRefresh();
+
+        if ("Notification" in window && Notification.permission === "granted" && $("notificationBtn")) {
+            $("notificationBtn").textContent = "🔔 Notifikasi Aktif";
+        }
 
         /* =========================
            AUTO LOGIN

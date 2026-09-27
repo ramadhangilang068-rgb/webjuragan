@@ -316,61 +316,134 @@
         }
 
         /* =========================
-       PHASE 5 — ORDER MANAGEMENT
+       PAYMENT VERIFICATION
        ========================= */
 
-        .order-toolbar {
+        .verification-panel {
+            margin-top: 15px;
+        }
+
+        .verification-head {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
-            margin: 15px 0;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
-        .order-toolbar input,
-        .order-toolbar select {
-            min-width: 170px;
-            padding: 9px 10px;
-            border: 1px solid var(--line);
-            border-radius: 9px;
-            background: #fff;
-        }
-
-        .order-table { min-width: 1050px; }
-
-        .badge {
+        .verification-count {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 4px 8px;
+            min-width: 34px;
+            height: 28px;
+            padding: 0 9px;
             border-radius: 999px;
+            background: #fff1e6;
+            color: var(--r);
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .verification-empty {
+            padding: 20px;
+            border: 1px dashed var(--line);
+            border-radius: 12px;
+            text-align: center;
+            color: var(--mut);
+            font-size: 12px;
+            background: #fcfaf8;
+        }
+
+        .verification-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .verification-card {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px;
+            background: #fff;
+        }
+
+        .verification-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .verification-invoice {
+            font-weight: 900;
+            color: #571e17;
+            word-break: break-word;
+        }
+
+        .verification-status {
+            display: inline-flex;
+            padding: 5px 8px;
+            border-radius: 999px;
+            background: #fff3df;
+            color: #9a4b00;
             font-size: 10px;
             font-weight: 900;
             white-space: nowrap;
-            background: #f2ece7;
         }
 
-        .badge.paid { background: #e7f7ed; color: #147a43; }
-        .badge.pending { background: #fff4d9; color: #8a5a00; }
-        .badge.failed { background: #fde8e8; color: #a61b1b; }
-        .badge.process { background: #eee8ff; color: #5a3ca6; }
+        .verification-meta {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+            margin-top: 12px;
+        }
 
-        .status-select {
-            min-width: 145px;
-            padding: 7px 8px;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            background: #fff;
+        .verification-meta div {
+            padding: 9px;
+            border-radius: 10px;
+            background: #fbf7f3;
+        }
+
+        .verification-meta small {
+            display: block;
+            color: var(--mut);
+            font-size: 10px;
+            margin-bottom: 2px;
+        }
+
+        .verification-meta b {
+            font-size: 12px;
+            word-break: break-word;
+        }
+
+        .proof-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .proof-actions .btn {
+            flex: 1 1 150px;
+        }
+
+        .verification-note {
+            width: 100%;
+            margin-top: 10px;
+            min-height: 72px;
+            resize: vertical;
+        }
+
+        .verified-message {
+            margin-top: 10px;
+            padding: 9px 10px;
+            border-radius: 10px;
+            background: #eef8f2;
+            color: #17633c;
             font-size: 11px;
+            font-weight: 800;
         }
 
-        .order-items {
-            max-width: 260px;
-            white-space: normal;
-            line-height: 1.45;
-        }
-
-        .mini { font-size: 11px; color: var(--mut); }
 
         /* =========================
        MOBILE
@@ -533,11 +606,6 @@
                 <input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec">
             </div>
 
-            <div class="field">
-                <label for="adminToken">Admin API Token <span class="mini">(opsional)</span></label>
-                <input id="adminToken" type="password" placeholder="Isi jika ADMIN_API_TOKEN di Script Properties digunakan">
-            </div>
-
             <!-- =========================
            STATISTICS
            ========================= -->
@@ -567,74 +635,32 @@
             </div>
 
             <!-- =========================
-           PHASE 5 — ORDER MANAGEMENT
+           PAYMENT VERIFICATION
            ========================= -->
 
-            <div class="panel" style="margin-top:15px">
-                <h3>Order Management</h3>
-                <p class="mini">Kelola status pesanan berdasarkan invoice. Status pembayaran berasal dari Midtrans Notification untuk transaksi online.</p>
-
-                <div class="order-toolbar">
-                    <input id="orderSearch" placeholder="Cari invoice / nama / WhatsApp / outlet">
-                    <select id="paymentFilter">
-                        <option value="">Semua pembayaran</option>
-                        <option value="PAID">PAID</option>
-                        <option value="PENDING">PENDING</option>
-                        <option value="FAILED">FAILED</option>
-                        <option value="BAYAR_DI_OUTLET">BAYAR_DI_OUTLET</option>
-                    </select>
-                    <select id="orderFilter">
-                        <option value="">Semua status order</option>
-                        <option value="NEW">NEW</option>
-                        <option value="CONFIRMED">CONFIRMED</option>
-                        <option value="PREPARING">PREPARING</option>
-                        <option value="READY">READY</option>
-                        <option value="COMPLETED">COMPLETED</option>
-                        <option value="CANCELLED">CANCELLED</option>
-                    </select>
-                    <button class="btn light" type="button" onclick="renderOrders()">Terapkan Filter</button>
+            <section class="panel verification-panel">
+                <div class="verification-head">
+                    <div>
+                        <h3 style="margin-bottom:2px">Verifikasi Pembayaran</h3>
+                        <div style="font-size:11px;color:#756861">
+                            Periksa bukti Transfer Bank / QRIS sebelum mengubah status menjadi PAID atau REJECTED.
+                        </div>
+                    </div>
+                    <span class="verification-count" id="verificationCount">0</span>
                 </div>
 
-                <div class="table-wrap">
-                    <table class="order-table">
-                        <thead>
-                            <tr>
-                                <th>Invoice</th>
-                                <th>Tanggal</th>
-                                <th>Customer</th>
-                                <th>Outlet</th>
-                                <th>Pesanan</th>
-                                <th>Total</th>
-                                <th>Pembayaran</th>
-                                <th>Status Order</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="orderRows"></tbody>
-                    </table>
+                <div class="field">
+                    <label for="adminToken">Admin API Token (opsional)</label>
+                    <input id="adminToken" type="password"
+                        placeholder="Isi hanya jika ADMIN_API_TOKEN di Apps Script diaktifkan">
                 </div>
-            </div>
 
-            <div class="grid">
-                <div class="panel">
-                    <h3>Riwayat Pembayaran</h3>
-                    <div class="table-wrap">
-                        <table>
-                            <thead><tr><th>Invoice</th><th>Status</th><th>Transaction ID</th><th>Payment Type</th><th>Aksi</th></tr></thead>
-                            <tbody id="paymentRows"></tbody>
-                        </table>
+                <div id="verificationList" class="verification-list">
+                    <div class="verification-empty">
+                        Belum ada pembayaran yang menunggu verifikasi.
                     </div>
                 </div>
-                <div class="panel">
-                    <h3>Lead Franchise</h3>
-                    <div class="table-wrap">
-                        <table>
-                            <thead><tr><th>Nama</th><th>WhatsApp</th><th>Kota</th><th>Status</th></tr></thead>
-                            <tbody id="leadRows"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            </section>
 
             <!-- =========================
            DATA TABLES
@@ -704,7 +730,6 @@
         let outlets = [];
         let orders = [];
         let payments = [];
-        let leads = [];
 
         const $ = (id) => document.getElementById(id);
 
@@ -719,7 +744,6 @@
                 $("login").style.display = "none";
                 $("dashboard").style.display = "block";
 
-                localStorage.jcAdminToken = $("adminToken").value || localStorage.jcAdminToken || "";
                 load();
             } else {
                 alert("Password demo salah.");
@@ -864,40 +888,51 @@
                 localStorage.jcApiUrl ||
                 "";
 
-            $("apiUrl").value = url;
-            $("adminToken").value = localStorage.jcAdminToken || "";
-
             if (url) {
                 localStorage.jcApiUrl = url;
-                localStorage.jcAdminToken = $("adminToken").value || "";
 
                 try {
-                    const token = encodeURIComponent(localStorage.jcAdminToken || "");
-                    const r = await fetch(url + "?action=adminData&token=" + token, { cache: "no-store" });
+                    const r = await fetch(
+                        url + "?action=adminData" +
+                        (getAdminToken() ? "&token=" + encodeURIComponent(getAdminToken()) : ""),
+                        { cache: "no-store" }
+                    );
+
                     const d = await r.json();
-                    if (!r.ok || !d.ok) throw new Error(d.error || "API admin menolak akses.");
+
+                    if (!r.ok || !d.ok) {
+                        throw new Error(d.error || "API admin tidak dapat diakses.");
+                    }
 
                     products = d.products || [];
                     outlets = d.outlets || [];
                     orders = d.orders || [];
                     payments = d.payments || [];
-                    leads = d.leads || [];
 
-                    $("sOrders").textContent = d.ordersCount ?? orders.length;
-                    $("sLeads").textContent = d.leadsCount ?? leads.length;
+                    $("sOrders").textContent =
+                        d.ordersCount ?? orders.length ?? "-";
+
+                    $("sLeads").textContent =
+                        d.leadsCount ?? "-";
+
                 } catch (e) {
-                    console.warn(e);
-                    alert("Data admin belum bisa diambil dari API. Periksa API URL, deployment Apps Script, dan Admin API Token jika digunakan.");
+                    alert(
+                        e.message ||
+                        "API belum bisa diakses. Data lokal tetap ditampilkan."
+                    );
+
                     fallback();
+                    orders = [];
+                    payments = [];
                 }
             } else {
                 fallback();
+                orders = [];
+                payments = [];
             }
 
             render();
-            renderOrders();
-            renderPayments();
-            renderLeads();
+            renderPaymentVerification();
         }
 
         /* =========================
@@ -905,9 +940,6 @@
            ========================= */
 
         function fallback() {
-            orders = JSON.parse(localStorage.jcOrders || "[]");
-            payments = JSON.parse(localStorage.jcPayments || "[]");
-            leads = JSON.parse(localStorage.jcLeads || "[]");
             products = JSON.parse(
                 localStorage.jcProducts || "[]"
             );
@@ -953,100 +985,17 @@
            ========================= */
 
         function render() {
-            $("productRows").innerHTML = products.map(rowProduct).join("");
-            $("outletRows").innerHTML = outlets.map(rowOutlet).join("");
-            $("sProducts").textContent = products.length;
-            $("sOutlets").textContent = outlets.length;
-            $("sOrders").textContent = orders.length;
-            $("sLeads").textContent = leads.length;
-        }
+            $("productRows").innerHTML =
+                products.map(rowProduct).join("");
 
-        function rupiah(n) {
-            return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(Number(n) || 0);
-        }
+            $("outletRows").innerHTML =
+                outlets.map(rowOutlet).join("");
 
-        function parseItems(order) {
-            if (Array.isArray(order.items)) return order.items;
-            try { return JSON.parse(order.items_json || "[]"); } catch (e) { return []; }
-        }
+            $("sProducts").textContent =
+                products.length;
 
-        function badgeClass(value) {
-            const v = String(value || "").toUpperCase();
-            if (v === "PAID") return "paid";
-            if (v === "PENDING" || v === "BAYAR_DI_OUTLET") return "pending";
-            if (v === "FAILED") return "failed";
-            return "process";
-        }
-
-        function rowOrder(order) {
-            const items = parseItems(order);
-            const itemText = items.length ? items.map(x => `${esc(x.name)} × ${Number(x.qty) || 1}`).join("<br>") : esc(order.product || "-");
-            const payment = String(order.payment_status || "-").toUpperCase();
-            const status = String(order.order_status || "NEW").toUpperCase();
-            const date = order.timestamp || order.createdAt || "-";
-            const wa = cleanPhone(order.phone || DEFAULT_WHATSAPP);
-            return `<tr>
-                <td><b>${esc(order.invoice || "-")}</b></td>
-                <td class="mini">${esc(date)}</td>
-                <td><b>${esc(order.name || "-")}</b><br><a class="wa-link" href="https://wa.me/${wa}" target="_blank" rel="noopener">WhatsApp</a></td>
-                <td>${esc(order.outlet || "-")}</td>
-                <td class="order-items">${itemText}</td>
-                <td><b>${rupiah(order.total)}</b></td>
-                <td><span class="badge ${badgeClass(payment)}">${esc(payment)}</span></td>
-                <td><select class="status-select" id="status-${esc(String(order.invoice || "").replace(/[^a-zA-Z0-9_-]/g,""))}" data-status-invoice="${esc(order.invoice || "")}">${["NEW","CONFIRMED","PREPARING","READY","COMPLETED","CANCELLED"].map(s => `<option value="${s}" ${s === status ? "selected" : ""}>${s}</option>`).join("")}</select></td>
-                <td><button class="btn red" type="button" onclick="saveOrderStatus('${encodeURIComponent(String(order.invoice || ""))}')">Simpan</button></td>
-            </tr>`;
-        }
-
-        function renderOrders() {
-            const search = String($("orderSearch")?.value || "").toLowerCase().trim();
-            const paymentFilter = String($("paymentFilter")?.value || "").toUpperCase();
-            const orderFilter = String($("orderFilter")?.value || "").toUpperCase();
-            const filtered = orders.filter(o => {
-                const hay = [o.invoice,o.name,o.phone,o.outlet].map(x => String(x || "").toLowerCase()).join(" ");
-                const p = String(o.payment_status || "").toUpperCase();
-                const st = String(o.order_status || "NEW").toUpperCase();
-                return (!search || hay.includes(search)) && (!paymentFilter || p === paymentFilter) && (!orderFilter || st === orderFilter);
-            });
-            $("orderRows").innerHTML = filtered.length ? filtered.map(rowOrder).join("") : `<tr><td colspan="9" style="text-align:center;padding:30px;color:#756861">Belum ada order sesuai filter.</td></tr>`;
-        }
-
-        async function saveOrderStatus(encodedInvoice) {
-            const invoice = decodeURIComponent(encodedInvoice);
-            const select = document.querySelector(`[data-status-invoice="${CSS.escape(invoice)}"]`);
-            const orderStatus = select ? select.value : "NEW";
-            const url = $("apiUrl").value || localStorage.jcApiUrl || "";
-            if (!url) { alert("Isi API URL terlebih dahulu."); return; }
-            try {
-                const r = await fetch(url, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "updateOrderStatus", token: localStorage.jcAdminToken || "", invoice, orderStatus }) });
-                const d = await r.json();
-                if (!r.ok || !d.ok) throw new Error(d.error || "Gagal memperbarui status.");
-                const target = orders.find(o => String(o.invoice) === invoice);
-                if (target) target.order_status = orderStatus;
-                alert(`Status ${invoice} menjadi ${orderStatus}.`);
-                renderOrders();
-            } catch (e) { alert(e.message || "Gagal memperbarui status order."); }
-        }
-
-        function renderPayments() {
-            $("paymentRows").innerHTML = payments.length ? payments.slice().reverse().map(p => `<tr><td><b>${esc(p.invoice || "-")}</b></td><td><span class="badge ${badgeClass(p.status)}">${esc(p.status || "-")}</span></td><td>${esc(p.transaction_id || "-")}</td><td>${esc(p.payment_type || p.payment_method || "-")}</td><td><button class="btn light" type="button" onclick="verifyPayment('${encodeURIComponent(String(p.invoice || ""))}')">Verifikasi</button></td></tr>`).join("") : `<tr><td colspan="5" style="text-align:center;padding:25px;color:#756861">Belum ada riwayat pembayaran.</td></tr>`;
-        }
-
-        async function verifyPayment(encodedInvoice) {
-            const invoice = decodeURIComponent(encodedInvoice);
-            const url = $("apiUrl").value || localStorage.jcApiUrl || "";
-            if (!url) { alert("Isi API URL terlebih dahulu."); return; }
-            try {
-                const r = await fetch(url, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "verifyPayment", token: localStorage.jcAdminToken || "", invoice }) });
-                const d = await r.json();
-                if (!r.ok || !d.ok) throw new Error(d.error || "Gagal memverifikasi pembayaran.");
-                alert(`Status pembayaran ${invoice}: ${d.paymentStatus}`);
-                await load();
-            } catch (e) { alert(e.message || "Gagal memverifikasi pembayaran."); }
-        }
-
-        function renderLeads() {
-            $("leadRows").innerHTML = leads.length ? leads.slice().reverse().map(l => `<tr><td>${esc(l.name || "-")}</td><td>${esc(l.phone || "-")}</td><td>${esc(l.city || "-")}</td><td><span class="badge">${esc(l.status || "NEW")}</span></td></tr>`).join("") : `<tr><td colspan="4" style="text-align:center;padding:25px;color:#756861">Belum ada lead.</td></tr>`;
+            $("sOutlets").textContent =
+                outlets.length;
         }
 
         /* =========================
@@ -1128,9 +1077,323 @@
             render();
         }
 
-        $("orderSearch").addEventListener("input", renderOrders);
-        $("paymentFilter").addEventListener("change", renderOrders);
-        $("orderFilter").addEventListener("change", renderOrders);
+        /* =========================
+           PAYMENT VERIFICATION
+           ========================= */
+
+        function getAdminToken() {
+            return String($("adminToken")?.value || "").trim();
+        }
+
+        const savedAdminToken = localStorage.getItem("jcAdminApiToken") || "";
+        if ($("adminToken")) {
+            $("adminToken").value = savedAdminToken;
+            $("adminToken").addEventListener("change", () => {
+                localStorage.setItem("jcAdminApiToken", $("adminToken").value.trim());
+            });
+        }
+
+        function rupiahAdmin(value) {
+            return "Rp " + Number(value || 0).toLocaleString("id-ID");
+        }
+
+        function getPaymentForInvoice(invoice) {
+            return payments.find((p) =>
+                String(p.invoice || "") === String(invoice || "")
+            ) || null;
+        }
+
+        function getOrderForInvoice(invoice) {
+            return orders.find((o) =>
+                String(o.invoice || "") === String(invoice || "")
+            ) || null;
+        }
+
+        function isWaitingVerification(order, payment) {
+            const orderStatus =
+                String(order?.payment_status || "").toUpperCase();
+
+            const paymentStatus =
+                String(payment?.status || "").toUpperCase();
+
+            return (
+                orderStatus === "WAITING_VERIFICATION" ||
+                paymentStatus === "WAITING_VERIFICATION"
+            );
+        }
+
+        function renderPaymentVerification() {
+            const list = $("verificationList");
+            const count = $("verificationCount");
+
+            if (!list || !count) return;
+
+            const candidates = [];
+
+            payments.forEach((payment) => {
+                const invoice = String(payment.invoice || "").trim();
+                if (!invoice) return;
+
+                const order = getOrderForInvoice(invoice);
+
+                if (isWaitingVerification(order, payment)) {
+                    candidates.push({
+                        invoice,
+                        order,
+                        payment
+                    });
+                }
+            });
+
+            // Jika Payments belum memiliki baris, tetapi Orders sudah WAITING_VERIFICATION,
+            // tetap tampilkan order tersebut agar admin tidak kehilangan antrean.
+            orders.forEach((order) => {
+                const invoice = String(order.invoice || "").trim();
+                if (!invoice) return;
+
+                if (
+                    String(order.payment_status || "").toUpperCase() ===
+                    "WAITING_VERIFICATION"
+                ) {
+                    if (!candidates.some((x) => x.invoice === invoice)) {
+                        candidates.push({
+                            invoice,
+                            order,
+                            payment: getPaymentForInvoice(invoice)
+                        });
+                    }
+                }
+            });
+
+            count.textContent = String(candidates.length);
+
+            if (!candidates.length) {
+                list.innerHTML = `
+                    <div class="verification-empty">
+                        ✓ Tidak ada pembayaran yang menunggu verifikasi.
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = candidates.map(renderVerificationCard).join("");
+        }
+
+        function renderVerificationCard(item) {
+            const order = item.order || {};
+            const payment = item.payment || {};
+
+            const invoice = item.invoice;
+            const proofUrl = payment.proof_url || "";
+            const proofName =
+                payment.proof_file_name ||
+                "Bukti pembayaran belum tercatat";
+
+            const customer =
+                payment.name ||
+                order.name ||
+                "-";
+
+            const phone =
+                payment.phone ||
+                order.phone ||
+                "-";
+
+            const outlet =
+                payment.outlet ||
+                order.outlet ||
+                "-";
+
+            const total =
+                payment.gross_amount ||
+                order.total ||
+                0;
+
+            const method =
+                payment.payment_method ||
+                order.payment_method ||
+                "-";
+
+            const uploadedAt =
+                payment.proof_uploaded_at ||
+                "";
+
+            return `
+                <article class="verification-card">
+                    <div class="verification-top">
+                        <div>
+                            <div class="verification-invoice">
+                                ${esc(invoice)}
+                            </div>
+                            <div style="font-size:11px;color:#756861;margin-top:2px">
+                                ${esc(proofName)}
+                            </div>
+                        </div>
+
+                        <span class="verification-status">
+                            WAITING_VERIFICATION
+                        </span>
+                    </div>
+
+                    <div class="verification-meta">
+                        <div>
+                            <small>Customer</small>
+                            <b>${esc(customer)}</b>
+                        </div>
+
+                        <div>
+                            <small>WhatsApp</small>
+                            <b>${esc(phone)}</b>
+                        </div>
+
+                        <div>
+                            <small>Metode</small>
+                            <b>${esc(method)}</b>
+                        </div>
+
+                        <div>
+                            <small>Total</small>
+                            <b>${rupiahAdmin(total)}</b>
+                        </div>
+                    </div>
+
+                    <div style="font-size:11px;color:#756861;margin-top:9px">
+                        Outlet: <b>${esc(outlet)}</b>
+                        ${uploadedAt
+                    ? ` • Bukti diupload: ${esc(String(uploadedAt))}`
+                    : ""}
+                    </div>
+
+                    <div class="field" style="margin-bottom:0">
+                        <label for="note-${esc(invoice)}">
+                            Catatan Verifikasi
+                        </label>
+                        <textarea
+                            class="verification-note"
+                            id="note-${esc(invoice)}"
+                            placeholder="Contoh: Transfer sesuai nominal dan rekening tujuan."
+                        ></textarea>
+                    </div>
+
+                    <div class="proof-actions">
+                        ${proofUrl
+                    ? `<a class="btn light"
+                                    href="${esc(proofUrl)}"
+                                    target="_blank"
+                                    rel="noopener">
+                                    Lihat Bukti Pembayaran
+                                   </a>`
+                    : `<button class="btn light" type="button" disabled>
+                                    Bukti Tidak Tersedia
+                                   </button>`
+                }
+
+                        <button
+                            class="btn red"
+                            type="button"
+                            onclick="verifyPayment('${encodeURIComponent(invoice)}','PAID')">
+                            ✓ Terima & PAID
+                        </button>
+
+                        <button
+                            class="btn danger"
+                            type="button"
+                            onclick="verifyPayment('${encodeURIComponent(invoice)}','REJECTED')">
+                            ✕ Tolak
+                        </button>
+                    </div>
+                </article>
+            `;
+        }
+
+        async function verifyPayment(encodedInvoice, status) {
+            const invoice = decodeURIComponent(encodedInvoice);
+            const noteEl = document.getElementById("note-" + invoice);
+            const note = noteEl ? noteEl.value.trim() : "";
+            const token = getAdminToken();
+
+            if (!invoice) {
+                alert("Invoice tidak ditemukan.");
+                return;
+            }
+
+            if (
+                status === "REJECTED" &&
+                !note
+            ) {
+                alert("Berikan catatan alasan penolakan terlebih dahulu.");
+                if (noteEl) noteEl.focus();
+                return;
+            }
+
+            const actionText =
+                status === "PAID"
+                    ? "menandai pembayaran sebagai PAID"
+                    : "menolak pembayaran";
+
+            if (!confirm(
+                "Yakin ingin " +
+                actionText +
+                " untuk invoice " +
+                invoice +
+                "?"
+            )) {
+                return;
+            }
+
+            const url =
+                $("apiUrl").value ||
+                localStorage.jcApiUrl ||
+                "";
+
+            if (!url) {
+                alert("Google Apps Script API URL belum diisi.");
+                return;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
+                    body: JSON.stringify({
+                        action: "verifyManualPayment",
+                        invoice,
+                        status,
+                        note,
+                        verifiedBy: "ADMIN",
+                        token
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || !data.ok) {
+                    throw new Error(
+                        data.error ||
+                        "Verifikasi pembayaran gagal."
+                    );
+                }
+
+                alert(
+                    status === "PAID"
+                        ? "Pembayaran berhasil diverifikasi sebagai PAID."
+                        : "Pembayaran ditolak."
+                );
+
+                await load();
+
+            } catch (error) {
+                console.error(error);
+                alert(
+                    error.message ||
+                    "Verifikasi pembayaran gagal."
+                );
+            }
+        }
+
 
         /* =========================
            AUTO LOGIN
@@ -1139,8 +1402,6 @@
         if (localStorage.jcAdmin === "1") {
             $("login").style.display = "none";
             $("dashboard").style.display = "block";
-            $("apiUrl").value = localStorage.jcApiUrl || "";
-            $("adminToken").value = localStorage.jcAdminToken || "";
 
             load();
         }

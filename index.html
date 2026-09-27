@@ -2315,11 +2315,11 @@
                     checked><span><b>Bayar di Outlet</b><small>Pembayaran dilakukan saat mengambil
                       pesanan.</small></span></label>
                 <label class="payment-option"><input type="radio" name="paymentMethod"
-                    value="Transfer Bank"><span><b>Transfer Bank</b><small>Detail rekening akan diberikan saat
-                      konfirmasi.</small></span></label>
+                    value="Transfer Bank"><span><b>Transfer Bank</b><small>Transfer manual dan upload bukti
+                      pembayaran.</small></span></label>
                 <label class="payment-option"><input type="radio" name="paymentMethod"
-                    value="QRIS"><span><b>QRIS</b><small>QRIS akan dikonfirmasi oleh admin
-                      outlet.</small></span></label>
+                    value="QRIS"><span><b>QRIS</b><small>Bayar manual lalu upload bukti
+                      pembayaran.</small></span></label>
               </div>
             </div>
             <div class="field"><label>Catatan</label><textarea id="checkoutNotes"
@@ -2366,14 +2366,11 @@
   <script>
     const CONFIG = {
       whatsapp: "0895375452514",
-      apiUrl: "https://script.google.com/macros/s/AKfycbzzyLLfTAxCj1rnwC9gtpoPnks_J7B0ZRSJoYPHYgPXbRVv2ombMYnovIFONDXPISN4fg/exec" ,
+      apiUrl: "https://script.google.com/macros/s/AKfycbzzyLLfTAxCj1rnwC9gtpoPnks_J7B0ZRSJoYPHYgPXbRVv2ombMYnovIFONDXPISN4fg/exec",
       businessName: "Juragan Chicken",
-      // PHASE 4 — Payment Gateway
-      // Gunakan "manual" selama gateway belum dikonfigurasi.
-      paymentProvider: "midtrans",
-      paymentApiUrl: "",
-      paymentClientKey: "SB-MIDTRANS-CLIENT-KEY-DIISI",
-      paymentEnvironment: "sandbox"
+      // PHASE 8 — Manual Payment
+      // Pembayaran Transfer Bank / QRIS dilakukan manual dan diverifikasi admin.
+      paymentProvider: "manual"
     };
     const FALLBACK_PRODUCTS = [
       { id: 1, name: "Chicken Paha Bawah", cat: "Chicken", price: 9500, src: "friedchickendada.png", desc: "Ayam crispy dengan balutan renyah dan rasa gurih, cocok untuk makan sendiri maupun dibawa pulang." },
@@ -2436,11 +2433,39 @@
     const rupiah = n => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(Number(n) || 0);
     const grid = document.getElementById("productGrid"), tabs = document.getElementById("tabs");
     function renderTabs(active = "Semua") { const cats = ["Semua", ...new Set(products.map(p => p.cat))]; tabs.innerHTML = cats.map(c => `<button class="tab ${c === active ? "active" : ""}" data-cat="${c}">${c}</button>`).join(""); tabs.querySelectorAll(".tab").forEach(b => b.onclick = () => renderProducts(b.dataset.cat)) }
-    function renderProducts(cat = "Semua") { renderTabs(cat); const list = cat === "Semua" ? products : products.filter(p => p.cat === cat); grid.innerHTML = list.map(p => `<article class="card"><div class="pic"><img src="${p.src}" alt="${p.name}" loading="lazy"><span class="tag">${p.cat}</span></div><div class="body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-foot"><span class="price">${rupiah(p.price)}</span><div class="cart-actions"><button class="small-btn" onclick="showProduct(${p.id})">Detail</button><button class="add-cart-btn" onclick="addToCart(${p.id})">+ Keranjang</button></div></div></div></article>`).join("") }
+    function renderProducts(cat = "Semua") { renderTabs(cat); const list = cat === "Semua" ? products : products.filter(p => p.cat === cat); grid.innerHTML = list.map(p => { const fallback = FALLBACK_PRODUCTS.find(f => String(f.id) === String(p.id) || f.name === p.name); const src = p.src || fallback?.src || ""; return `<article class="card"><div class="pic"><img src="${src}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${fallback?.src || ""}'"><span class="tag">${p.cat}</span></div><div class="body"><h3>${p.name}</h3><p>${p.desc}</p><div class="card-foot"><span class="price">${rupiah(p.price)}</span><div class="cart-actions"><button class="small-btn" onclick="showProduct(${p.id})">Detail</button><button class="add-cart-btn" onclick="addToCart(${p.id})">+ Keranjang</button></div></div></div></article>` }).join("") }
     function showProduct(id) { const p = products.find(x => String(x.id) === String(id)); if (!p) return; modalImg.src = p.src; modalImg.alt = p.name; modalTitle.textContent = p.name; modalDesc.textContent = p.desc; modalPrice.textContent = rupiah(p.price); modal.classList.add("open"); modalOrder.onclick = () => { addToCart(p.id); modal.classList.remove("open"); } }
     function renderOutlets() { outletGrid.innerHTML = outlets.map(o => `<article class="outlet"><h3>${o.name}</h3><p>📍 ${o.city}</p><a href="${o.maps || "#"}" target="_blank" rel="noopener">Buka Maps →</a></article>`).join(""); outletSelect.innerHTML = outlets.map(o => `<option value="${o.id}">${o.name}</option>`).join("") }
     function renderProductSelect() { productSelect.innerHTML = products.map(p => `<option value="${p.id}">${p.name} — ${rupiah(p.price)}</option>`).join("") }
-    async function loadDatabase() { if (!CONFIG.apiUrl) return; try { const r = await fetch(CONFIG.apiUrl + "?action=publicData", { cache: "no-store" }); const d = await r.json(); if (Array.isArray(d.products) && d.products.length) products = d.products; if (Array.isArray(d.outlets) && d.outlets.length) outlets = d.outlets; renderProducts(); renderProductSelect(); renderOutlets() } catch (e) { console.warn("Database belum tersambung, memakai data demo.", e) } }
+    async function loadDatabase() {
+      if (!CONFIG.apiUrl) return;
+      try {
+        const r = await fetch(CONFIG.apiUrl + "?action=publicData", { cache: "no-store" });
+        const d = await r.json();
+
+        /* Perbaikan gambar saja: pertahankan data database, tetapi gunakan
+           field img bila backend mengirim img, dan fallback gambar bawaan
+           bila field src tidak tersedia. */
+        if (Array.isArray(d.products) && d.products.length) {
+          products = d.products.map(p => {
+            const fallback = FALLBACK_PRODUCTS.find(f =>
+              String(f.id) === String(p.id) || f.name === p.name
+            );
+            return {
+              ...p,
+              src: p.src || p.img || fallback?.src || ""
+            };
+          });
+        }
+
+        if (Array.isArray(d.outlets) && d.outlets.length) outlets = d.outlets;
+        renderProducts();
+        renderProductSelect();
+        renderOutlets();
+      } catch (e) {
+        console.warn("Database belum tersambung, memakai data demo.", e);
+      }
+    }
     orderForm.onsubmit = e => { e.preventDefault(); const p = products.find(x => String(x.id) === String(productSelect.value)); const o = outlets.find(x => String(x.id) === String(outletSelect.value)); const text = `Halo ${CONFIG.businessName},%0A%0ASaya ingin memesan:%0A%0ANama: ${encodeURIComponent(custName.value)}%0ANo. WhatsApp: ${encodeURIComponent(custPhone.value)}%0AOutlet: ${encodeURIComponent(o?.name || "-")}%0AMenu: ${encodeURIComponent(p?.name || "-")}%0AHarga: ${encodeURIComponent(rupiah(p?.price || 0))}%0AJumlah: ${qty.value}%0ACatatan: ${encodeURIComponent(notes.value || "-")}`; window.open(`https://wa.me/${o?.wa || CONFIG.whatsapp}?text=${text}`, "_blank") };
     floatWa.href = `https://wa.me/${CONFIG.whatsapp}?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20menu.`;
     document.getElementById("cartTrigger").onclick = openCart;
@@ -2527,7 +2552,7 @@
     function renderInvoice(inv) {
       const paymentStatus = inv.paymentStatus || (inv.payment === "Bayar di Outlet" ? "BAYAR DI OUTLET" : "MENUNGGU PEMBAYARAN");
       const rows = inv.items.map(item => `<tr><td>${item.name} × ${item.qty}</td><td>${rupiah(item.price * item.qty)}</td></tr>`).join("");
-      invoiceBox.innerHTML = `<div class="invoice-brand"><div><b>JURAGAN CHICKEN</b><div style="font-size:11px;color:var(--muted)">${inv.number}</div></div><span class="invoice-status">${paymentStatus}</span></div><div class="invoice-meta"><div><span>Customer</span><b>${escapeHtml(inv.name)}</b></div><div><span>No. WhatsApp</span><b>${escapeHtml(inv.phone)}</b></div><div><span>Outlet</span><b>${escapeHtml(inv.outlet)}</b></div><div><span>Tipe Pesanan</span><b>${escapeHtml(inv.type)}</b></div><div><span>Pembayaran</span><b>${escapeHtml(inv.payment)}</b></div><div><span>Tanggal</span><b>${new Date(inv.createdAt).toLocaleString("id-ID")}</b></div></div><table class="invoice-table"><thead><tr><th>Pesanan</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table><div class="invoice-grand"><span>TOTAL</span><strong>${rupiah(inv.total)}</strong></div><div class="invoice-note">${inv.notes ? `Catatan: ${escapeHtml(inv.notes)}<br>` : ""}Untuk pembayaran Transfer Bank atau QRIS, detail pembayaran dikonfirmasi oleh admin outlet melalui WhatsApp.</div>`;
+      invoiceBox.innerHTML = `<div class="invoice-brand"><div><b>JURAGAN CHICKEN</b><div style="font-size:11px;color:var(--muted)">${inv.number}</div></div><span class="invoice-status">${paymentStatus}</span></div><div class="invoice-meta"><div><span>Customer</span><b>${escapeHtml(inv.name)}</b></div><div><span>No. WhatsApp</span><b>${escapeHtml(inv.phone)}</b></div><div><span>Outlet</span><b>${escapeHtml(inv.outlet)}</b></div><div><span>Tipe Pesanan</span><b>${escapeHtml(inv.type)}</b></div><div><span>Pembayaran</span><b>${escapeHtml(inv.payment)}</b></div><div><span>Tanggal</span><b>${new Date(inv.createdAt).toLocaleString("id-ID")}</b></div></div><table class="invoice-table"><thead><tr><th>Pesanan</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table><div class="invoice-grand"><span>TOTAL</span><strong>${rupiah(inv.total)}</strong></div><div class="invoice-note">${inv.notes ? `Catatan: ${escapeHtml(inv.notes)}<br>` : ""}Untuk pembayaran Transfer Bank atau QRIS, lakukan pembayaran sesuai detail dari admin outlet lalu upload bukti pembayaran untuk verifikasi manual.</div>`;
     }
 
     function escapeHtml(value) {
@@ -2535,7 +2560,8 @@
     }
 
     /* =========================================================
-       PHASE 4 — PAYMENT GATEWAY & VERIFICATION HOOK
+       PHASE 8 — MANUAL PAYMENT & PAYMENT PROOF
+       Hanya mengganti alur pembayaran online.
        ========================================================= */
     const paymentGatewayBox = document.getElementById("paymentGatewayBox");
     const payNowButton = document.getElementById("payNow");
@@ -2546,132 +2572,277 @@
 
     function renderPaymentGateway(inv) {
       if (!paymentGatewayBox || !payNowButton) return;
+
       const online = isOnlinePayment(inv);
       paymentGatewayBox.style.display = online ? "block" : "none";
-      payNowButton.style.display = online ? "inline-flex" : "none";
-      if (!online) { paymentGatewayBox.innerHTML = ""; return; }
+
+      /* Tombol lama "Bayar Sekarang" tetap tidak digunakan pada pembayaran manual. */
+      payNowButton.style.display = "none";
+
+      if (!online) {
+        paymentGatewayBox.innerHTML = "";
+        return;
+      }
+
+      const status = String(inv.paymentStatus || "PENDING").toUpperCase();
+      const proofName = inv.proofFileName || "";
+
       paymentGatewayBox.innerHTML = `
-        <h4>Pembayaran Online</h4>
-        <p>Status: <span class="payment-status">${escapeHtml(inv.paymentStatus || "MENUNGGU PEMBAYARAN")}</span></p>
+        <h4>Pembayaran Manual</h4>
+        <p>Status: <span class="payment-status">${escapeHtml(status)}</span></p>
         <div class="payment-info">
-          Gunakan tombol <b>Bayar Sekarang</b> untuk membuka halaman pembayaran Midtrans.
-          Status pembayaran final ditentukan server melalui notifikasi atau verifikasi status Midtrans.
-          <br><button class="btn light" type="button" id="verifyPaymentBtn" style="margin-top:10px">Cek Status Pembayaran</button>
-        </div>`;
+          <b>${escapeHtml(inv.payment)}</b><br>
+          Silakan lakukan pembayaran sesuai detail yang diberikan oleh admin outlet.
+          Setelah transfer/QRIS selesai, upload bukti pembayaran di bawah ini.
+        </div>
+
+        <div class="payment-info" style="margin-top:10px">
+          <label for="paymentProofInput" style="display:block;font-weight:900;color:#572019;margin-bottom:7px">
+            Bukti Pembayaran
+          </label>
+          <input id="paymentProofInput" type="file"
+            accept="image/*,.pdf"
+            style="width:100%;padding:10px;border:1px solid var(--line);border-radius:11px;background:#fff">
+
+          <div id="paymentProofInfo" style="margin-top:8px;font-size:11px;color:var(--muted)">
+            ${proofName
+          ? `Bukti dipilih: <b>${escapeHtml(proofName)}</b>`
+          : "Format JPG, PNG, WEBP, atau PDF. Maksimal 5 MB."}
+          </div>
+
+          <button class="btn light" type="button" id="uploadProofBtn" style="margin-top:10px;width:100%">
+            Upload Bukti Pembayaran
+          </button>
+
+          <div id="paymentProofResult" style="margin-top:8px;font-size:11px"></div>
+        </div>
+
+        <div class="payment-info" style="margin-top:10px">
+          Setelah bukti dikirim, admin akan melakukan verifikasi secara manual.
+          <br><b>Status akan berubah menjadi PAID setelah pembayaran diverifikasi.</b>
+        </div>
+
+        <button class="btn light" type="button" id="verifyPaymentBtn"
+          style="margin-top:10px;width:100%">
+          Cek Status Pembayaran
+        </button>`;
+
+      const proofInput = document.getElementById("paymentProofInput");
+      const uploadButton = document.getElementById("uploadProofBtn");
       const verifyButton = document.getElementById("verifyPaymentBtn");
-      if (verifyButton) verifyButton.onclick = verifyCurrentPayment;
-    }
 
-    async function startPayment() {
-      if (!currentInvoice || !isOnlinePayment(currentInvoice)) return;
+      if (proofInput) {
+        proofInput.onchange = () => {
+          const file = proofInput.files && proofInput.files[0];
+          if (!file) return;
 
-      if (CONFIG.paymentProvider !== "midtrans") {
-        alert("Payment gateway belum dikonfigurasi.");
-        return;
-      }
-
-      if (!CONFIG.paymentApiUrl || !CONFIG.paymentClientKey || CONFIG.paymentClientKey.includes("DIISI")) {
-        alert("Midtrans belum dikonfigurasi. Isi paymentApiUrl dan paymentClientKey terlebih dahulu.");
-        return;
-      }
-
-      payNowButton.disabled = true;
-      payNowButton.textContent = "Membuka pembayaran...";
-
-      try {
-        const response = await fetch(CONFIG.paymentApiUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "createPayment", invoice: currentInvoice })
-        });
-        const data = await response.json();
-        if (!response.ok || !data.ok || !data.token) {
-          throw new Error(data.error || data.message || "Token pembayaran tidak tersedia.");
-        }
-
-        await loadMidtransSnap();
-
-        window.snap.pay(data.token, {
-          onSuccess: function (result) {
-            updateInvoicePaymentStatus("PAID", result);
-            verifyCurrentPayment();
-            alert("Pembayaran berhasil. Status final akan diverifikasi server.");
-          },
-          onPending: function (result) {
-            updateInvoicePaymentStatus("PENDING", result);
-            verifyCurrentPayment();
-            alert("Pembayaran belum selesai. Silakan selesaikan pembayaran.");
-          },
-          onError: function (result) {
-            updateInvoicePaymentStatus("FAILED", result);
-            verifyCurrentPayment();
-            alert("Pembayaran gagal. Status final tetap mengikuti server Midtrans.");
-          },
-          onClose: function () {
-            payNowButton.disabled = false;
-            payNowButton.textContent = "Bayar Sekarang →";
+          const info = document.getElementById("paymentProofInfo");
+          if (file.size > 5 * 1024 * 1024) {
+            proofInput.value = "";
+            if (info) info.textContent = "File terlalu besar. Maksimal 5 MB.";
+            return;
           }
-        });
-      } catch (error) {
-        console.error("Midtrans error:", error);
-        alert("Pembayaran belum dapat dibuka. Periksa konfigurasi Midtrans.");
-      } finally {
-        payNowButton.disabled = false;
-        payNowButton.textContent = "Bayar Sekarang →";
+
+          inv.proofFileName = file.name;
+          inv.proofFileSize = file.size;
+          localStorage.setItem("juraganChickenLastInvoice", JSON.stringify(inv));
+
+          if (info) {
+            info.innerHTML = `Bukti dipilih: <b>${escapeHtml(file.name)}</b>`;
+          }
+        };
       }
+
+      if (uploadButton) uploadButton.onclick = uploadPaymentProof;
+      if (verifyButton) verifyButton.onclick = verifyManualPayment;
     }
 
-    function loadMidtransSnap() {
-      if (window.snap) return Promise.resolve();
-      return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[data-juragan-midtrans]');
-        if (existing) {
-          existing.addEventListener("load", resolve, { once: true });
-          existing.addEventListener("error", reject, { once: true });
-          return;
-        }
-        const script = document.createElement("script");
-        script.setAttribute("data-juragan-midtrans", "1");
-        script.src = CONFIG.paymentEnvironment === "production"
-          ? "https://app.midtrans.com/snap/snap.js"
-          : "https://app.sandbox.midtrans.com/snap/snap.js";
-        script.setAttribute("data-client-key", CONFIG.paymentClientKey);
-        script.onload = resolve;
-        script.onerror = () => reject(new Error("Snap JS gagal dimuat."));
-        document.head.appendChild(script);
-      });
-    }
-
-    function updateInvoicePaymentStatus(status, gatewayResult) {
+    function updateManualPaymentStatus(status, extra = {}) {
       if (!currentInvoice) return;
-      currentInvoice.paymentStatus = status;
-      currentInvoice.gatewayResult = gatewayResult || null;
-      localStorage.setItem("juraganChickenLastInvoice", JSON.stringify(currentInvoice));
+
+      currentInvoice.paymentStatus = String(status || "PENDING").toUpperCase();
+      Object.assign(currentInvoice, extra);
+
+      localStorage.setItem(
+        "juraganChickenLastInvoice",
+        JSON.stringify(currentInvoice)
+      );
+
       renderInvoice(currentInvoice);
       renderPaymentGateway(currentInvoice);
     }
 
-    async function verifyCurrentPayment() {
-      if (!currentInvoice || !CONFIG.paymentApiUrl) return;
-      const button = document.getElementById("verifyPaymentBtn");
-      if (button) { button.disabled = true; button.textContent = "Memeriksa..."; }
+    /*
+     * Frontend sudah disiapkan untuk endpoint uploadPaymentProof.
+     * Jika backend belum memiliki endpoint tersebut, sistem tidak mengubah
+     * data order dan memberikan fallback konfirmasi melalui WhatsApp.
+     */
+    async function uploadPaymentProof() {
+      if (!currentInvoice || !isOnlinePayment(currentInvoice)) return;
+
+      const input = document.getElementById("paymentProofInput");
+      const resultBox = document.getElementById("paymentProofResult");
+      const button = document.getElementById("uploadProofBtn");
+      const file = input?.files?.[0];
+
+      if (!file) {
+        alert("Pilih file bukti pembayaran terlebih dahulu.");
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Ukuran file maksimal 5 MB.");
+        return;
+      }
+
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Mengirim bukti...";
+      }
+
       try {
-        const url = CONFIG.paymentApiUrl + "?action=checkPaymentStatus&invoice=" + encodeURIComponent(currentInvoice.number) + "&phone=" + encodeURIComponent(currentInvoice.phone);
+        /*
+         * Endpoint ini akan digunakan ketika backend manual-payment
+         * sudah diaktifkan. Untuk saat ini Phase 8 tetap aman jika
+         * endpoint belum tersedia.
+         */
+        if (!CONFIG.apiUrl) {
+          throw new Error("API belum tersedia.");
+        }
+
+        const base64 = await readFileAsBase64(file);
+
+        const response = await fetch(CONFIG.apiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "uploadPaymentProof",
+            invoice: currentInvoice.number,
+            name: currentInvoice.name,
+            phone: currentInvoice.phone,
+            paymentMethod: currentInvoice.payment,
+            fileName: file.name,
+            mimeType: file.type || "application/octet-stream",
+            fileBase64: base64
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || "Upload bukti belum tersedia.");
+        }
+
+        updateManualPaymentStatus("WAITING_VERIFICATION", {
+          proofFileName: file.name,
+          proofUploadedAt: new Date().toISOString(),
+          proofUrl: data.fileUrl || ""
+        });
+
+        const box = document.getElementById("paymentProofResult");
+        if (box) {
+          box.innerHTML = "✓ Bukti pembayaran berhasil dikirim dan menunggu verifikasi admin.";
+        }
+
+        alert("Bukti pembayaran berhasil dikirim. Silakan tunggu verifikasi admin.");
+      } catch (error) {
+        console.warn("Upload bukti pembayaran:", error);
+
+        /*
+         * Fallback untuk tahap pengujian sebelum endpoint backend manual
+         * diaktifkan: data order tetap tersimpan, lalu customer diarahkan
+         * untuk mengonfirmasi melalui WhatsApp dan melampirkan bukti.
+         */
+        currentInvoice.proofFileName = file.name;
+        currentInvoice.proofSelectedAt = new Date().toISOString();
+        localStorage.setItem(
+          "juraganChickenLastInvoice",
+          JSON.stringify(currentInvoice)
+        );
+
+        const box = document.getElementById("paymentProofResult");
+        if (box) {
+          box.innerHTML =
+            "Bukti sudah dipilih. Untuk pengujian saat ini, kirim bukti melalui WhatsApp dengan tombol konfirmasi di bawah.";
+        }
+
+        alert(
+          "Upload ke database belum aktif. Bukti pembayaran sudah dipilih. " +
+          "Silakan tekan 'Konfirmasi via WhatsApp' dan lampirkan file bukti tersebut di WhatsApp."
+        );
+      } finally {
+        const b = document.getElementById("uploadProofBtn");
+        if (b) {
+          b.disabled = false;
+          b.textContent = "Upload Bukti Pembayaran";
+        }
+      }
+    }
+
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          const result = String(reader.result || "");
+          const comma = result.indexOf(",");
+          resolve(comma >= 0 ? result.substring(comma + 1) : result);
+        };
+
+        reader.onerror = () => reject(new Error("File tidak dapat dibaca."));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function verifyManualPayment() {
+      if (!currentInvoice || !CONFIG.apiUrl) {
+        alert("Status pembayaran belum dapat diperiksa.");
+        return;
+      }
+
+      const button = document.getElementById("verifyPaymentBtn");
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Memeriksa...";
+      }
+
+      try {
+        const url =
+          CONFIG.apiUrl +
+          "?action=trackOrder&invoice=" +
+          encodeURIComponent(currentInvoice.number) +
+          "&phone=" +
+          encodeURIComponent(currentInvoice.phone);
+
         const response = await fetch(url, { cache: "no-store" });
         const data = await response.json();
-        if (!response.ok || !data.ok) throw new Error(data.error || "Status pembayaran belum dapat diverifikasi.");
-        currentInvoice.paymentStatus = data.paymentStatus || currentInvoice.paymentStatus;
-        currentInvoice.paymentVerifiedAt = data.verifiedAt || null;
-        currentInvoice.transactionStatus = data.transactionStatus || "";
-        localStorage.setItem("juraganChickenLastInvoice", JSON.stringify(currentInvoice));
-        renderInvoice(currentInvoice);
-        renderPaymentGateway(currentInvoice);
+
+        if (!response.ok || !data.ok) {
+          throw new Error(
+            data.error || "Status pembayaran belum dapat diperiksa."
+          );
+        }
+
+        const paymentStatus =
+          data.order?.paymentStatus ||
+          currentInvoice.paymentStatus ||
+          "PENDING";
+
+        updateManualPaymentStatus(paymentStatus);
+
         alert("Status pembayaran: " + currentInvoice.paymentStatus);
       } catch (error) {
-        alert(error.message || "Status pembayaran belum dapat diverifikasi.");
+        alert(
+          error.message ||
+          "Status pembayaran belum dapat diverifikasi."
+        );
       } finally {
         const b = document.getElementById("verifyPaymentBtn");
-        if (b) { b.disabled = false; b.textContent = "Cek Status Pembayaran"; b.onclick = verifyCurrentPayment; }
+        if (b) {
+          b.disabled = false;
+          b.textContent = "Cek Status Pembayaran";
+          b.onclick = verifyManualPayment;
+        }
       }
     }
 
@@ -2691,7 +2862,7 @@
     checkoutModal.onclick = e => { if (e.target === checkoutModal) closeCheckout(); };
     document.getElementById("invoiceClose").onclick = () => { invoiceModal.classList.remove("open"); invoiceModal.setAttribute("aria-hidden", "true"); };
     invoiceModal.onclick = e => { if (e.target === invoiceModal) { invoiceModal.classList.remove("open"); invoiceModal.setAttribute("aria-hidden", "true"); } };
-    document.getElementById("payNow").onclick = startPayment;
+    // Pembayaran manual — tombol Bayar Sekarang Midtrans tidak digunakan.
     document.getElementById("printInvoice").onclick = () => {
       const content = document.getElementById("invoiceBox").innerHTML;
       const w = window.open("", "_blank", "width=850,height=900");

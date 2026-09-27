@@ -2748,28 +2748,19 @@
       } catch (error) {
         console.warn("Upload bukti pembayaran:", error);
 
-        /*
-         * Fallback untuk tahap pengujian sebelum endpoint backend manual
-         * diaktifkan: data order tetap tersimpan, lalu customer diarahkan
-         * untuk mengonfirmasi melalui WhatsApp dan melampirkan bukti.
-         */
-        currentInvoice.proofFileName = file.name;
-        currentInvoice.proofSelectedAt = new Date().toISOString();
-        localStorage.setItem(
-          "juraganChickenLastInvoice",
-          JSON.stringify(currentInvoice)
-        );
+        const message =
+          error && error.message
+            ? error.message
+            : "Upload bukti pembayaran gagal.";
 
         const box = document.getElementById("paymentProofResult");
         if (box) {
           box.innerHTML =
-            "Bukti sudah dipilih. Untuk pengujian saat ini, kirim bukti melalui WhatsApp dengan tombol konfirmasi di bawah.";
+            "✕ Upload gagal: <b>" + escapeHtml(message) + "</b>";
         }
 
-        alert(
-          "Upload ke database belum aktif. Bukti pembayaran sudah dipilih. " +
-          "Silakan tekan 'Konfirmasi via WhatsApp' dan lampirkan file bukti tersebut di WhatsApp."
-        );
+        console.error("Upload bukti pembayaran gagal:", error);
+        alert("Upload bukti pembayaran gagal: " + message);
       } finally {
         const b = document.getElementById("uploadProofBtn");
         if (b) {

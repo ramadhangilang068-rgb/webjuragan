@@ -996,6 +996,57 @@
         }
 
         /* =========================
+           ADMIN API — JSONP
+           Menghindari masalah CORS/redirect Google Apps Script.
+           ========================= */
+        function loadAdminDataJsonp(url, token) {
+            return new Promise((resolve, reject) => {
+                const callbackName =
+                    "__jcAdminJsonp_" + Date.now() + "_" +
+                    Math.random().toString(36).slice(2);
+
+                const script = document.createElement("script");
+                const params = new URLSearchParams();
+                params.set("action", "adminData");
+                params.set("callback", callbackName);
+                if (token) params.set("token", token);
+
+                let finished = false;
+
+                const cleanup = () => {
+                    if (script.parentNode) script.parentNode.removeChild(script);
+                    try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+                };
+
+                const timer = setTimeout(() => {
+                    if (finished) return;
+                    finished = true;
+                    cleanup();
+                    reject(new Error("API admin tidak merespons. Periksa deployment Web App Apps Script."));
+                }, 15000);
+
+                window[callbackName] = (data) => {
+                    if (finished) return;
+                    finished = true;
+                    clearTimeout(timer);
+                    cleanup();
+                    resolve(data);
+                };
+
+                script.onerror = () => {
+                    if (finished) return;
+                    finished = true;
+                    clearTimeout(timer);
+                    cleanup();
+                    reject(new Error("API admin tidak dapat diakses. Periksa deployment Web App Apps Script."));
+                };
+
+                script.src = url + (url.includes("?") ? "&" : "?") + params.toString();
+                document.head.appendChild(script);
+            });
+        }
+
+        /* =========================
            LOAD DATA
            ========================= */
 
@@ -1012,16 +1063,13 @@
                 localStorage.jcApiUrl = url;
 
                 try {
-                    const r = await fetch(
-                        url + "?action=adminData" +
-                        (getAdminToken() ? "&token=" + encodeURIComponent(getAdminToken()) : ""),
-                        { cache: "no-store" }
+                    const d = await loadAdminDataJsonp(
+                        url,
+                        getAdminToken()
                     );
 
-                    const d = await r.json();
-
-                    if (!r.ok || !d.ok) {
-                        throw new Error(d.error || "API admin tidak dapat diakses.");
+                    if (!d || !d.ok) {
+                        throw new Error((d && d.error) || "API admin tidak dapat diakses.");
                     }
 
                     products = d.products || [];

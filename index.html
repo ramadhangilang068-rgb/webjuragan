@@ -1998,6 +1998,59 @@
         padding-bottom: 42px !important;
       }
     }
+
+    /* =========================================================
+         FINAL LAYOUT SAFETY FIX
+         Hanya merapikan jarak layar dan meluruskan foto.
+         ========================================================= */
+    .hero-photo {
+      transform: none !important;
+    }
+
+    .hero-photo img {
+      transform: none !important;
+    }
+
+    @media (max-width: 980px) {
+
+      .top .container,
+      header .container,
+      .hero .container,
+      section>.container,
+      footer .container {
+        width: min(1180px, calc(100% - 32px)) !important;
+        max-width: calc(100% - 32px) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      .hero-photo {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .top .container,
+      header .container,
+      .hero .container,
+      section>.container,
+      footer .container {
+        width: calc(100% - 32px) !important;
+        max-width: calc(100% - 32px) !important;
+      }
+
+      .hero-photo {
+        transform: none !important;
+      }
+
+      .hero-photo img {
+        transform: none !important;
+      }
+    }
   </style>
 
 </head>
@@ -2713,24 +2766,36 @@
 
         const base64 = await readFileAsBase64(file);
 
-        const response = await fetch(CONFIG.apiUrl, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            action: "uploadPaymentProof",
-            invoice: currentInvoice.number,
-            name: currentInvoice.name,
-            phone: currentInvoice.phone,
-            paymentMethod: currentInvoice.payment,
-            fileName: file.name,
-            mimeType: file.type || "application/octet-stream",
-            fileBase64: base64
-          })
+        const payload = JSON.stringify({
+          action: "uploadPaymentProof",
+          invoice: currentInvoice.number,
+          name: currentInvoice.name,
+          phone: currentInvoice.phone,
+          paymentMethod: currentInvoice.payment,
+          fileName: file.name,
+          mimeType: file.type || "application/octet-stream",
+          fileBase64: base64
         });
 
-        // Google Apps Script Web App dapat mengembalikan redirect lintas-origin.
-        // mode no-cors mencegah browser menghentikan request karena CORS.
-        // Konfirmasi keberhasilan dilakukan melalui endpoint cek status.
+        /*
+         * Google Apps Script Web App dapat melakukan redirect lintas-origin.
+         * Browser tidak selalu mengizinkan response POST tersebut dibaca
+         * oleh fetch biasa. Kirim sebagai simple request no-cors.
+         * Backend tetap menerima JSON yang sama melalui e.postData.contents.
+         * Response sengaja tidak dibaca; status diverifikasi melalui tombol
+         * "Cek Status Pembayaran".
+         */
+        const response = await fetch(CONFIG.apiUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: payload
+        });
+
+        if (!response) {
+          throw new Error("Request upload tidak dapat dikirim.");
+        }
+
         updateManualPaymentStatus("WAITING_VERIFICATION", {
           proofFileName: file.name,
           proofUploadedAt: new Date().toISOString(),

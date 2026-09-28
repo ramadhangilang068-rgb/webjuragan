@@ -65,13 +65,26 @@
         }
 
         /* NAV */
+        .top {
+            background: #211714;
+            color: #ffe9d8;
+            font-size: 12px
+        }
+
+        .top .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0
+        }
+
         .nav {
-            height: 78px;
-            background: #fff;
+            height: 90px;
+            background: #fffdf9eb;
+            backdrop-filter: blur(14px);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(117, 30, 15, .1);
+            border-bottom: 1px solid var(--line);
             box-shadow: 0 6px 24px rgba(70, 20, 10, .06)
         }
 
@@ -80,20 +93,25 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px
+            gap: 20px
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center
         }
 
         .logo {
-            width: 145px
+            width: 110px
         }
 
         .nav-links {
             display: flex;
             align-items: center;
             gap: 21px;
-            font-size: 12px;
-            font-weight: 900;
-            color: #542d28
+            font-size: 14px;
+            font-weight: 850;
+            color: #533c34
         }
 
         .nav-links a:hover {
@@ -102,7 +120,7 @@
 
         .btn {
             border: 0;
-            border-radius: 13px;
+            border-radius: 999px;
             padding: 12px 18px;
             font-weight: 950;
             display: inline-flex;
@@ -138,21 +156,14 @@
             display: none;
             position: relative;
             z-index: 1001;
-            width: 42px;
-            height: 42px;
             border: 1px solid var(--line);
-            border-radius: 12px;
             background: #fff;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 4px
-        }
-
-        .menu-btn span {
-            width: 18px;
-            height: 2px;
-            background: #5c2822
+            border-radius: 11px;
+            padding: 9px;
+            font-size: 20px;
+            line-height: 1;
+            color: #5c2822;
+            cursor: pointer
         }
 
         /* DECOR */
@@ -256,22 +267,26 @@
         }
 
         .hero-copy {
-            color: #fff
+            color: #5d0e0e;
+            text-shadow: none
         }
 
         .hero h1 {
             font: 950 clamp(44px, 6vw, 72px)/.96 Georgia, serif;
+            color: #5d0e0e;
             margin: 14px 0 18px;
-            letter-spacing: -.035em
+            letter-spacing: -.035em;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .18)
         }
 
         .hero h1 span {
-            color: var(--yellow)
+            color: var(--yellow);
+            text-shadow: 0 2px 10px rgba(70, 8, 8, .55)
         }
 
         .hero p {
             font-size: 17px;
-            color: #ffece3;
+            color: #6a1a14;
             max-width: 670px;
             margin: 0 0 24px
         }
@@ -285,7 +300,7 @@
         .hero-note {
             margin-top: 18px;
             font-size: 11px;
-            color: #f9d5c9
+            color: #6a1a14
         }
 
         .hero-visual {
@@ -494,57 +509,47 @@
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 14px
+            gap: 18px
         }
 
         .menu-card {
             border-radius: 20px;
-            min-height: 170px;
-            padding: 20px;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
             overflow: hidden;
-            position: relative;
-            background: linear-gradient(145deg, #9b1515, #5f0808)
+            background: #fff;
+            border: 1px solid var(--line);
+            box-shadow: 0 12px 30px rgba(74, 20, 10, .08);
+            transition: .2s ease;
+            display: flex;
+            flex-direction: column
         }
 
-        .menu-card:nth-child(2) {
-            background: linear-gradient(145deg, #db311e, #8e100d)
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 38px rgba(74, 20, 10, .13)
         }
 
-        .menu-card:nth-child(3) {
-            background: linear-gradient(145deg, #8d1212, #3c0707)
+        .menu-card-img {
+            width: 100%;
+            height: 205px;
+            object-fit: cover;
+            background: #f7eee7
         }
 
-        .menu-card:nth-child(4) {
-            background: linear-gradient(145deg, #f0a900, #a91b13)
-        }
-
-        .menu-card:after {
-            content: "🍗";
-            position: absolute;
-            right: -8px;
-            top: -16px;
-            font-size: 90px;
-            opacity: .13;
-            transform: rotate(-18deg)
+        .menu-card-body {
+            padding: 16px 17px 18px
         }
 
         .menu-card h3 {
-            font: 900 23px Georgia, serif;
-            margin: 0;
-            position: relative;
-            z-index: 2
+            font: 900 20px/1.15 Georgia, serif;
+            margin: 0 0 6px;
+            color: #651412
         }
 
         .menu-card p {
-            margin: 3px 0 0;
-            color: #ffece2;
+            margin: 0;
+            color: var(--mut);
             font-size: 11px;
-            position: relative;
-            z-index: 2
+            line-height: 1.55
         }
 
         /* MODEL */
@@ -774,19 +779,28 @@
         }
 
         .package-table th {
-            background: #4a0a0a;
+            background: linear-gradient(135deg, #5b0d0d, #9f1717);
             color: #fff;
-            padding: 16px 14px;
-            font-size: 12px
+            padding: 20px 14px;
+            font-size: 14px;
+            font-weight: 950;
+            text-align: center;
+            vertical-align: middle;
+            letter-spacing: .01em;
+            border-bottom: 4px solid var(--yellow)
         }
 
         .package-table th:first-child {
-            text-align: left;
-            width: 38%
+            width: 38%;
+            text-align: center
         }
 
         .package-table th:not(:first-child) {
-            border-left: 1px solid rgba(255, 255, 255, .12)
+            border-left: 1px solid rgba(255, 255, 255, .22)
+        }
+
+        .package-table th br {
+            line-height: 1.6
         }
 
         .package-table td {
@@ -1170,11 +1184,12 @@
 
         .step {
             position: relative;
-            background: rgba(255, 255, 255, .08);
-            border: 1px solid rgba(255, 255, 255, .15);
+            background: rgba(255, 255, 255, .94);
+            border: 1px solid rgba(255, 255, 255, .98);
             border-radius: 19px;
             padding: 21px;
-            min-height: 175px
+            min-height: 175px;
+            box-shadow: 0 12px 30px rgba(70, 8, 8, .16)
         }
 
         .step .n {
@@ -1191,12 +1206,14 @@
 
         .step h3 {
             font-size: 14px;
-            margin: 0
+            margin: 0;
+            color: #5b0d0d;
+            font-weight: 950
         }
 
         .step p {
             font-size: 11px;
-            color: #f3d8d0;
+            color: #6d5148;
             margin: 6px 0 0
         }
 
@@ -1445,7 +1462,7 @@
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 78px;
+                top: 90px;
                 left: 0;
                 right: 0;
                 background: #fff;
@@ -1463,11 +1480,11 @@
             }
 
             .nav-links a {
-                padding: 9px
+                padding: 10px
             }
 
             .menu-btn {
-                display: flex
+                display: block
             }
 
             .nav-inner>.btn {
@@ -1518,6 +1535,15 @@
                 width: calc(100% - 30px)
             }
 
+            .top .container {
+                padding: 7px 0;
+                gap: 12px
+            }
+
+            .top span:last-child {
+                display: none
+            }
+
             .nav {
                 height: 68px
             }
@@ -1527,7 +1553,7 @@
             }
 
             .logo {
-                width: 115px
+                width: 110px
             }
 
             .hero {
@@ -1627,16 +1653,22 @@
 </head>
 
 <body>
+    <div class="top">
+        <div class="container"><span>🍗 Fried Chicken • ☕ Coffee • 🔥 Paket Juragan</span><span>Proposal Kemitraan •
+                Konsultasi • Daftar Mitra</span></div>
+    </div>
     <header class="nav">
         <div class="container nav-inner">
-            <a href="index.html"><img class="logo" src="logo.jpg.png" alt="Juragan Chicken"></a>
+            <a class="logo-link" href="index.html" aria-label="Kembali ke Website Utama Juragan Chicken"><img
+                    class="logo" src="logo.jpg.png" alt="Logo Juragan Chicken"></a>
             <nav class="nav-links" id="frNavLinks">
-                <a href="#tentang">Tentang</a><a href="#keunggulan">Keunggulan</a><a href="#paket">Paket</a><a
-                    href="#simulasi">Simulasi</a><a href="#alur">Alur</a><a href="#daftar">Daftar</a>
+                <a href="index.html">Home</a><a href="#tentang">Tentang</a><a href="#keunggulan">Keunggulan</a><a
+                    href="#paket">Paket</a><a href="#simulasi">Simulasi</a><a href="#alur">Alur</a><a
+                    href="#daftar">Daftar</a>
             </nav>
             <a class="btn red" href="#daftar">Konsultasi Kemitraan</a>
             <button class="menu-btn" id="frMenuBtn" type="button" aria-label="Buka menu"
-                aria-expanded="false"><span></span><span></span><span></span></button>
+                aria-expanded="false">☰</button>
         </div>
     </header>
 
@@ -1743,21 +1775,64 @@
                         kemitraan, produk unggulan ditampilkan secara ringkas.</p>
                 </div>
                 <div class="menu-grid">
-                    <article class="menu-card">
-                        <h3>Fried Chicken</h3>
-                        <p>Sayap • Dada • Paha Atas • Paha Bawah</p>
+                    <article class="menu-card"><img class="menu-card-img" src="friedchickendada.png"
+                            alt="Chicken Paha Bawah" loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>Chicken Paha Bawah</h3>
+                            <p>Ayam crispy dengan balutan renyah dan rasa gurih, cocok untuk makan sendiri maupun dibawa
+                                pulang.</p>
+                        </div>
                     </article>
-                    <article class="menu-card">
-                        <h3>Chicken Signature</h3>
-                        <p>Chicken Fire • Geprek • Korean Cheese • BBQ</p>
+                    <article class="menu-card"><img class="menu-card-img" src="friedchickenpaha.png"
+                            alt="Chicken Paha Atas dan Dada" loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>Chicken Paha Atas / Dada</h3>
+                            <p>Potongan ayam pilihan yang renyah dan gurih, cocok dinikmati sebagai menu utama.</p>
+                        </div>
                     </article>
-                    <article class="menu-card">
-                        <h3>Rice Bowl</h3>
-                        <p>Korean Cheese • BBQ • Sambal Geprek</p>
+                    <article class="menu-card"><img class="menu-card-img" src="burger.png" alt="Chicken Burger"
+                            loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>Chicken Burger</h3>
+                            <p>Burger ayam dengan bun lembut dan isian gurih, cocok untuk pilihan makan yang praktis.
+                            </p>
+                        </div>
                     </article>
-                    <article class="menu-card">
-                        <h3>Drink & Coffee</h3>
-                        <p>Coffee • Milk • Mocktail • Squash • Herbal</p>
+                    <article class="menu-card"><img class="menu-card-img" src="chickenwings.png" alt="Chicken Wings"
+                            loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>Chicken Wings</h3>
+                            <p>Chicken wings dengan rasa gurih dan tekstur renyah, pas untuk dinikmati sendiri atau
+                                bersama.</p>
+                        </div>
+                    </article>
+                    <article class="menu-card"><img class="menu-card-img" src="frenchfries.png" alt="French Fries"
+                            loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>French Fries</h3>
+                            <p>Kentang goreng dengan tekstur renyah, cocok sebagai camilan atau teman makan.</p>
+                        </div>
+                    </article>
+                    <article class="menu-card"><img class="menu-card-img" src="kopisusu.png" alt="Iced Coffee"
+                            loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>Iced Coffee</h3>
+                            <p>Kopi dingin yang menyegarkan untuk menemani menu utama maupun waktu santai.</p>
+                        </div>
+                    </article>
+                    <article class="menu-card"><img class="menu-card-img" src="cappucino1.png" alt="Cappuccino"
+                            loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>Cappuccino</h3>
+                            <p>Cita rasa kopi creamy yang lembut, cocok dinikmati saat bersantai.</p>
+                        </div>
+                    </article>
+                    <article class="menu-card"><img class="menu-card-img" src="matcha.png" alt="Matcha Drink"
+                            loading="lazy">
+                        <div class="menu-card-body">
+                            <h3>Matcha Drink</h3>
+                            <p>Minuman matcha dengan rasa lembut dan menyegarkan sebagai pilihan non-coffee.</p>
+                        </div>
                     </article>
                 </div>
             </div>

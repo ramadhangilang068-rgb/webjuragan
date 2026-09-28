@@ -3,316 +3,1393 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Franchise Juragan Chicken | Kemitraan</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Proposal Kemitraan Juragan Chicken | Jagonya Ayam Lezat & Sehat</title>
     <meta name="description"
-        content="Informasi franchise dan kemitraan Juragan Chicken. Pelajari konsep outlet, dukungan, proses pengajuan dan isi form minat.">
+        content="Proposal kemitraan Juragan Chicken: profil, keunggulan, paket kemitraan, fasilitas, simulasi HPP, BEP, alur kerja sama dan formulir minat mitra.">
     <link rel="icon" href="logo.jpg.png" type="image/png">
-
     <style>
         :root {
-            --r: #b91c1c;
-            --o: #f97316;
-            --c: #fff8ef;
-            --ink: #241916;
-            --mut: #71625b;
-            --line: #eaded5;
+            --red: #a71919;
+            --red2: #d72d1d;
+            --deep: #5d0e0e;
+            --yellow: #ffd21c;
+            --gold: #f5a900;
+            --cream: #fff7e8;
+            --cream2: #fff0c7;
+            --ink: #241313;
+            --mut: #705957;
             --white: #fff;
-            --shadow: 0 18px 55px rgba(77, 33, 20, .08);
-            --wa: #25d366;
+            --line: #ead8ca;
+            --green: #19a85a;
+            --shadow: 0 20px 55px rgba(75, 14, 10, .14)
         }
 
         * {
-            box-sizing: border-box;
+            box-sizing: border-box
         }
 
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: smooth
         }
 
         body {
             margin: 0;
-            background: var(--c);
             color: var(--ink);
-            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #fffaf4;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
+            overflow-x: hidden
         }
 
         a {
             text-decoration: none;
-            color: inherit;
+            color: inherit
+        }
+
+        img {
+            display: block;
+            max-width: 100%
         }
 
         button,
         input,
         select,
         textarea {
-            font: inherit;
+            font: inherit
         }
 
         .container {
-            width: min(1120px, 92%);
-            margin: auto;
+            width: min(1160px, 92%);
+            margin: auto
         }
 
-        /* HEADER */
+        /* NAV */
         .nav {
-            min-height: 76px;
+            height: 78px;
             background: #fff;
-            border-bottom: 1px solid var(--line);
-            display: flex;
-            align-items: center;
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 100;
+            border-bottom: 1px solid rgba(117, 30, 15, .1);
+            box-shadow: 0 6px 24px rgba(70, 20, 10, .06)
         }
 
         .nav-inner {
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 14px;
-            width: 100%;
+            gap: 16px
         }
 
         .logo {
-            width: 150px;
+            width: 145px
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 20px;
-            font-size: 13px;
-            font-weight: 850;
-            color: #533c34;
+            gap: 21px;
+            font-size: 12px;
+            font-weight: 900;
+            color: #542d28
         }
 
         .nav-links a:hover {
-            color: var(--r);
+            color: var(--red)
         }
 
         .btn {
             border: 0;
-            border-radius: 999px;
+            border-radius: 13px;
             padding: 12px 18px;
-            font-weight: 900;
+            font-weight: 950;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: .2s ease
+        }
+
+        .btn:hover {
+            transform: translateY(-2px)
         }
 
         .red {
-            background: linear-gradient(135deg, var(--r), #e13a20);
+            background: linear-gradient(135deg, var(--red), var(--red2));
             color: #fff;
-            box-shadow: 0 9px 22px rgba(185, 28, 28, .16);
+            box-shadow: 0 10px 25px rgba(167, 25, 25, .2)
+        }
+
+        .yellow {
+            background: var(--yellow);
+            color: #56100e;
+            box-shadow: 0 10px 25px rgba(245, 169, 0, .18)
         }
 
         .light {
             background: #fff;
             border: 1px solid var(--line);
-            color: #633d30;
+            color: #632d25
         }
 
         .menu-btn {
             display: none;
-            width: 40px;
-            height: 40px;
+            position: relative;
+            z-index: 1001;
+            width: 42px;
+            height: 42px;
             border: 1px solid var(--line);
-            border-radius: 11px;
+            border-radius: 12px;
             background: #fff;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            gap: 4px;
+            gap: 4px
         }
 
         .menu-btn span {
             width: 18px;
             height: 2px;
-            border-radius: 99px;
-            background: #533c34;
+            background: #5c2822
         }
 
-        /* HERO */
-        .hero {
-            padding: 68px 0;
-            background: linear-gradient(135deg, #fff0d8, #ffd18d 55%, #ff9d3d);
+        /* DECOR */
+        .dot-pattern {
+            background-image: radial-gradient(rgba(255, 210, 28, .65) 1.4px, transparent 1.4px);
+            background-size: 13px 13px
         }
 
-        .hero-grid,
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+        .ribbon {
+            display: inline-flex;
             align-items: center;
+            gap: 8px;
+            background: var(--yellow);
+            color: #5a100e;
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 950;
+            letter-spacing: .09em;
+            text-transform: uppercase
         }
 
         .eyebrow,
         .kicker {
-            color: #99291c;
+            color: #d99a00;
             font-size: 11px;
             font-weight: 950;
-            letter-spacing: .13em;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            font: 900 clamp(43px, 6vw, 67px)/1 Georgia, serif;
-            color: #571e17;
-            margin: 10px 0 15px;
-        }
-
-        .hero p {
-            font-size: 17px;
-            color: #694b3e;
-            max-width: 650px;
-        }
-
-        .hero-img {
-            border-radius: 27px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .hero-img img {
-            height: 390px;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        section {
-            padding: 72px 0;
+            letter-spacing: .16em;
+            text-transform: uppercase
         }
 
         .head {
             text-align: center;
-            max-width: 760px;
-            margin: 0 auto 30px;
+            max-width: 820px;
+            margin: 0 auto 38px
         }
 
         .head h2 {
-            font: 900 42px/1.08 Georgia, serif;
-            color: #571e17;
-            margin: 7px 0;
+            font: 950 42px/1.05 Georgia, serif;
+            color: #651412;
+            margin: 8px 0 10px
         }
 
         .head p {
             color: var(--mut);
+            margin: 0;
+            font-size: 15px
         }
 
-        .cards,
-        .steps {
+        .section-red {
+            background: linear-gradient(135deg, #8c1010, #b91d16 65%, #740909);
+            color: #fff
+        }
+
+        .section-red .head h2 {
+            color: #fff
+        }
+
+        .section-red .head p {
+            color: #f2d9cf
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffcf18 0%, #ffd92e 36%, #a91717 36%, #8c1010 100%);
+            padding: 68px 0 76px
+        }
+
+        .hero:before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .1);
+            right: -180px;
+            top: -220px;
+            z-index: -1
+        }
+
+        .hero:after {
+            content: "";
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: rgba(255, 210, 28, .1);
+            left: -170px;
+            bottom: -210px;
+            z-index: -1
+        }
+
+        .hero-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+            grid-template-columns: 1.03fr .97fr;
+            gap: 55px;
+            align-items: center
         }
 
-        .card {
+        .hero-copy {
+            color: #fff
+        }
+
+        .hero h1 {
+            font: 950 clamp(44px, 6vw, 72px)/.96 Georgia, serif;
+            margin: 14px 0 18px;
+            letter-spacing: -.035em
+        }
+
+        .hero h1 span {
+            color: var(--yellow)
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #ffece3;
+            max-width: 670px;
+            margin: 0 0 24px
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .hero-note {
+            margin-top: 18px;
+            font-size: 11px;
+            color: #f9d5c9
+        }
+
+        .hero-visual {
+            position: relative
+        }
+
+        .hero-photo {
+            border-radius: 32px;
+            overflow: hidden;
+            border: 7px solid rgba(255, 255, 255, .86);
+            box-shadow: 0 28px 70px rgba(36, 0, 0, .34);
+            background: #fff
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 440px;
+            object-fit: cover
+        }
+
+        .hero-badge {
+            position: absolute;
+            left: -18px;
+            bottom: 24px;
+            background: #fff;
+            color: #5f1713;
+            border-radius: 18px;
+            padding: 14px 17px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+            max-width: 230px
+        }
+
+        .hero-badge strong {
+            display: block;
+            font-size: 17px
+        }
+
+        .hero-badge span {
+            font-size: 10px;
+            color: #795b54
+        }
+
+        /* STORY */
+        .story {
+            padding: 78px 0;
+            background: #fff
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: 46px;
+            align-items: center
+        }
+
+        .story-card {
+            position: relative;
+            background: linear-gradient(145deg, #fff0c5, #fff);
+            border: 1px solid #eed6b2;
+            border-radius: 28px;
+            padding: 34px;
+            box-shadow: var(--shadow);
+            overflow: hidden
+        }
+
+        .story-card:after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 210, 28, .3);
+            right: -70px;
+            bottom: -70px
+        }
+
+        .story-card .big {
+            font: 950 64px/1 Georgia, serif;
+            color: var(--red)
+        }
+
+        .story-card h3 {
+            font: 900 26px Georgia, serif;
+            color: #671412;
+            margin: 10px 0
+        }
+
+        .story-card p {
+            font-size: 13px;
+            color: #72574f
+        }
+
+        .story-copy h2 {
+            font: 950 42px/1.08 Georgia, serif;
+            color: #651412;
+            margin: 9px 0 15px
+        }
+
+        .story-copy p {
+            color: var(--mut);
+            font-size: 14px
+        }
+
+        .story-copy .quote {
+            border-left: 5px solid var(--yellow);
+            padding: 8px 0 8px 17px;
+            margin: 20px 0;
+            font-weight: 900;
+            color: #57211b
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 76px 0;
+            background: var(--cream)
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px
+        }
+
+        .feature {
+            background: #fff;
+            border-radius: 20px;
+            padding: 22px 16px;
+            border: 1px solid var(--line);
+            box-shadow: 0 10px 28px rgba(74, 30, 10, .05);
+            min-height: 195px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .feature:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--red), var(--yellow))
+        }
+
+        .feature .num {
+            font: 950 30px Georgia, serif;
+            color: var(--red);
+            opacity: .25
+        }
+
+        .feature h3 {
+            font-size: 14px;
+            color: #591c17;
+            margin: 6px 0
+        }
+
+        .feature p {
+            font-size: 11px;
+            color: var(--mut);
+            margin: 0
+        }
+
+        /* STATS */
+        .stats {
+            padding: 28px 0;
+            background: #3d0808;
+            color: #fff
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px
+        }
+
+        .stat {
+            text-align: center;
+            padding: 13px;
+            border-right: 1px solid rgba(255, 255, 255, .13)
+        }
+
+        .stat:last-child {
+            border: 0
+        }
+
+        .stat strong {
+            display: block;
+            font: 950 27px Georgia, serif;
+            color: var(--yellow)
+        }
+
+        .stat span {
+            font-size: 10px;
+            color: #f2d9cf;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 800
+        }
+
+        /* MENU */
+        .menu-section {
+            padding: 76px 0;
+            background: #fff
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px
+        }
+
+        .menu-card {
+            border-radius: 20px;
+            min-height: 170px;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(145deg, #9b1515, #5f0808)
+        }
+
+        .menu-card:nth-child(2) {
+            background: linear-gradient(145deg, #db311e, #8e100d)
+        }
+
+        .menu-card:nth-child(3) {
+            background: linear-gradient(145deg, #8d1212, #3c0707)
+        }
+
+        .menu-card:nth-child(4) {
+            background: linear-gradient(145deg, #f0a900, #a91b13)
+        }
+
+        .menu-card:after {
+            content: "🍗";
+            position: absolute;
+            right: -8px;
+            top: -16px;
+            font-size: 90px;
+            opacity: .13;
+            transform: rotate(-18deg)
+        }
+
+        .menu-card h3 {
+            font: 900 23px Georgia, serif;
+            margin: 0;
+            position: relative;
+            z-index: 2
+        }
+
+        .menu-card p {
+            margin: 3px 0 0;
+            color: #ffece2;
+            font-size: 11px;
+            position: relative;
+            z-index: 2
+        }
+
+        /* MODEL */
+        .model {
+            padding: 76px 0;
+            background: linear-gradient(180deg, #fff7e8, #fff)
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .model-card {
+            border-radius: 24px;
+            padding: 26px;
             background: #fff;
             border: 1px solid var(--line);
-            border-radius: 20px;
-            padding: 21px;
+            box-shadow: 0 14px 38px rgba(80, 20, 10, .07)
         }
 
-        .card h3 {
-            margin: 8px 0;
+        .model-card.dark {
+            background: #470909;
+            color: #fff;
+            border-color: #470909
         }
 
-        .card p {
+        .model-card h3 {
+            font: 900 27px Georgia, serif;
+            margin: 0 0 10px;
+            color: #661412
+        }
+
+        .model-card.dark h3 {
+            color: var(--yellow)
+        }
+
+        .model-card p {
             font-size: 13px;
+            color: var(--mut)
+        }
+
+        .model-card.dark p {
+            color: #f0d5ca
+        }
+
+        .model-list {
+            display: grid;
+            gap: 9px;
+            margin-top: 17px
+        }
+
+        .model-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 11px 12px;
+            border-radius: 12px;
+            background: #fff7ef;
+            font-size: 12px;
+            font-weight: 800;
+            color: #54352d
+        }
+
+        .dark .model-item {
+            background: rgba(255, 255, 255, .06);
+            color: #fff
+        }
+
+        .tick {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #61120f;
+            display: grid;
+            place-items: center;
+            flex: none;
+            font-size: 12px;
+            font-weight: 950
+        }
+
+        /* PACKAGES */
+        .package-section {
+            padding: 80px 0;
+            background: #fff
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 17px;
+            align-items: stretch
+        }
+
+        .package {
+            position: relative;
+            border-radius: 25px;
+            background: #fff;
+            border: 1px solid var(--line);
+            box-shadow: 0 16px 42px rgba(75, 20, 10, .08);
+            padding: 27px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden
+        }
+
+        .package:before {
+            content: "";
+            height: 7px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #8f1414
+        }
+
+        .package.gold:before {
+            background: linear-gradient(90deg, #ffbe00, #ffdf4a)
+        }
+
+        .package.platinum:before {
+            background: linear-gradient(90deg, #3e3e3e, #d4d4d4)
+        }
+
+        .package.featured {
+            transform: translateY(-10px);
+            box-shadow: 0 26px 55px rgba(167, 25, 25, .16);
+            border: 2px solid var(--red)
+        }
+
+        .package-badge {
+            position: absolute;
+            right: 16px;
+            top: 17px;
+            background: var(--yellow);
+            color: #59110e;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 9px;
+            font-weight: 950
+        }
+
+        .package-label {
+            font-size: 11px;
+            font-weight: 950;
+            letter-spacing: .14em;
+            color: #9b4a3d;
+            text-transform: uppercase
+        }
+
+        .package h3 {
+            font: 950 29px/1.05 Georgia, serif;
+            color: #611311;
+            margin: 7px 0
+        }
+
+        .price {
+            font: 950 34px/1 Georgia, serif;
+            color: var(--red);
+            margin: 4px 0 9px
+        }
+
+        .package-desc {
+            font-size: 12px;
             color: var(--mut);
+            min-height: 52px
         }
 
-        .dark {
-            background: #241916;
+        .package ul {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 23px;
+            display: grid;
+            gap: 9px
+        }
+
+        .package li {
+            font-size: 12px;
+            display: flex;
+            gap: 8px;
+            color: #50362f
+        }
+
+        .package li:before {
+            content: "✓";
+            color: var(--green);
+            font-weight: 950
+        }
+
+        .package .btn {
+            width: 100%;
+            margin-top: auto
+        }
+
+        .draft-note {
+            margin: 22px auto 0;
+            max-width: 930px;
+            padding: 15px 18px;
+            border-radius: 15px;
+            background: #fff8e7;
+            border: 1px solid #eed29a;
+            color: #68453c;
+            font-size: 11px;
+            text-align: center
+        }
+
+        /* TABLE */
+        .detail {
+            padding: 80px 0;
+            background: var(--cream)
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: var(--shadow)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px
+        }
+
+        .package-table th {
+            background: #4a0a0a;
             color: #fff;
+            padding: 16px 14px;
+            font-size: 12px
         }
 
-        .dark .head h2 {
+        .package-table th:first-child {
+            text-align: left;
+            width: 38%
+        }
+
+        .package-table th:not(:first-child) {
+            border-left: 1px solid rgba(255, 255, 255, .12)
+        }
+
+        .package-table td {
+            padding: 14px;
+            border-bottom: 1px solid #eee2d8;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 850;
+            color: #52362f
+        }
+
+        .package-table td:first-child {
+            text-align: left;
+            color: #3d2924
+        }
+
+        .package-table tr:last-child td {
+            border-bottom: 0
+        }
+
+        .package-table tbody tr:hover {
+            background: #fffaf4
+        }
+
+        .package-table .yes {
+            color: var(--green);
+            font-size: 17px
+        }
+
+        .package-table .tag {
+            display: inline-block;
+            border-radius: 999px;
+            background: #fff0c7;
+            padding: 4px 8px;
+            font-size: 10px;
+            color: #6b3c1c
+        }
+
+        .table-note {
+            margin-top: 14px;
+            padding: 15px 17px;
+            border-radius: 15px;
+            background: #fff;
+            border: 1px solid var(--line);
+            font-size: 11px;
+            color: #6d5148
+        }
+
+        /* HPP */
+        .hpp {
+            padding: 78px 0;
+            background: #4a0808;
+            color: #fff
+        }
+
+        .hpp-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 20px;
+            align-items: stretch
+        }
+
+        .hpp-copy {
+            padding: 10px
+        }
+
+        .hpp-copy h2 {
+            font: 950 43px/1.05 Georgia, serif;
+            margin: 9px 0 13px;
+            color: #fff
+        }
+
+        .hpp-copy p {
+            color: #efd9d1;
+            font-size: 13px
+        }
+
+        .hpp-callout {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap
+        }
+
+        .mini-stat {
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .12);
+            padding: 12px 15px;
+            border-radius: 13px
+        }
+
+        .mini-stat span {
+            display: block;
+            color: #eacfc6;
+            font-size: 9px;
+            text-transform: uppercase
+        }
+
+        .mini-stat strong {
+            display: block;
+            color: var(--yellow);
+            font: 950 21px Georgia, serif
+        }
+
+        .hpp-card {
+            background: #fff;
+            color: #33201b;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .2)
+        }
+
+        .hpp-card h3 {
+            font: 900 25px Georgia, serif;
+            color: #661412;
+            margin: 0 0 15px
+        }
+
+        .hpp-table {
+            width: 100%;
+            min-width: 0
+        }
+
+        .hpp-table th {
+            background: #fff0c7;
+            color: #5b2017;
+            text-align: left;
+            padding: 10px;
+            font-size: 10px
+        }
+
+        .hpp-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid #eee3d9;
+            font-size: 11px
+        }
+
+        .hpp-table td:last-child {
+            text-align: right;
+            font-weight: 900
+        }
+
+        .hpp-total {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 13px
+        }
+
+        .hpp-total div {
+            background: #fff8ed;
+            border: 1px solid #eedccf;
+            padding: 11px;
+            border-radius: 12px
+        }
+
+        .hpp-total span {
+            display: block;
+            font-size: 9px;
+            color: var(--mut)
+        }
+
+        .hpp-total strong {
+            font-size: 18px;
+            color: var(--red)
+        }
+
+        /* SIMULATION */
+        .sim {
+            padding: 80px 0;
+            background: #fff
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .calculator,
+        .chart-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 15px 38px rgba(76, 20, 10, .07)
+        }
+
+        .calc-title,
+        .chart-title {
+            font: 950 26px/1.1 Georgia, serif;
+            color: #641411
+        }
+
+        .calc-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 11px;
+            margin: 19px 0
+        }
+
+        .calc-fields label {
+            font-size: 10px;
+            font-weight: 900;
+            color: #4d3932
+        }
+
+        .calc-fields input {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            outline: none
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px
+        }
+
+        .result-card {
+            padding: 12px;
+            border-radius: 13px;
+            background: #fff8ef;
+            border: 1px solid #eedfd3
+        }
+
+        .result-card span {
+            display: block;
+            font-size: 9px;
+            color: var(--mut);
+            font-weight: 800
+        }
+
+        .result-card strong {
+            display: block;
+            margin-top: 4px;
+            color: var(--red);
+            font-size: 14px
+        }
+
+        .formula {
+            margin-top: 14px;
+            padding: 12px 13px;
+            border-radius: 12px;
+            background: #f7f2ed;
+            color: #66514a;
+            font-size: 10px
+        }
+
+        .bar-chart {
+            margin-top: 30px;
+            display: grid;
+            gap: 21px
+        }
+
+        .bar-row {
+            display: grid;
+            grid-template-columns: 55px 1fr 85px;
+            gap: 9px;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 900;
+            color: #583b32
+        }
+
+        .bar-track {
+            height: 28px;
+            border-radius: 999px;
+            background: #eee2d9;
+            overflow: hidden
+        }
+
+        .bar-track i {
+            display: block;
+            height: 100%;
+            width: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--red), #ef9c20);
+            transition: .3s
+        }
+
+        .bar-row:nth-child(2) .bar-track i {
+            background: linear-gradient(90deg, #e6a500, var(--red2))
+        }
+
+        .chart-caption {
+            font-size: 10px;
+            color: var(--mut);
+            margin-top: 23px
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 17px
+        }
+
+        .trust-grid div {
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 15px
+        }
+
+        .trust-grid strong {
+            display: block;
+            color: #641411;
+            font-size: 12px
+        }
+
+        .trust-grid span {
+            display: block;
+            color: var(--mut);
+            font-size: 10px;
+            margin-top: 3px
+        }
+
+        /* SCENARIOS */
+        .scenario {
+            padding: 70px 0;
+            background: var(--cream)
+        }
+
+        .scenario-table {
+            background: #fff;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            box-shadow: 0 12px 34px rgba(70, 20, 10, .06)
+        }
+
+        .scenario-table table {
+            min-width: 650px
+        }
+
+        .scenario-table th {
+            background: #65100e;
             color: #fff;
+            padding: 14px;
+            font-size: 11px
         }
 
-        .dark .head p {
-            color: #d8c4b8;
+        .scenario-table td {
+            padding: 13px;
+            border-bottom: 1px solid #eee3da;
+            text-align: center;
+            font-size: 11px
+        }
+
+        .scenario-table td:first-child {
+            text-align: left;
+            font-weight: 900
+        }
+
+        .scenario-table tr:last-child td {
+            border-bottom: 0
+        }
+
+        .green-text {
+            color: #13854a;
+            font-weight: 950
+        }
+
+        /* PROCESS */
+        .process {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #ffcf18, #f7b718 45%, #8c1010 45%, #650808);
+            color: #fff
         }
 
         .steps {
+            display: grid;
             grid-template-columns: repeat(4, 1fr);
+            gap: 12px
         }
 
         .step {
-            border: 1px solid rgba(255, 255, 255, .13);
-            background: rgba(255, 255, 255, .03);
-            border-radius: 17px;
-            padding: 19px;
+            position: relative;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 19px;
+            padding: 21px;
+            min-height: 175px
         }
 
-        .num {
-            width: 37px;
-            height: 37px;
-            border-radius: 11px;
-            background: var(--o);
+        .step .n {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--yellow);
+            color: #5b0d0d;
             display: grid;
             place-items: center;
             font-weight: 950;
-            margin-bottom: 12px;
+            margin-bottom: 12px
+        }
+
+        .step h3 {
+            font-size: 14px;
+            margin: 0
         }
 
         .step p {
-            font-size: 12px;
-            color: #d8c4b8;
+            font-size: 11px;
+            color: #f3d8d0;
+            margin: 6px 0 0
         }
 
-        .requirements {
+        .process-note {
+            margin-top: 18px;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, .18);
+            border-radius: 13px;
+            font-size: 10px;
+            color: #f9e7df
+        }
+
+        /* TERMS FAQ */
+        .terms {
+            padding: 78px 0;
+            background: #fff
+        }
+
+        .terms-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 35px;
-            align-items: center;
+            gap: 20px
         }
 
-        .check {
+        .term-card,
+        .faq {
             background: #fff;
             border: 1px solid var(--line);
-            padding: 12px;
-            border-radius: 13px;
-            margin: 8px 0;
-            font-weight: 850;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 28px rgba(74, 20, 10, .05)
         }
 
-        .note {
-            background: #fff0d8;
-            border: 1px solid #efcf9c;
-            border-radius: 21px;
-            padding: 23px;
-            color: #654638;
+        .term-card h3,
+        .faq h3 {
+            font: 900 23px Georgia, serif;
+            color: #641411;
+            margin: 0 0 12px
+        }
+
+        .term-list {
+            display: grid;
+            gap: 8px
+        }
+
+        .term-item {
+            display: flex;
+            gap: 9px;
+            padding: 9px 0;
+            border-bottom: 1px dashed #e8d8cd;
+            font-size: 11px;
+            color: #5d4640
+        }
+
+        .term-item:last-child {
+            border-bottom: 0
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 9px
+        }
+
+        .faq details {
+            border: 1px solid #eaded5;
+            border-radius: 12px;
+            padding: 11px 13px
+        }
+
+        .faq summary {
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 900;
+            color: #55251f
+        }
+
+        .faq details p {
+            font-size: 10px;
+            color: var(--mut);
+            margin: 7px 0 0
+        }
+
+        /* CTA */
+        .cta {
+            padding: 76px 0;
+            background: linear-gradient(135deg, #790909, #bb1d17);
+            color: #fff;
+            position: relative;
+            overflow: hidden
+        }
+
+        .cta:after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: rgba(255, 210, 28, .12);
+            right: -190px;
+            top: -160px
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+            z-index: 2
+        }
+
+        .cta h2 {
+            font: 950 44px/1.04 Georgia, serif;
+            margin: 0 0 9px
+        }
+
+        .cta p {
+            color: #f4d7ce;
+            margin: 0;
+            max-width: 700px;
+            font-size: 13px
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .cta-actions .btn {
+            white-space: nowrap
+        }
+
+        /* FORM */
+        .form-section {
+            padding: 78px 0;
+            background: var(--cream)
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 25px;
+            align-items: start
+        }
+
+        .form-intro h2 {
+            font: 950 42px/1.05 Georgia, serif;
+            color: #641411;
+            margin: 8px 0 12px
+        }
+
+        .form-intro p {
+            font-size: 13px;
+            color: var(--mut)
+        }
+
+        .contact-card {
+            margin-top: 18px;
+            padding: 17px;
+            border-radius: 17px;
+            background: #fff;
+            border: 1px solid var(--line)
+        }
+
+        .contact-card strong {
+            display: block;
+            color: #641411
+        }
+
+        .contact-card span {
+            font-size: 12px;
+            color: var(--mut)
         }
 
         .form {
             background: #fff;
             border: 1px solid var(--line);
             border-radius: 23px;
-            padding: 24px;
-            box-shadow: var(--shadow);
+            padding: 25px;
+            box-shadow: var(--shadow)
         }
 
         .field {
             display: grid;
             gap: 5px;
-            margin-bottom: 11px;
+            margin-bottom: 11px
         }
 
         .field label {
-            font-size: 11px;
-            font-weight: 900;
+            font-size: 10px;
+            font-weight: 950;
+            color: #54372f
         }
 
         .field input,
@@ -320,390 +1397,933 @@
         .field textarea {
             width: 100%;
             border: 1px solid var(--line);
-            border-radius: 11px;
+            border-radius: 10px;
             padding: 10px;
-            outline: none;
+            background: #fff;
+            outline: none
         }
 
         .field textarea {
-            min-height: 85px;
-            resize: vertical;
+            min-height: 90px;
+            resize: vertical
         }
 
         .form .btn {
-            width: 100%;
-        }
-
-        .wa-card {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 15px;
-            padding: 10px 14px;
-            border-radius: 12px;
-            background: #e9f9ef;
-            color: #137a43;
-            font-weight: 900;
-            font-size: 13px;
+            width: 100%
         }
 
         footer {
-            background: #1d1411;
-            color: #d8c4b8;
-            padding: 27px 0;
+            background: #210505;
+            color: #e5c9bf;
+            padding: 25px 0
         }
 
         footer .container {
             display: flex;
             justify-content: space-between;
             gap: 15px;
-            font-size: 12px;
+            font-size: 10px
         }
 
         .float-wa {
             position: fixed;
-            right: 20px;
-            bottom: 20px;
+            right: 18px;
+            bottom: 18px;
             width: 56px;
             height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            background: var(--wa);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #1fbd63;
             color: #fff;
-            z-index: 70;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .18);
+            z-index: 120;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .22);
+            font-size: 25px
         }
 
-        .float-wa svg {
-            width: 30px;
-            height: 30px;
-            fill: currentColor;
-        }
-
-        @media(max-width:900px) {
+        @media(max-width:1000px) {
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 76px;
+                top: 78px;
                 left: 0;
                 right: 0;
                 background: #fff;
-                padding: 10px 4% 14px;
+                padding: 12px 4%;
                 flex-direction: column;
-                align-items: stretch;
                 gap: 4px;
-                border-bottom: 1px solid var(--line);
-                box-shadow: 0 15px 30px rgba(50, 25, 18, .10);
+                border-bottom: 1px solid var(--line)
             }
 
             .nav-links.open {
-                display: flex;
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                z-index: 1000
             }
 
             .nav-links a {
-                padding: 10px 12px;
-                border-radius: 10px;
+                padding: 9px
             }
 
             .menu-btn {
-                display: flex;
+                display: flex
+            }
+
+            .nav-inner>.btn {
+                display: none
             }
 
             .hero-grid,
+            .story-grid,
+            .hpp-grid,
+            .sim-grid,
+            .model-grid,
             .form-grid,
-            .requirements {
-                grid-template-columns: 1fr;
+            .terms-grid {
+                grid-template-columns: 1fr
             }
 
-            .cards {
-                grid-template-columns: 1fr 1fr;
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .package-grid {
+                grid-template-columns: 1fr
+            }
+
+            .package.featured {
+                transform: none
             }
 
             .steps {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .cta-grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero-photo img {
+                height: 390px
             }
         }
 
-        @media(max-width:600px) {
-            .nav {
-                min-height: 66px;
+        @media(max-width:650px) {
+            .container {
+                width: calc(100% - 30px)
             }
 
-            .logo {
-                width: 110px;
+            .nav {
+                height: 68px
             }
 
             .nav-links {
-                top: 66px;
+                top: 68px
+            }
+
+            .logo {
+                width: 115px
             }
 
             .hero {
-                padding: 45px 0;
+                padding: 45px 0 55px
             }
 
             .hero h1 {
-                font-size: clamp(42px, 12vw, 58px);
+                font-size: clamp(42px, 13vw, 60px)
             }
 
-            .hero p {
-                font-size: 16px;
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr
             }
 
-            .hero-img img {
-                height: auto;
-                max-height: 330px;
+            .hero-actions .btn {
+                width: 100%
             }
 
-            .cards,
+            .hero-photo img {
+                height: 290px
+            }
+
+            .hero-badge {
+                left: 10px;
+                bottom: 12px
+            }
+
+            .head h2,
+            .story-copy h2,
+            .hpp-copy h2,
+            .form-intro h2 {
+                font-size: 34px
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .stat {
+                border-bottom: 1px solid rgba(255, 255, 255, .13)
+            }
+
             .steps {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr
             }
 
-            .head h2 {
-                font-size: 34px;
+            .calc-fields,
+            .result-grid,
+            .trust-grid {
+                grid-template-columns: 1fr
             }
 
-            section {
-                padding: 55px 0;
+            .calculator,
+            .chart-card,
+            .hpp-card,
+            .form {
+                padding: 19px
             }
 
-            footer .container {
-                flex-direction: column;
+            .bar-row {
+                grid-template-columns: 42px 1fr 72px
+            }
+
+            .cta h2 {
+                font-size: 35px
+            }
+
+            .cta-actions {
+                display: grid
+            }
+
+            .cta-actions .btn {
+                width: 100%
             }
 
             .float-wa {
-                right: 15px;
-                bottom: 15px;
                 width: 52px;
                 height: 52px;
-                border-radius: 14px;
+                right: 14px;
+                bottom: 14px
+            }
+
+            .hpp-total {
+                grid-template-columns: 1fr
             }
         }
     </style>
 </head>
 
 <body>
-
     <header class="nav">
         <div class="container nav-inner">
-            <a href="index.html" aria-label="Kembali ke Juragan Chicken">
-                <img class="logo" src="logo.jpg.png" alt="Juragan Chicken">
-            </a>
-
+            <a href="index.html"><img class="logo" src="logo.jpg.png" alt="Juragan Chicken"></a>
             <nav class="nav-links" id="frNavLinks">
-                <a href="index.html">Website Utama</a>
-                <a href="#konsep">Konsep</a>
-                <a href="#proses">Proses</a>
-                <a href="#daftar">Daftar Minat</a>
+                <a href="#tentang">Tentang</a><a href="#keunggulan">Keunggulan</a><a href="#paket">Paket</a><a
+                    href="#simulasi">Simulasi</a><a href="#alur">Alur</a><a href="#daftar">Daftar</a>
             </nav>
-
-            <a class="btn red" href="#daftar">Minat Franchise</a>
-
-            <button class="menu-btn" id="frMenuBtn" type="button" aria-label="Buka menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
+            <a class="btn red" href="#daftar">Konsultasi Kemitraan</a>
+            <button class="menu-btn" id="frMenuBtn" type="button" aria-label="Buka menu"
+                aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
     </header>
 
     <main>
+        <!-- HERO -->
         <section class="hero">
             <div class="container hero-grid">
-                <div>
-                    <span class="eyebrow">FRANCHISE & KEMITRAAN</span>
-                    <h1>Bangun outlet Juragan bersama.</h1>
-                    <p>Halaman khusus calon mitra untuk memahami konsep, kesiapan lokasi, proses pengajuan dan data yang
-                        perlu disiapkan.</p>
-
-                    <a class="btn red" href="#daftar">Ajukan Minat →</a>
-
-                    <a class="wa-card"
-                        href="https://wa.me/62895375452514?text=Halo%20Tim%20Juragan%20Chicken,%20saya%20ingin%20menanyakan%20informasi%20franchise."
-                        target="_blank" rel="noopener">
-                        Hubungi WhatsApp
-                    </a>
+                <div class="hero-copy">
+                    <span class="ribbon">Proposal Kemitraan Juragan Chicken</span>
+                    <h1>Bangun usaha ayam bersama <span>Juragan.</span></h1>
+                    <p>Jagonya Ayam Lezat & Sehat. Juragan Chicken dikembangkan dari kebutuhan ekosistem pesantren untuk
+                        menghadirkan produk ayam yang halal, baik, nikmat dan berkualitas, sekaligus membuka peluang
+                        usaha bagi masyarakat.</p>
+                    <div class="hero-actions"><a class="btn yellow" href="#paket">Lihat Paket Kemitraan →</a><a
+                            class="btn light" href="#simulasi">Lihat Simulasi Bisnis</a></div>
+                    <div class="hero-note">*Materi di halaman ini adalah draft website proposal. Nominal, isi paket dan
+                        ketentuan dapat Anda ubah sesuai data final Juragan Chicken.</div>
                 </div>
-
-                <div class="hero-img">
-                    <img src="chickencoffee.png"
-                        alt="Fried chicken Juragan Chicken" fetchpriority="high">
+                <div class="hero-visual">
+                    <div class="hero-photo"><img src="chickencoffee.png" alt="Produk Juragan Chicken"></div>
+                    <div class="hero-badge"><strong>Jagonya Ayam Lezat & Sehat</strong><span>Konsep kemitraan dengan
+                            paket yang dapat disesuaikan.</span></div>
                 </div>
             </div>
         </section>
 
-        <section id="konsep">
-            <div class="container">
-                <div class="head">
-                    <span class="kicker">Konsep</span>
-                    <h2>Yang perlu diketahui calon mitra.</h2>
-                    <p>Detail komersial final harus mengikuti paket resmi Juragan Chicken.</p>
+        <!-- STORY -->
+        <section class="story" id="tentang">
+            <div class="container story-grid">
+                <div class="story-card dot-pattern"><span class="eyebrow">Tentang Juragan Chicken</span>
+                    <div class="big">JC</div>
+                    <h3>Dari ekosistem pesantren menuju peluang usaha masyarakat.</h3>
+                    <p>Konten ini mengambil dasar dari proposal Juragan Chicken dan dapat disempurnakan dengan sejarah,
+                        legalitas, data outlet serta pencapaian aktual perusahaan.</p>
                 </div>
+                <div class="story-copy">
+                    <span class="kicker">Profil & Latar Belakang</span>
+                    <h2>Bukan hanya menjual ayam, tetapi membangun ekosistem usaha.</h2>
+                    <p>Menurut proposal, Juragan Chicken berfokus pada produk olahan ayam goreng dan lahir dari
+                        kebutuhan stakeholder untuk menyediakan menu ayam yang halal, baik dan berkualitas. Unit ini
+                        kemudian diarahkan untuk mendukung kemandirian ekonomi pesantren dan memperluas manfaat melalui
+                        program kemitraan untuk masyarakat.</p>
+                    <div class="quote">“Halalan Tayyiban, nikmat, berkualitas dan memberi manfaat ekonomi.”</div>
+                    <p>Struktur proposal ini sengaja dibuat lebih bisnis-oriented: calon mitra dapat memahami brand,
+                        produk, paket, fasilitas, proses kerja sama, serta gambaran keuangan sebelum menghubungi tim.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-                <div class="cards">
-                    <div class="card"><b>🏪</b>
-                        <h3>Konsep Outlet</h3>
-                        <p>Format outlet, desain, signage dan perlengkapan mengikuti paket kerja sama.</p>
+        <!-- STATS -->
+        <section class="stats">
+            <div class="container stat-grid">
+                <div class="stat"><strong>13 JT</strong><span>Mulai paket draft</span></div>
+                <div class="stat"><strong>15 JT</strong><span>Paket lengkap draft</span></div>
+                <div class="stat"><strong>25 JT</strong><span>Paket super lengkap draft</span></div>
+                <div class="stat"><strong>100%</strong><span>Dapat disesuaikan</span></div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features" id="keunggulan">
+            <div class="container">
+                <div class="head"><span class="kicker">Kenapa Juragan Chicken?</span>
+                    <h2>Lima alasan yang menjadi fondasi brand.</h2>
+                    <p>Diambil dari materi proposal, kemudian disusun ulang agar lebih mudah dipahami calon mitra.</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature">
+                        <div class="num">01</div>
+                        <h3>Penyembelihan sesuai syariat</h3>
+                        <p>Proposal menekankan proses penyembelihan ayam sesuai dengan syariat.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="num">02</div>
+                        <h3>Higienis & modern</h3>
+                        <p>Pengolahan diarahkan menggunakan proses yang higienis dengan dukungan teknologi.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="num">03</div>
+                        <h3>Rempah pilihan</h3>
+                        <p>Brand mengangkat penggunaan bumbu dan rempah pilihan dari Indonesia.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="num">04</div>
+                        <h3>Tanpa pengawet</h3>
+                        <p>Materi proposal menyebutkan produk diolah tanpa menggunakan bahan pengawet.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="num">05</div>
+                        <h3>Halalan Tayyiban</h3>
+                        <p>Nilai halal, baik, nikmat dan berkualitas menjadi bagian dari positioning Juragan.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU -->
+        <section class="menu-section">
+            <div class="container">
+                <div class="head"><span class="kicker">Produk</span>
+                    <h2>Menu yang menjadi daya tarik outlet.</h2>
+                    <p>Proposal memuat beragam menu ayam, rice bowl, burger, minuman dan varian lainnya. Untuk halaman
+                        kemitraan, produk unggulan ditampilkan secara ringkas.</p>
+                </div>
+                <div class="menu-grid">
+                    <article class="menu-card">
+                        <h3>Fried Chicken</h3>
+                        <p>Sayap • Dada • Paha Atas • Paha Bawah</p>
+                    </article>
+                    <article class="menu-card">
+                        <h3>Chicken Signature</h3>
+                        <p>Chicken Fire • Geprek • Korean Cheese • BBQ</p>
+                    </article>
+                    <article class="menu-card">
+                        <h3>Rice Bowl</h3>
+                        <p>Korean Cheese • BBQ • Sambal Geprek</p>
+                    </article>
+                    <article class="menu-card">
+                        <h3>Drink & Coffee</h3>
+                        <p>Coffee • Milk • Mocktail • Squash • Herbal</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODEL -->
+        <section class="model">
+            <div class="container">
+                <div class="head"><span class="kicker">Model Kemitraan</span>
+                    <h2>Modal, sistem dan support dalam satu ekosistem.</h2>
+                    <p>Bagian ini memperkuat proposal agar calon mitra tidak hanya melihat harga, tetapi memahami apa
+                        yang sebenarnya mereka dapatkan.</p>
+                </div>
+                <div class="model-grid">
+                    <div class="model-card">
+                        <h3>Yang disiapkan untuk mitra</h3>
+                        <div class="model-list">
+                            <div class="model-item"><span class="tick">✓</span><span>Brand & identitas outlet Juragan
+                                    Chicken</span></div>
+                            <div class="model-item"><span class="tick">✓</span><span>Booth / perlengkapan sesuai
+                                    paket</span></div>
+                            <div class="model-item"><span class="tick">✓</span><span>Bahan baku awal sesuai paket</span>
+                            </div>
+                            <div class="model-item"><span class="tick">✓</span><span>Training dan pendampingan</span>
+                            </div>
+                            <div class="model-item"><span class="tick">✓</span><span>Media promosi dan materi
+                                    opening</span></div>
+                        </div>
                     </div>
-                    <div class="card"><b>🍗</b>
-                        <h3>Produk</h3>
-                        <p>Fried chicken, menu pendamping, coffee dan minuman.</p>
-                    </div>
-                    <div class="card"><b>📣</b>
-                        <h3>Brand Support</h3>
-                        <p>Identitas brand dan materi promosi sesuai standar yang ditetapkan.</p>
+                    <div class="model-card dark">
+                        <h3>Yang perlu dipahami calon mitra</h3>
+                        <p>Usaha tidak hanya bergantung pada paket awal. Lokasi, harga jual, traffic, biaya operasional,
+                            kualitas pelayanan dan konsistensi menjalankan SOP akan memengaruhi hasil outlet.</p>
+                        <div class="model-list">
+                            <div class="model-item"><span class="tick">1</span><span>Lokasi harus dibahas dan
+                                    dinilai.</span></div>
+                            <div class="model-item"><span class="tick">2</span><span>Angka keuangan adalah simulasi,
+                                    bukan jaminan.</span></div>
+                            <div class="model-item"><span class="tick">3</span><span>Ketentuan final dituangkan dalam
+                                    perjanjian.</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="dark" id="proses">
+        <!-- PACKAGES -->
+        <section class="package-section" id="paket">
             <div class="container">
-                <div class="head">
-                    <span class="kicker">Proses</span>
-                    <h2>Alur pengajuan.</h2>
-                    <p>Sesuaikan alur ini dengan SOP franchise resmi saat data final tersedia.</p>
+                <div class="head"><span class="kicker">Harga Paket Kemitraan</span>
+                    <h2>Pilih paket, lalu sesuaikan dengan lokasi.</h2>
+                    <p>Harga di bawah mengikuti materi proposal Juragan Chicken yang Anda kirim. Silakan ubah langsung
+                        pada HTML saat data final sudah ditetapkan.</p>
                 </div>
+                <div class="package-grid">
+                    <article class="package">
+                        <div class="package-label">Bronze</div>
+                        <h3>Paket Hemat Ceria</h3>
+                        <div class="price">Rp13.000.000</div>
+                        <p class="package-desc">Paket entry untuk mitra yang ingin memulai dengan konsep usaha yang
+                            lebih sederhana.</p>
+                        <ul>
+                            <li>Bahan baku</li>
+                            <li>Peralatan usaha</li>
+                            <li>Media promosi</li>
+                            <li>Pendampingan training</li>
+                            <li>Konsultasi</li>
+                            <li>Order bahan baku</li>
+                        </ul><a class="btn light" href="#daftar">Konsultasikan Paket</a>
+                    </article>
+                    <article class="package featured gold"><span class="package-badge">PILIHAN MITRA</span>
+                        <div class="package-label">Gold</div>
+                        <h3>Paket Hemat Lengkap</h3>
+                        <div class="price">Rp15.000.000</div>
+                        <p class="package-desc">Paket dengan fasilitas lebih lengkap untuk calon mitra yang menginginkan
+                            kesiapan outlet lebih baik.</p>
+                        <ul>
+                            <li>Bahan baku</li>
+                            <li>Peralatan usaha lengkap</li>
+                            <li>Media promosi</li>
+                            <li>Pendampingan training</li>
+                            <li>Konsultasi</li>
+                            <li>Order bahan baku</li>
+                            <li>Support persiapan opening</li>
+                        </ul><a class="btn red" href="#daftar">Konsultasikan Paket</a>
+                    </article>
+                    <article class="package platinum">
+                        <div class="package-label">Platinum</div>
+                        <h3>Paket Hemat Super Lengkap</h3>
+                        <div class="price">Rp25.000.000</div>
+                        <p class="package-desc">Paket dengan skala perlengkapan dan konsep outlet yang lebih besar
+                            sesuai materi proposal.</p>
+                        <ul>
+                            <li>Bahan baku</li>
+                            <li>Peralatan usaha lengkap</li>
+                            <li>Media promosi</li>
+                            <li>Pendampingan training</li>
+                            <li>Konsultasi</li>
+                            <li>Order bahan baku</li>
+                            <li>Support pembukaan outlet</li>
+                        </ul><a class="btn light" href="#daftar">Konsultasikan Paket</a>
+                    </article>
+                </div>
+                <div class="draft-note"><strong>Penting:</strong> isi paket, jumlah barang, spesifikasi booth, volume
+                    bahan baku, hak penggunaan brand, masa kerja sama, wilayah, fee/royalty, kewajiban pembelian bahan
+                    baku dan ketentuan lainnya harus diisi berdasarkan data final perusahaan sebelum proposal dipakai
+                    sebagai dokumen penawaran resmi.</div>
+            </div>
+        </section>
 
+        <!-- PACKAGE TABLE -->
+        <section class="detail" id="detail">
+            <div class="container">
+                <div class="head"><span class="kicker">Rincian Fasilitas</span>
+                    <h2>Bandingkan paket dalam satu tabel.</h2>
+                    <p>Format ini sengaja dibuat mudah diedit agar Anda dapat mengganti tanda ✓ menjadi jumlah unit,
+                        merek, spesifikasi atau nominal sebenarnya.</p>
+                </div>
+                <div class="table-wrap">
+                    <table class="package-table">
+                        <thead>
+                            <tr>
+                                <th>Komponen</th>
+                                <th>Bronze<br>Rp13 JT</th>
+                                <th>Gold<br>Rp15 JT</th>
+                                <th>Platinum<br>Rp25 JT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hak penggunaan brand Juragan Chicken</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Booth / outlet</td>
+                                <td><span class="tag">Basic</span></td>
+                                <td><span class="tag">Standard</span></td>
+                                <td><span class="tag">Premium</span></td>
+                            </tr>
+                            <tr>
+                                <td>Peralatan usaha</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓✓</td>
+                                <td class="yes">✓✓✓</td>
+                            </tr>
+                            <tr>
+                                <td>Bahan baku awal</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓✓</td>
+                                <td class="yes">✓✓✓</td>
+                            </tr>
+                            <tr>
+                                <td>Media promosi</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓✓</td>
+                            </tr>
+                            <tr>
+                                <td>Training karyawan</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Konsultasi usaha</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Pendampingan opening</td>
+                                <td>Diskusi</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Order bahan baku</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Pendampingan pengembangan</td>
+                                <td>Diskusi</td>
+                                <td class="yes">✓</td>
+                                <td class="yes">✓</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-note"><strong>Catatan editing:</strong> tabel di atas adalah struktur proposal, bukan
+                    inventaris final. Ganti setiap “✓ / ✓✓ / ✓✓✓ / Basic / Standard / Premium” dengan data aktual
+                    seperti nama barang, jumlah unit dan nilai rupiahnya agar calon mitra dapat melihat nilai paket
+                    secara konkret.</div>
+            </div>
+        </section>
+
+        <!-- HPP -->
+        <section class="hpp">
+            <div class="container hpp-grid">
+                <div class="hpp-copy"><span class="ribbon">Data contoh dari proposal</span>
+                    <h2>Jadikan angka bisnis sebagai bagian dari cerita.</h2>
+                    <p>Proposal yang Anda kirim sudah mempunyai contoh perhitungan HPP per ekor: pendapatan Rp89.000,
+                        total HPP Rp63.591 dan gross profit Rp25.509. Angka ini sangat bagus dijadikan dasar halaman
+                        simulasi, dengan catatan harga perlu diperbarui ketika data terbaru tersedia.</p>
+                    <div class="hpp-callout">
+                        <div class="mini-stat"><span>Pendapatan / ekor</span><strong>Rp89.000</strong></div>
+                        <div class="mini-stat"><span>HPP / ekor</span><strong>Rp63.591</strong></div>
+                        <div class="mini-stat"><span>Gross profit</span><strong>Rp25.509</strong></div>
+                    </div>
+                </div>
+                <div class="hpp-card">
+                    <h3>Contoh struktur HPP</h3>
+                    <table class="hpp-table">
+                        <thead>
+                            <tr>
+                                <th>Komponen</th>
+                                <th>Contoh / ekor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ayam / ekor</td>
+                                <td>Rp48.000</td>
+                            </tr>
+                            <tr>
+                                <td>Tepung / kantong</td>
+                                <td>Rp7.833</td>
+                            </tr>
+                            <tr>
+                                <td>Kemasan / pcs</td>
+                                <td>Rp1.058</td>
+                            </tr>
+                            <tr>
+                                <td>Sambal / sachet</td>
+                                <td>Rp1.620</td>
+                            </tr>
+                            <tr>
+                                <td>Minyak goreng</td>
+                                <td>Rp3.650</td>
+                            </tr>
+                            <tr>
+                                <td>Gas</td>
+                                <td>Rp1.150</td>
+                            </tr>
+                            <tr>
+                                <td>Kantong plastik</td>
+                                <td>Rp280</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="hpp-total">
+                        <div><span>Total HPP / ekor</span><strong>Rp63.591</strong></div>
+                        <div><span>Gross Profit / ekor</span><strong>Rp25.509</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATION -->
+        <section class="sim" id="simulasi">
+            <div class="container">
+                <div class="head"><span class="kicker">Simulasi Keuangan</span>
+                    <h2>Hitung BEP dan margin dengan asumsi Anda sendiri.</h2>
+                    <p>Gunakan angka aktual Juragan ketika sudah tersedia. Kalkulator ini hanya alat bantu dan tidak
+                        merupakan janji omzet, keuntungan atau payback.</p>
+                </div>
+                <div class="sim-grid">
+                    <div class="calculator">
+                        <div class="calc-title">Kalkulator BEP</div>
+                        <div class="calc-fields">
+                            <label>Investasi awal<input id="bepInvestment" type="number" value="15000000" min="0"
+                                    step="100000"></label>
+                            <label>Harga jual rata-rata / transaksi<input id="bepPrice" type="number" value="89000"
+                                    min="0" step="1000"></label>
+                            <label>HPP / transaksi<input id="bepCogs" type="number" value="63591" min="0"
+                                    step="1000"></label>
+                            <label>Biaya tetap / bulan<input id="bepFixed" type="number" value="6000000" min="0"
+                                    step="100000"></label>
+                            <label>Target transaksi / hari<input id="bepDaily" type="number" value="10" min="0"
+                                    step="1"></label>
+                        </div>
+                        <div class="result-grid">
+                            <div class="result-card"><span>Margin kotor</span><strong id="bepMargin">28,5%</strong>
+                            </div>
+                            <div class="result-card"><span>Kontribusi / transaksi</span><strong
+                                    id="bepContribution">Rp25.409</strong></div>
+                            <div class="result-card"><span>BEP / bulan</span><strong id="bepUnits">237
+                                    transaksi</strong></div>
+                            <div class="result-card"><span>BEP omzet / bulan</span><strong id="bepSales">Rp21,1
+                                    jt</strong></div>
+                            <div class="result-card"><span>Estimasi laba*</span><strong id="bepProfit">Rp1,6 jt</strong>
+                            </div>
+                            <div class="result-card"><span>Payback*</span><strong id="bepPayback">9,4 bln</strong></div>
+                        </div>
+                        <div class="formula"><strong>Rumus:</strong> margin = (harga jual − HPP) ÷ harga jual. BEP unit
+                            = biaya tetap ÷ kontribusi per transaksi. Payback ilustratif = investasi awal ÷ estimasi
+                            laba operasional bulanan.</div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Omzet target vs titik BEP</div>
+                        <p class="chart-caption">Grafik otomatis berubah saat asumsi diubah.</p>
+                        <div class="bar-chart">
+                            <div class="bar-row"><span>BEP</span>
+                                <div class="bar-track"><i id="bepBar"></i></div><b id="bepBarText">Rp21,1 jt</b>
+                            </div>
+                            <div class="bar-row"><span>Target</span>
+                                <div class="bar-track"><i id="targetBar"></i></div><b id="targetBarText">Rp26,7 jt</b>
+                            </div>
+                        </div>
+                        <div class="trust-grid">
+                            <div><strong>Transparan</strong><span>Asumsi dapat diedit.</span></div>
+                            <div><strong>Realistis</strong><span>Biaya lokasi dan volume harus memakai data
+                                    aktual.</span></div>
+                            <div><strong>Terukur</strong><span>Calon mitra bisa melihat cara hitungnya.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCENARIOS -->
+        <section class="scenario">
+            <div class="container">
+                <div class="head"><span class="kicker">Skenario Volume</span>
+                    <h2>Bagaimana jika volume penjualan berubah?</h2>
+                    <p>Contoh di bawah menggunakan gross profit Rp25.509 per ekor dari materi proposal, sebelum biaya
+                        tetap. Silakan ganti angka jika HPP terbaru berubah.</p>
+                </div>
+                <div class="scenario-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Volume / hari</th>
+                                <th>Volume / bulan</th>
+                                <th>Omzet contoh</th>
+                                <th>Gross profit contoh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10 ekor</td>
+                                <td>300</td>
+                                <td>Rp26.700.000</td>
+                                <td class="green-text">Rp7.652.700</td>
+                            </tr>
+                            <tr>
+                                <td>20 ekor</td>
+                                <td>600</td>
+                                <td>Rp53.400.000</td>
+                                <td class="green-text">Rp15.305.400</td>
+                            </tr>
+                            <tr>
+                                <td>30 ekor</td>
+                                <td>900</td>
+                                <td>Rp80.100.000</td>
+                                <td class="green-text">Rp22.958.100</td>
+                            </tr>
+                            <tr>
+                                <td>40 ekor</td>
+                                <td>1.200</td>
+                                <td>Rp106.800.000</td>
+                                <td class="green-text">Rp30.610.800</td>
+                            </tr>
+                            <tr>
+                                <td>50 ekor</td>
+                                <td>1.500</td>
+                                <td>Rp133.500.000</td>
+                                <td class="green-text">Rp38.263.500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="draft-note">*Perhitungan skenario menggunakan 30 hari/bulan dan angka contoh dari proposal.
+                    Gross profit belum dikurangi sewa, gaji, listrik, air, pajak, platform, penyusutan, transportasi dan
+                    biaya operasional lainnya.</div>
+            </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="process" id="alur">
+            <div class="container">
+                <div class="head"><span class="ribbon">Alur Kerja Sama</span>
+                    <h2>Jelas dari konsultasi sampai outlet berjalan.</h2>
+                    <p>Alur ini memperkuat bagian “Benefit & Alur Kerjasama” pada proposal awal.</p>
+                </div>
                 <div class="steps">
-                    <div class="step">
-                        <div class="num">01</div><b>Isi form</b>
-                        <p>Kirim data kontak dan rencana lokasi.</p>
+                    <article class="step">
+                        <div class="n">01</div>
+                        <h3>Konsultasi Paket</h3>
+                        <p>Diskusikan modal, kebutuhan dan konsep outlet.</p>
+                    </article>
+                    <article class="step">
+                        <div class="n">02</div>
+                        <h3>Survey / Validasi Lokasi</h3>
+                        <p>Bahas kelayakan lokasi dan kebutuhan outlet.</p>
+                    </article>
+                    <article class="step">
+                        <div class="n">03</div>
+                        <h3>Kesepakatan & MOU</h3>
+                        <p>Ketentuan kerja sama ditetapkan secara tertulis.</p>
+                    </article>
+                    <article class="step">
+                        <div class="n">04</div>
+                        <h3>Training & Persiapan</h3>
+                        <p>Peralatan, bahan, SOP dan persiapan opening.</p>
+                    </article>
+                    <article class="step">
+                        <div class="n">05</div>
+                        <h3>Pengiriman Peralatan</h3>
+                        <p>Perlengkapan outlet disiapkan sesuai paket.</p>
+                    </article>
+                    <article class="step">
+                        <div class="n">06</div>
+                        <h3>Opening</h3>
+                        <p>Outlet mulai beroperasi dengan pendampingan sesuai kesepakatan.</p>
+                    </article>
+                    <article class="step">
+                        <div class="n">07</div>
+                        <h3>Support Operasional</h3>
+                        <p>Konsultasi dan pengembangan sesuai sistem yang tersedia.</p>
+                    </article>
+                    <article class="step">
+                        <div class="n">08</div>
+                        <h3>Evaluasi & Pengembangan</h3>
+                        <p>Review kinerja dan peluang pengembangan outlet.</p>
+                    </article>
+                </div>
+                <div class="process-note">Catatan: tahapan final, durasi dan bentuk support mengikuti kebijakan serta
+                    perjanjian kemitraan yang berlaku.</div>
+            </div>
+        </section>
+
+        <!-- TERMS + FAQ -->
+        <section class="terms">
+            <div class="container">
+                <div class="head"><span class="kicker">Transparansi Kerja Sama</span>
+                    <h2>Hal yang sebaiknya dijelaskan sejak awal.</h2>
+                    <p>Bagian ini sengaja ditambahkan agar proposal tidak hanya menarik secara visual tetapi juga terasa
+                        profesional.</p>
+                </div>
+                <div class="terms-grid">
+                    <div class="term-card">
+                        <h3>Ketentuan yang perlu ditetapkan</h3>
+                        <div class="term-list">
+                            <div class="term-item">✓ Masa berlaku kerja sama</div>
+                            <div class="term-item">✓ Hak penggunaan brand & identitas</div>
+                            <div class="term-item">✓ Wilayah / area outlet</div>
+                            <div class="term-item">✓ Ketentuan pembelian bahan baku</div>
+                            <div class="term-item">✓ Royalty / fee, jika ada</div>
+                            <div class="term-item">✓ Kewajiban dan support masing-masing pihak</div>
+                            <div class="term-item">✓ Ketentuan renewal / perpanjangan</div>
+                            <div class="term-item">✓ Standar produk, pelayanan dan outlet</div>
+                        </div>
                     </div>
-                    <div class="step">
-                        <div class="num">02</div><b>Screening</b>
-                        <p>Tim mempelajari area dan lokasi.</p>
-                    </div>
-                    <div class="step">
-                        <div class="num">03</div><b>Penawaran</b>
-                        <p>Paket dan fasilitas dibahas.</p>
-                    </div>
-                    <div class="step">
-                        <div class="num">04</div><b>Persiapan</b>
-                        <p>Outlet disiapkan sesuai kesepakatan.</p>
+                    <div class="faq">
+                        <h3>FAQ Calon Mitra</h3>
+                        <div class="faq-list">
+                            <details open>
+                                <summary>Apakah paket bisa disesuaikan?</summary>
+                                <p>Bisa dibahas berdasarkan modal, lokasi dan kebutuhan outlet. Isi final harus
+                                    ditetapkan sebelum akad/perjanjian.</p>
+                            </details>
+                            <details>
+                                <summary>Apakah ada royalty?</summary>
+                                <p>Isi sesuai kebijakan final Juragan Chicken. Jangan gunakan klaim “tanpa royalty”
+                                    sebelum ketentuannya benar-benar ditetapkan.</p>
+                            </details>
+                            <details>
+                                <summary>Apakah lokasi harus disurvey?</summary>
+                                <p>Sangat disarankan. Status survey, kriteria lokasi dan keputusan persetujuan dapat
+                                    dituliskan sesuai SOP perusahaan.</p>
+                            </details>
+                            <details>
+                                <summary>Apakah hasil usaha dijamin?</summary>
+                                <p>Tidak. Penjualan dan laba dipengaruhi lokasi, harga, traffic, biaya, operasional dan
+                                    faktor pasar.</p>
+                            </details>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <div class="container requirements">
+        <!-- CTA -->
+        <section class="cta">
+            <div class="container cta-grid">
                 <div>
-                    <span class="kicker">Kesiapan Mitra</span>
-                    <h2 style="font:900 40px/1.08 Georgia,serif;color:#571e17">Siapkan data berikut.</h2>
-                    <div class="check">✓ Nama & nomor WhatsApp</div>
-                    <div class="check">✓ Kota / Kabupaten</div>
-                    <div class="check">✓ Status lokasi: milik / sewa</div>
-                    <div class="check">✓ Perkiraan luas lokasi</div>
-                    <div class="check">✓ Target pembukaan</div>
+                    <h2>Siap membahas lokasi dan paket Anda?</h2>
+                    <p>Jangan hanya memilih berdasarkan harga. Konsultasikan kondisi lokasi, modal dan konsep outlet
+                        agar paket yang dipilih sesuai kebutuhan.</p>
                 </div>
-
-                <div class="note">
-                    <h3>Catatan sebelum publikasi</h3>
-                    <p>Masukkan investasi, franchise fee, royalty, estimasi omzet, margin, ROI atau klaim keuntungan
-                        hanya berdasarkan dokumen resmi. Jangan menggunakan angka demo sebagai penawaran.</p>
-                </div>
+                <div class="cta-actions"><a class="btn yellow" href="#daftar">Mulai Konsultasi →</a><a class="btn light"
+                        href="index.html">Lihat Website Utama</a></div>
             </div>
         </section>
 
-        <section id="daftar">
+        <!-- FORM -->
+        <section class="form-section" id="daftar">
             <div class="container form-grid">
-                <div>
-                    <span class="kicker">Calon Mitra</span>
-                    <h2 style="font:900 42px/1.08 Georgia,serif;color:#571e17">Mulai pembicaraan.</h2>
-                    <p style="color:var(--mut)">Isi form. Setelah dikirim, data akan diteruskan melalui WhatsApp tim
-                        Juragan Chicken.</p>
-
-                    <a class="wa-card"
-                        href="https://wa.me/62895375452514?text=Halo%20Tim%20Franchise%20Juragan%20Chicken,%20saya%20ingin%20menanyakan%20informasi%20kemitraan."
-                        target="_blank" rel="noopener">
-                        💬 WhatsApp Franchise
-                    </a>
+                <div class="form-intro"><span class="kicker">Calon Mitra</span>
+                    <h2>Ceritakan rencana usaha Anda.</h2>
+                    <p>Form ini dibuat agar tim Juragan dapat menerima gambaran awal sebelum melakukan konsultasi.</p>
+                    <div class="contact-card"><strong>WhatsApp Kemitraan</strong><span>0895375452514</span></div>
+                    <div class="contact-card"><strong>Catatan</strong><span>Data yang dikirim melalui tombol di bawah
+                            akan membuka WhatsApp dan tidak otomatis tersimpan di website.</span></div>
                 </div>
-
                 <form class="form" id="frForm">
-                    <div class="field"><label for="fn">Nama Lengkap</label><input id="fn" required></div>
-                    <div class="field"><label for="fw">No. WhatsApp</label><input id="fw" required></div>
-                    <div class="field"><label for="fk">Kota / Kabupaten</label><input id="fk" required></div>
-                    <div class="field">
-                        <label for="fl">Status Lokasi</label>
-                        <select id="fl">
+                    <div class="field"><label>Nama Lengkap</label><input id="fn" required placeholder="Nama Anda"></div>
+                    <div class="field"><label>No. WhatsApp</label><input id="fw" required placeholder="08xxxxxxxxxx">
+                    </div>
+                    <div class="field"><label>Kota / Kabupaten</label><input id="fk" required
+                            placeholder="Contoh: Subang"></div>
+                    <div class="field"><label>Paket yang diminati</label><select id="fp">
+                            <option>Bronze — Rp13 juta</option>
+                            <option>Gold — Rp15 juta</option>
+                            <option>Platinum — Rp25 juta</option>
+                            <option>Masih ingin konsultasi</option>
+                        </select></div>
+                    <div class="field"><label>Kisaran modal</label><input id="fb" placeholder="Contoh: Rp15 juta"></div>
+                    <div class="field"><label>Status lokasi</label><select id="fl">
                             <option>Sudah punya lokasi</option>
                             <option>Sedang mencari lokasi</option>
                             <option>Belum menentukan</option>
-                        </select>
-                    </div>
-                    <div class="field"><label for="fu">Perkiraan luas</label><input id="fu"
+                        </select></div>
+                    <div class="field"><label>Perkiraan luas lokasi</label><input id="fu"
                             placeholder="Contoh: 30–50 m²"></div>
-                    <div class="field"><label for="fc">Catatan</label><textarea id="fc"></textarea></div>
-                    <button class="btn red" type="submit">Kirim Minat via WhatsApp →</button>
+                    <div class="field"><label>Catatan / kebutuhan</label><textarea id="fc"
+                            placeholder="Ceritakan rencana atau kebutuhan Anda..."></textarea></div><button
+                        class="btn red" type="submit">Kirim Minat via WhatsApp →</button>
                 </form>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <span>© <span id="yr"></span> Juragan Chicken</span>
-            <a href="index.html">Website Utama</a>
-        </div>
+        <div class="container"><span>© <span id="yr"></span> Juragan Chicken • Proposal Kemitraan</span><a
+                href="index.html">Website Utama</a></div>
     </footer>
-
     <a class="float-wa"
-        href="https://wa.me/62895375452514?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20bertanya%20tentang%20franchise."
-        aria-label="WhatsApp Juragan Chicken" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                d="M20.52 3.48A11.78 11.78 0 0 0 12.1 0C5.58 0 .27 5.31.27 11.83c0 2.08.54 4.11 1.57 5.9L.17 24l6.42-1.63a11.83 11.83 0 0 0 5.51 1.36h.01c6.52 0 11.83-5.31 11.83-11.83 0-3.15-1.23-6.11-3.42-8.42ZM12.1 21.69h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.81.97 1.02-3.71-.23-.38a9.83 9.83 0 1 1 8.4₁ 4.7Zm5.4-7.38c-.3-.15-1.77-.87-2.04-.97-.27-.１-.47-.１5-.67.１5-.２.３-.７７.９７-.９５ １.１７-.１７.２-.３５.２２-.65.０７-.３-.１５-１.２７-.４７-２.４２-１.
-    </a>
+        href="https://wa.me/6289537542514?text=Halo%20Juragan%20Chicken,%20saya%20ingin%20konsultasi%20kemitraan."
+        aria-label="WhatsApp Juragan Chicken" target="_blank" rel="noopener">◉</a>
 
     <script>
-        const WA = "62895375452514";
-
-        document.getElementById("frForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const text =
-        </svg>
-    </a>
-
-    <script>
-        const WA = "62895375452514";
-
-        document.getElementById("frForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const text =
-                "Halo Tim Franchise Juragan Chicken,%0A%0A" +
-                "Saya berminat mengetahui informasi franchise.%0A%0A" +
-                "Nama: " + encodeURIComponent(document.getElementById("fn").value) + "%0A" +
-                "No. WhatsApp: " + encodeURIComponent(document.getElementById("fw").value) + "%0A" +
-                "Kota/Area: " + encodeURIComponent(document.getElementById("fk").value) + "%0A" +
-                "Status lokasi: " + encodeURIComponent(document.getElementById("fl").value) + "%0A" +
-                "Perkiraan luas: " + encodeURIComponent(document.getElementById("fu").value || "-") + "%0A" +
-                "Catatan: " + encodeURIComponent(document.getElementById("fc").value || "-");
-
-            window.open("https://wa.me/" + WA + "?text=" + text, "_blank");
-        });
-
-        const frMenuBtn = document.getElementById("frMenuBtn");
-        const frNavLinks = document.getElementById("frNavLinks");
-
-        frMenuBtn.addEventListener("click", () => {
-            const open = frNavLinks.classList.toggle("open");
-            frMenuBtn.setAttribute("aria-expanded", String(open));
-        });
-
-        frNavLinks.querySelectorAll("a").forEach(a => {
-            a.addEventListener("click", () => {
-                frNavLinks.classList.remove("open");
-                frMenuBtn.setAttribute("aria-expanded", "false");
-            });
-        });
-
+        const WA = "6289537542514";
+        const form = document.getElementById("frForm");
+        form.addEventListener("submit", function (e) { e.preventDefault(); const text = `Halo Tim Kemitraan Juragan Chicken,%0A%0ASaya ingin konsultasi kemitraan.%0A%0ANama: ${encodeURIComponent(document.getElementById("fn").value)}%0ANo. WhatsApp: ${encodeURIComponent(document.getElementById("fw").value)}%0AKota/Area: ${encodeURIComponent(document.getElementById("fk").value)}%0APaket diminati: ${encodeURIComponent(document.getElementById("fp").value)}%0AKisaran modal: ${encodeURIComponent(document.getElementById("fb").value || "-")}%0AStatus lokasi: ${encodeURIComponent(document.getElementById("fl").value)}%0APerkiraan luas: ${encodeURIComponent(document.getElementById("fu").value || "-")}%0ACatatan: ${encodeURIComponent(document.getElementById("fc").value || "-")}`; window.open("https://wa.me/" + WA + "?text=" + text, "_blank") });
+        const btn = document.getElementById("frMenuBtn");
+        const links = document.getElementById("frNavLinks");
+        if (btn && links) {
+            const setMenu = (open) => {
+                links.classList.toggle("open", open);
+                btn.setAttribute("aria-expanded", String(open));
+                btn.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+            };
+            btn.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); setMenu(!links.classList.contains("open")); });
+            links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+            document.addEventListener("click", function (e) { if (!links.contains(e.target) && !btn.contains(e.target)) setMenu(false); });
+            document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+            window.addEventListener("resize", function () { if (window.innerWidth > 1000) setMenu(false); });
+        }
         document.getElementById("yr").textContent = new Date().getFullYear();
+        (function () { const ids = ["bepInvestment", "bepPrice", "bepCogs", "bepFixed", "bepDaily"]; const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)])); const out = { margin: document.getElementById("bepMargin"), contribution: document.getElementById("bepContribution"), units: document.getElementById("bepUnits"), sales: document.getElementById("bepSales"), profit: document.getElementById("bepProfit"), payback: document.getElementById("bepPayback"), bepBar: document.getElementById("bepBar"), targetBar: document.getElementById("targetBar"), bepBarText: document.getElementById("bepBarText"), targetBarText: document.getElementById("targetBarText") }; const rupiah = n => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(Math.max(0, n)); const compact = n => n >= 1000000 ? "Rp" + (n / 1000000).toLocaleString("id-ID", { maximumFractionDigits: 1 }) + " jt" : rupiah(n); function calc() { const investment = +el.bepInvestment.value || 0, price = +el.bepPrice.value || 0, cogs = Math.max(0, +el.bepCogs.value || 0), fixed = +el.bepFixed.value || 0, daily = +el.bepDaily.value || 0, contribution = Math.max(0, price - cogs), margin = price > 0 ? contribution / price * 100 : 0, units = contribution > 0 ? Math.ceil(fixed / contribution) : 0, bepSales = units * price, targetSales = daily * 30 * price, profit = daily * 30 * contribution - fixed, payback = profit > 0 ? investment / profit : 0; out.margin.textContent = margin.toFixed(1) + "%"; out.contribution.textContent = rupiah(contribution); out.units.textContent = units.toLocaleString("id-ID") + " transaksi"; out.sales.textContent = compact(bepSales); out.profit.textContent = rupiah(profit); out.payback.textContent = payback > 0 ? payback.toFixed(1) + " bln" : "—"; const max = Math.max(bepSales, targetSales, 1); out.bepBar.style.width = Math.min(100, bepSales / max * 100) + "%"; out.targetBar.style.width = Math.min(100, targetSales / max * 100) + "%"; out.bepBarText.textContent = compact(bepSales); out.targetBarText.textContent = compact(targetSales) } ids.forEach(id => el[id].addEventListener("input", calc)); calc() })();
     </script>
-
 </body>
 
 </html>

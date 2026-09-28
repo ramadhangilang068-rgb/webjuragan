@@ -2512,6 +2512,7 @@
       try {
         const response = await fetch(CONFIG.apiUrl, {
           method: "POST",
+          mode: "no-cors",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({ action: "createOrder", invoice: inv })
         });
@@ -2727,16 +2728,13 @@
           })
         });
 
-        const data = await response.json();
-
-        if (!response.ok || !data.ok) {
-          throw new Error(data.error || "Upload bukti belum tersedia.");
-        }
-
+        // Google Apps Script Web App dapat mengembalikan redirect lintas-origin.
+        // mode no-cors mencegah browser menghentikan request karena CORS.
+        // Konfirmasi keberhasilan dilakukan melalui endpoint cek status.
         updateManualPaymentStatus("WAITING_VERIFICATION", {
           proofFileName: file.name,
           proofUploadedAt: new Date().toISOString(),
-          proofUrl: data.fileUrl || ""
+          proofUrl: ""
         });
 
         const box = document.getElementById("paymentProofResult");
